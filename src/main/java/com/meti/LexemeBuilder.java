@@ -1,3 +1,5 @@
+package com.meti;
+
 interface LexemeBuilder {
     boolean canBuild(LexerState state);
 

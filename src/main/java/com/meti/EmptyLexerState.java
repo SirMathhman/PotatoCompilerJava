@@ -1,3 +1,5 @@
+package com.meti;
+
 import java.util.Optional;
 
 class EmptyLexerState implements LexerState {
