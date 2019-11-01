@@ -1,5 +1,5 @@
 package com.meti.assemble;
 
-public interface Type {
+interface Type {
 	String value();
 }

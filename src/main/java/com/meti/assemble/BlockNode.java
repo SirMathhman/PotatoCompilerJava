@@ -7,7 +7,7 @@ import java.util.Set;
 
 class BlockNode implements AssemblyNode {
 	private final String name;
-	private Set<Modifier> modifiers;
+	private final Set<Modifier> modifiers;
 	private final Map<String, Type> arguments;
 	private final List<? extends AssemblyNode> children;
 

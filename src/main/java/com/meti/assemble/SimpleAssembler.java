@@ -20,7 +20,7 @@ class SimpleAssembler implements Assembler {
 
 	@Override
 	public List<AssemblyNode> assembleChildren(List<? extends Match> tokens) {
-		var state = new AssemblerState(tokens, this);
+		var state = new ListAssemblerState(tokens, this);
 		return recognizers.stream()
 				.map(recognizer -> recognizer.locate(state))
 				.flatMap(Optional::stream)

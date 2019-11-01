@@ -1,41 +1,17 @@
 package com.meti.assemble;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class BlockNodeBuilder {
-    private String name;
-    private Set<Modifier> modifiers;
-    private Map<String, Type> arguments;
-    private List<? extends AssemblyNode> children;
+interface BlockNodeBuilder {
+    BlockNodeBuilder withName(String name);
 
-    public BlockNodeBuilder() {
-        this("", new HashSet<>(), new HashMap<>(), new ArrayList<>());
-    }
+    BlockNodeBuilder withModifiers(Set<Modifier> modifiers);
 
-    public BlockNodeBuilder(String name, Set<Modifier> modifiers, Map<String, Type> arguments, List<? extends AssemblyNode> children) {
-        this.name = name;
-        this.modifiers = modifiers;
-        this.arguments = arguments;
-        this.children = children;
-    }
+    BlockNodeBuilder withArguments(Map<String, Type> arguments);
 
-    public BlockNodeBuilder withName(String name) {
-        return new BlockNodeBuilder(name, modifiers, arguments, children);
-    }
+    BlockNodeBuilder withChildren(List<? extends AssemblyNode> children);
 
-    public BlockNodeBuilder withModifiers(Set<Modifier> modifiers) {
-        return new BlockNodeBuilder(name, modifiers, arguments, children);
-    }
-
-    public BlockNodeBuilder withArguments(Map<String, Type> arguments) {
-        return new BlockNodeBuilder(name, modifiers, arguments, children);
-    }
-
-    public BlockNodeBuilder withChildren(List<? extends AssemblyNode> children) {
-        return new BlockNodeBuilder(name, modifiers, arguments, children);
-    }
-
-    public BlockNode build() {
-        return new BlockNode(name, modifiers, arguments, children);
-    }
+    AssemblyNode build();
 }

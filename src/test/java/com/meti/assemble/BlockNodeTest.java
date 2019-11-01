@@ -13,16 +13,16 @@ class BlockNodeTest {
 
     @Test
     void testEquals() {
-        var node0 = new BlockNodeBuilder()
+        AssemblyNode node0 = new SimpleBlockNodeBuilder()
                 .withName("test")
                 .withArguments(Map.of("value", Primitive.STRING))
                 .withModifiers(Collections.singleton(Modifier.SINGLE))
                 .build();
-        var map = new HashMap<String, Type>();
+        HashMap<String, Primitive> map = new HashMap<>();
         map.put("value", Primitive.STRING);
         var modifier = new HashSet<Modifier>();
         modifier.add(Modifier.SINGLE);
-        var node1 = new BlockNodeBuilder()
+        AssemblyNode node1 = new SimpleBlockNodeBuilder()
                 .withName("test")
                 .withArguments(map)
                 .withModifiers(modifier)

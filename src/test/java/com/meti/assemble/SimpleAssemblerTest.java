@@ -9,7 +9,6 @@ import java.util.Set;
 
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 class SimpleAssemblerTest {
     @Test
@@ -19,7 +18,7 @@ class SimpleAssemblerTest {
         var lexemes = lexer.parse("extern print[value string]");
         var actualRoot = assembler.assembleChildren(lexemes);
 
-        var print = new BlockNodeBuilder()
+        AssemblyNode print = new SimpleBlockNodeBuilder()
                 .withName("print")
                 .withModifiers(Set.of(Modifier.EXTERN))
                 .withArguments(Map.of("value", Primitive.STRING))
@@ -34,12 +33,12 @@ class SimpleAssemblerTest {
         var lexemes = lexer.parse("single Internal={extern print[value string]}");
         var actualRoot = assembler.assembleSingle(lexemes);
 
-        var print = new BlockNodeBuilder()
+        AssemblyNode print = new SimpleBlockNodeBuilder()
                 .withName("print")
                 .withModifiers(Set.of(Modifier.EXTERN))
                 .withArguments(Map.of("value", Primitive.STRING))
                 .build();
-        var internal = new BlockNodeBuilder()
+        AssemblyNode internal = new SimpleBlockNodeBuilder()
                 .withName("Internal")
                 .withModifiers(Set.of(Modifier.SINGLE))
                 .withChildren(singletonList(print))

@@ -23,10 +23,10 @@ class BlockRecognizer implements Recognizer {
 
     private Optional<AssemblyNode> buildBlock(AssemblerState state, int nameIndex) {
         var name = state.get(nameIndex, InlineMatch.class);
-        var parameterMap = buildParameters(state, nameIndex);
+        Map<String, Primitive> parameterMap = buildParameters(state, nameIndex);
         var modifiers = buildModifiers(state, nameIndex);
         var children = buildChildren(state, nameIndex);
-        return Optional.of(new BlockNodeBuilder()
+        return Optional.of(new SimpleBlockNodeBuilder()
                 .withName(name.value())
                 .withArguments(parameterMap)
                 .withModifiers(modifiers)
@@ -40,10 +40,10 @@ class BlockRecognizer implements Recognizer {
         return state.parent().assembleChildren(content);
     }
 
-    private Map<String, Type> buildParameters(AssemblerState state, Integer nameIndex) {
+    private Map<String, Primitive> buildParameters(AssemblerState state, Integer nameIndex) {
         if(state.isType(nameIndex + 1, ParameterMatch.class)) {
             var parameters = state.get(nameIndex + 1, ParameterMatch.class).map();
-            var parameterMap = new HashMap<String, Type>();
+            HashMap<String, Primitive> parameterMap = new HashMap<>();
             for (String parameterName : parameters.keySet()) {
                 String parameterType = parameters.get(parameterName);
                 try {
