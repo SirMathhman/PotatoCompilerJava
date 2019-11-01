@@ -2,7 +2,7 @@ package com.meti;
 
 import java.util.Objects;
 
-class InlineToken implements Token {
+class InlineToken implements StringToken {
 	private final String value;
 
 	InlineToken(String value) {
@@ -17,7 +17,7 @@ class InlineToken implements Token {
 	@Override
 	public boolean equals(Object obj) {
 		return this == obj || obj != null && getClass() == obj.getClass() &&
-				Objects.equals(value, ((Token) obj).value());
+				Objects.equals(value, ((StringToken) obj).value());
 	}
 
 	@Override

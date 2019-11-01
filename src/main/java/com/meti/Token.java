@@ -1,5 +1,4 @@
 package com.meti;
 
-interface Token {
-	String value();
+public interface Token {
 }

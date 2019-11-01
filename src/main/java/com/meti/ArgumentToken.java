@@ -2,7 +2,7 @@ package com.meti;
 
 import java.util.Map;
 
-class ArgumentToken implements Token {
+class ArgumentToken implements StringToken {
 	private final Map<String, String> types;
 
 	ArgumentToken(Map<String, String> types) {
