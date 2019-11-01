@@ -3,7 +3,7 @@ package com.meti.assemble;
 import com.meti.CompileException;
 import com.meti.lexeme.match.InlineMatch;
 import com.meti.lexeme.match.ParameterMatch;
-import com.meti.lexeme.match.StringMatch;
+import com.meti.lexeme.match.ValuedMatch;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -59,9 +59,9 @@ class BlockRecognizer implements Recognizer {
     }
 
     private Set<Modifier> buildModifiers(AssemblerState state, Integer nameIndex) {
-        return state.sub(0, nameIndex, StringMatch.class)
+        return state.sub(0, nameIndex, ValuedMatch.class)
                 .stream()
-                .map(StringMatch::value)
+                .map(ValuedMatch::value)
                 .map(String::toUpperCase)
                 .map(Modifier::valueOf)
                 .collect(Collectors.toSet());

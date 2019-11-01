@@ -9,7 +9,9 @@ public class PotatoLexer extends SequentialLexer {
 			new ArgumentMatcher(),
 			new BlockMatcher(),
 			new KeywordMatcher(),
+			new InvocationMatcher(),
 			new NameMatcher(),
+			new StringMatcher(),
 			new InvalidMatcher()));
 
 	private PotatoLexer(List<? extends Matcher> builders) {

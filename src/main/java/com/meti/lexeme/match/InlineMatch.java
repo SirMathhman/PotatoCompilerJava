@@ -2,7 +2,7 @@ package com.meti.lexeme.match;
 
 import java.util.Objects;
 
-public class InlineMatch implements StringMatch {
+public class InlineMatch implements ValuedMatch {
 	private final String value;
 
 	public InlineMatch(String value) {
@@ -17,7 +17,7 @@ public class InlineMatch implements StringMatch {
 	@Override
 	public boolean equals(Object obj) {
 		return this == obj || obj != null && getClass() == obj.getClass() &&
-				Objects.equals(value, ((StringMatch) obj).value());
+				Objects.equals(value, ((ValuedMatch) obj).value());
 	}
 
 	@Override

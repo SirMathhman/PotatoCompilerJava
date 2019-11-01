@@ -1,5 +1,14 @@
 package com.meti.lexeme.match;
 
-public interface StringMatch extends Match {
-	String value();
+class StringMatch implements ValuedMatch {
+	private final String value;
+
+	StringMatch(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String value() {
+		return value;
+	}
 }

@@ -6,16 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SimpleCompilerTest {
-
+class HelloWorldTest {
 	@Test
 	void compile() {
 		var lexer = PotatoLexer.PotatoLexer;
 		var assembler = PotatoAssembler.PotatoAssembler;
 		var compiler = PotatoCompiler.PotatoCompiler;
-		var matches = lexer.parse("single Internal={extern print[value string]}");
+		var matches = lexer.parse("Internal.print(\"Hello World!\")");
 		var tree = assembler.assembleSingle(matches);
 		var result = compiler.compile(tree);
-		assertEquals("function a0(b1){print(b1);}", result);
+		assertEquals("a0(\"Hello World!\")", result);
 	}
 }

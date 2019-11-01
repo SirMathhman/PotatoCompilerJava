@@ -2,7 +2,7 @@ package com.meti.lexeme.match;
 
 import java.util.Locale;
 
-public enum KeywordMatch implements StringMatch {
+public enum KeywordMatch implements ValuedMatch {
 	EXTERN,
 	SINGLE;
 
