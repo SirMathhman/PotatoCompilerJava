@@ -9,6 +9,7 @@ import java.util.Set;
 
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 class SimpleAssemblerTest {
     @Test
@@ -16,14 +17,14 @@ class SimpleAssemblerTest {
         var lexer = PotatoLexer.PotatoLexer;
         var assembler = new SimpleAssembler(List.of(new BlockRecognizer()));
         var lexemes = lexer.parse("extern print[value string]");
-        var actualRoot = assembler.assembleSingle(lexemes);
+        var actualRoot = assembler.assembleChildren(lexemes);
 
         var print = new BlockNodeBuilder()
                 .withName("print")
                 .withModifiers(Set.of(Modifier.EXTERN))
                 .withArguments(Map.of("value", Primitive.STRING))
                 .build();
-        assertEquals(new SimpleNode(List.of(print)), actualRoot);
+        assertEquals(print, actualRoot.get(0));
     }
 
     @Test

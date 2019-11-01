@@ -2,6 +2,7 @@ package com.meti.assemble;
 
 import com.meti.lexeme.match.BlockMatch;
 import com.meti.lexeme.match.Match;
+import com.meti.lexeme.match.ParameterMatch;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,5 +52,13 @@ public class AssemblerState {
         return matches.subList(from, to).stream()
                 .map(clazz::cast)
                 .collect(Collectors.toList());
+    }
+
+    public boolean isType(int index, Class<?> clazz) {
+        return matches.get(index).getClass().equals(clazz);
+    }
+
+    public int size() {
+        return matches.size();
     }
 }

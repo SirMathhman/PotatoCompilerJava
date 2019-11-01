@@ -5,10 +5,7 @@ import com.meti.lexeme.match.InlineMatch;
 import com.meti.lexeme.match.ParameterMatch;
 import com.meti.lexeme.match.StringMatch;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class BlockRecognizer implements Recognizer {
@@ -38,22 +35,27 @@ class BlockRecognizer implements Recognizer {
     }
 
     private List<AssemblyNode> buildChildren(AssemblerState state, Integer nameIndex) {
-        var content = state.sub(nameIndex + 1);
+        if(nameIndex + 2 >= state.size()) return new ArrayList<>();
+        var content = state.sub(nameIndex + 2, state.size() - 1);
         return state.parent().assembleChildren(content);
     }
 
-    private HashMap<String, Type> buildParameters(AssemblerState state, Integer nameIndex) {
-        var parameters = state.get(nameIndex + 1, ParameterMatch.class).map();
-        var parameterMap = new HashMap<String, Type>();
-        for (String parameterName : parameters.keySet()) {
-            String parameterType = parameters.get(parameterName);
-            try {
-                parameterMap.put(parameterName, Primitive.valueOf(parameterType.toUpperCase()));
-            } catch (IllegalArgumentException e) {
-                throw new CompileException("Could not resolve type: " + parameterType);
+    private Map<String, Type> buildParameters(AssemblerState state, Integer nameIndex) {
+        if(state.isType(nameIndex + 1, ParameterMatch.class)) {
+            var parameters = state.get(nameIndex + 1, ParameterMatch.class).map();
+            var parameterMap = new HashMap<String, Type>();
+            for (String parameterName : parameters.keySet()) {
+                String parameterType = parameters.get(parameterName);
+                try {
+                    parameterMap.put(parameterName, Primitive.valueOf(parameterType.toUpperCase()));
+                } catch (IllegalArgumentException e) {
+                    throw new CompileException("Could not resolve type: " + parameterType);
+                }
             }
+            return parameterMap;
+        } else {
+            return new HashMap<>();
         }
-        return parameterMap;
     }
 
     private Set<Modifier> buildModifiers(AssemblerState state, Integer nameIndex) {
