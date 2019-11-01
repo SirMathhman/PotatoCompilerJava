@@ -1,11 +1,13 @@
 package com.meti.assemble;
 
-import com.meti.lexeme.match.BlockMatch;
 import com.meti.lexeme.match.Match;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.IntFunction;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 class ListAssemblerState implements AssemblerState {
     private final List<? extends Match> matches;
@@ -17,6 +19,14 @@ class ListAssemblerState implements AssemblerState {
     }
 
     @Override
+    public List<Integer> indices(Class<? extends Match> clazz) {
+        return IntStream.range(0, matches.size())
+                .filter(value -> matches.get(value).getClass().equals(clazz))
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Assembler parent(){
         return assembler;
     }
@@ -24,11 +34,6 @@ class ListAssemblerState implements AssemblerState {
     @Override
     public List<? extends Match> matches() {
         return matches;
-    }
-
-    @Override
-    public boolean endsWith(BlockMatch match) {
-        return false;
     }
 
     @Override

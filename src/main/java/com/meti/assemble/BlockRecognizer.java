@@ -2,6 +2,7 @@ package com.meti.assemble;
 
 import com.meti.CompileException;
 import com.meti.lexeme.match.InlineMatch;
+import com.meti.lexeme.match.InvocationMatch;
 import com.meti.lexeme.match.ParameterMatch;
 import com.meti.lexeme.match.ValuedMatch;
 
@@ -18,12 +19,13 @@ class BlockRecognizer implements Recognizer {
     public Optional<AssemblyNode> locate(AssemblerState state) {
         var nameOptional = state.indexOf(InlineMatch.class);
         if (nameOptional.isEmpty()) return Optional.empty();
+        if(state.indexOf(InvocationMatch.class).isPresent()) return Optional.empty();
         return buildBlock(state, nameOptional.get());
     }
 
     private Optional<AssemblyNode> buildBlock(AssemblerState state, int nameIndex) {
         var name = state.get(nameIndex, InlineMatch.class);
-        Map<String, Type> parameterMap = buildParameters(state, nameIndex);
+        var parameterMap = buildParameters(state, nameIndex);
         var modifiers = buildModifiers(state, nameIndex);
         var children = buildChildren(state, nameIndex);
         return Optional.of(new SimpleBlockNodeBuilder()

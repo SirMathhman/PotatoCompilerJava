@@ -1,17 +1,17 @@
 package com.meti.assemble;
 
-import com.meti.lexeme.match.BlockMatch;
+import com.meti.lexeme.match.InvocationMatch;
 import com.meti.lexeme.match.Match;
 
 import java.util.List;
 import java.util.Optional;
 
 interface AssemblerState {
+    List<Integer> indices(Class<? extends Match> clazz);
+
     Assembler parent();
 
     List<? extends Match> matches();
-
-    boolean endsWith(BlockMatch match);
 
     Optional<Integer> indexOf(Class<? extends Match> clazz);
 
