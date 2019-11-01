@@ -1,4 +1,4 @@
-package com.meti;
+package com.meti.lexeme;
 
 public class SimpleLexerState implements LexerState {
 	private final String value;

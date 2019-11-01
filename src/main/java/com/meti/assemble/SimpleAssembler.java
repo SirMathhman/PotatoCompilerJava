@@ -1,4 +1,6 @@
-package com.meti;
+package com.meti.assemble;
+
+import com.meti.lexeme.match.Match;
 
 import java.util.Collection;
 import java.util.List;

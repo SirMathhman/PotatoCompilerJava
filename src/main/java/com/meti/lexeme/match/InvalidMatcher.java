@@ -1,8 +1,11 @@
-package com.meti;
+package com.meti.lexeme.match;
+
+import com.meti.CompileException;
+import com.meti.lexeme.LexerState;
 
 import java.util.Optional;
 
-class InvalidMatcher implements Matcher {
+public class InvalidMatcher implements Matcher {
 	@Override
 	public Optional<Match> build(LexerState lexerState) {
 		if (lexerState.hasTerminated()) {

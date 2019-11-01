@@ -1,11 +1,13 @@
-package com.meti;
+package com.meti.lexeme.match;
+
+import com.meti.lexeme.LexerState;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-class ArgumentMatcher implements Matcher {
+public class ArgumentMatcher implements Matcher {
 	@Override
 	public Optional<Match> build(LexerState lexerState) {
 		String value = lexerState.compute();

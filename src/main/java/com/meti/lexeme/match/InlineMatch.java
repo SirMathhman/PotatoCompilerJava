@@ -1,8 +1,8 @@
-package com.meti;
+package com.meti.lexeme.match;
 
 import java.util.Objects;
 
-class InlineMatch implements StringMatch {
+public class InlineMatch implements StringMatch {
 	private final String value;
 
 	InlineMatch(String value) {

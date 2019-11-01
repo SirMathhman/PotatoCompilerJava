@@ -1,9 +1,11 @@
-package com.meti;
+package com.meti.lexeme.match;
+
+import com.meti.lexeme.LexerState;
 
 import java.util.Locale;
 import java.util.Optional;
 
-class KeywordMatcher implements Matcher {
+public class KeywordMatcher implements Matcher {
 	@Override
 	public Optional<Match> build(LexerState lexerState) {
 		try {

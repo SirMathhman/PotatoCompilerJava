@@ -1,8 +1,10 @@
-package com.meti;
+package com.meti.lexeme;
+
+import com.meti.lexeme.match.*;
 
 import java.util.List;
 
-class PotatoLexer extends SequentialLexer {
+public class PotatoLexer extends SequentialLexer {
 	public static final Lexer PotatoLexer = new PotatoLexer(List.of(
 			new ArgumentMatcher(),
 			new BlockMatcher(),

@@ -1,8 +1,10 @@
-package com.meti;
+package com.meti.lexeme.match;
+
+import com.meti.lexeme.LexerState;
 
 import java.util.Optional;
 
-class BlockMatcher implements Matcher {
+public class BlockMatcher implements Matcher {
 	@Override
 	public Optional<Match> build(LexerState lexerState) {
 		Optional<Match> result;

@@ -1,4 +1,4 @@
-package com.meti;
+package com.meti.lexeme;
 
 public interface LexerState {
 	void advance();

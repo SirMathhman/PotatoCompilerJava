@@ -1,8 +1,8 @@
-package com.meti;
+package com.meti.lexeme.match;
 
 import java.util.Map;
 
-class ArgumentMatch implements StringMatch {
+public class ArgumentMatch implements StringMatch {
 	private final Map<String, String> types;
 
 	ArgumentMatch(Map<String, String> types) {

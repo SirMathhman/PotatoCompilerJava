@@ -1,8 +1,8 @@
-package com.meti;
+package com.meti.lexeme.match;
 
 import java.util.Locale;
 
-enum KeywordMatch implements StringMatch {
+public enum KeywordMatch implements StringMatch {
 	EXTERN,
 	SINGLE;
 

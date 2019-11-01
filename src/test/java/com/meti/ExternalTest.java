@@ -1,5 +1,7 @@
 package com.meti;
 
+import com.meti.lexeme.PotatoLexer;
+import com.meti.lexeme.match.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

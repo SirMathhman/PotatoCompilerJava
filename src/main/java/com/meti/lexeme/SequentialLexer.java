@@ -1,4 +1,7 @@
-package com.meti;
+package com.meti.lexeme;
+
+import com.meti.lexeme.match.Match;
+import com.meti.lexeme.match.Matcher;
 
 import java.util.ArrayList;
 import java.util.Collection;
