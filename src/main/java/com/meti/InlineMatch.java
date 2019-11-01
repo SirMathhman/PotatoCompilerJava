@@ -2,10 +2,10 @@ package com.meti;
 
 import java.util.Objects;
 
-class InlineToken implements StringToken {
+class InlineMatch implements StringMatch {
 	private final String value;
 
-	InlineToken(String value) {
+	InlineMatch(String value) {
 		this.value = value;
 	}
 
@@ -17,12 +17,12 @@ class InlineToken implements StringToken {
 	@Override
 	public boolean equals(Object obj) {
 		return this == obj || obj != null && getClass() == obj.getClass() &&
-				Objects.equals(value, ((StringToken) obj).value());
+				Objects.equals(value, ((StringMatch) obj).value());
 	}
 
 	@Override
 	public String toString() {
-		return "InlineToken{" +
+		return "InlineMatch{" +
 				"value='" + value + '\'' +
 				'}';
 	}

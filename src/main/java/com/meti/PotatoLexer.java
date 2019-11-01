@@ -1,18 +1,16 @@
 package com.meti;
 
-import scala.collection.Seq;
-
 import java.util.List;
 
 class PotatoLexer extends SequentialLexer {
 	public static final Lexer PotatoLexer = new PotatoLexer(List.of(
-			new ArgumentTokenBuilder(),
-			new BlockTokenBuilder(),
-			new KeywordTokenBuilder(),
-			new NameTokenBuilder(),
-			new InvalidTokenBuilder()));
+			new ArgumentMatcher(),
+			new BlockMatcher(),
+			new KeywordMatcher(),
+			new NameMatcher(),
+			new InvalidMatcher()));
 
-	private PotatoLexer(List<? extends TokenBuilder> builders) {
+	private PotatoLexer(List<? extends Matcher> builders) {
 		super(builders);
 	}
 }

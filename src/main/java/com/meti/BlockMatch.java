@@ -1,6 +1,6 @@
 package com.meti;
 
-class BlockToken implements StringToken {
+class BlockMatch implements StringMatch {
 	@Override
 	public String value() {
 		return null;

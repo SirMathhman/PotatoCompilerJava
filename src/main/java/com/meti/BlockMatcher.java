@@ -2,15 +2,15 @@ package com.meti;
 
 import java.util.Optional;
 
-class BlockTokenBuilder implements TokenBuilder {
+class BlockMatcher implements Matcher {
 	@Override
-	public Optional<Token> build(LexerState lexerState) {
-		Optional<Token> result;
+	public Optional<Match> build(LexerState lexerState) {
+		Optional<Match> result;
 		String value = lexerState.compute();
 		if (value.equals("={")) {
-			result = Optional.of(new BlockToken());
+			result = Optional.of(new BlockMatch());
 		} else if (value.equals("}")) {
-			result = Optional.of(new BlockToken());
+			result = Optional.of(new BlockMatch());
 		} else {
 			result = Optional.empty();
 		}

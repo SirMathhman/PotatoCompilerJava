@@ -4,28 +4,26 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class SequentialLexer implements Lexer {
-	private final List<? extends TokenBuilder> builders;
+	private final List<? extends Matcher> builders;
 
-	SequentialLexer(List<? extends TokenBuilder> builders) {
+	SequentialLexer(List<? extends Matcher> builders) {
 		this.builders = builders;
 	}
 
 	@Override
-	public List<? extends Token> parse(String value) {
+	public List<? extends Match> parse(String value) {
 		LexerState state = new SimpleLexerState(value);
-		List<Token> tokens = new ArrayList<>();
+		List<Match> matches = new ArrayList<>();
 		boolean shouldContinue;
 		do {
-			shouldContinue = buildNextToken(state, tokens);
+			shouldContinue = buildNextToken(state, matches);
 		} while (shouldContinue);
-		return tokens;
+		return matches;
 	}
 
-	private boolean buildNextToken(LexerState state, Collection<? super Token> tokens) {
+	private boolean buildNextToken(LexerState state, Collection<? super Match> tokens) {
 		builders.stream()
 				.map(builder -> builder.build(state))
 				.flatMap(Optional::stream)

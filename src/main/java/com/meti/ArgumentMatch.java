@@ -2,10 +2,10 @@ package com.meti;
 
 import java.util.Map;
 
-class ArgumentToken implements StringToken {
+class ArgumentMatch implements StringMatch {
 	private final Map<String, String> types;
 
-	ArgumentToken(Map<String, String> types) {
+	ArgumentMatch(Map<String, String> types) {
 		this.types = types;
 	}
 

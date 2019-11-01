@@ -14,16 +14,16 @@ class ExternalTest {
 		var lexer = PotatoLexer.PotatoLexer;
 		var tokens = lexer.parse(text)
 				.stream()
-				.map(Token::getClass)
+				.map(Match::getClass)
 				.collect(Collectors.toList());
 		assertIterableEquals(List.of(
-				KeywordToken.class,
-				InlineToken.class,
-				BlockToken.class,
-				KeywordToken.class,
-				InlineToken.class,
-				ArgumentToken.class,
-				BlockToken.class
+				KeywordMatch.class,
+				InlineMatch.class,
+				BlockMatch.class,
+				KeywordMatch.class,
+				InlineMatch.class,
+				ArgumentMatch.class,
+				BlockMatch.class
 		), tokens);
 	}
 }

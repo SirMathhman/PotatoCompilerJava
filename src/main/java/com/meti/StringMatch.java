@@ -1,5 +1,5 @@
 package com.meti;
 
-interface StringToken extends Token {
+interface StringMatch extends Match {
 	String value();
 }

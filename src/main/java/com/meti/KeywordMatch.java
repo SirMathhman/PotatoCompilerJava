@@ -2,7 +2,7 @@ package com.meti;
 
 import java.util.Locale;
 
-enum KeywordToken implements StringToken {
+enum KeywordMatch implements StringMatch {
 	EXTERN,
 	SINGLE;
 

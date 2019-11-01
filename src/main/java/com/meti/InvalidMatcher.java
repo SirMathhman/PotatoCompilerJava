@@ -2,9 +2,9 @@ package com.meti;
 
 import java.util.Optional;
 
-class InvalidTokenBuilder implements TokenBuilder {
+class InvalidMatcher implements Matcher {
 	@Override
-	public Optional<Token> build(LexerState lexerState) {
+	public Optional<Match> build(LexerState lexerState) {
 		if (lexerState.hasTerminated()) {
 			throw new CompileException("Cannot parse syntax: " + lexerState.compute());
 		} else {
