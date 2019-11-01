@@ -1,5 +1,5 @@
 package com.meti.assemble;
 
-enum Modifier {
+public enum Modifier {
     SINGLE, EXTERN
 }

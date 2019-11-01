@@ -15,7 +15,7 @@ class SimpleAssembler implements Assembler {
 	@Override
 	public AssemblyNode assembleSingle(List<? extends Match> tokens) {
 		List<AssemblyNode> nodes = assembleChildren(tokens);
-		return new SimpleNode(nodes);
+		return new GroupNode(nodes);
 	}
 
 	@Override

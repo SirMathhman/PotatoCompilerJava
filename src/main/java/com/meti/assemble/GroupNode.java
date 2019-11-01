@@ -3,10 +3,10 @@ package com.meti.assemble;
 import java.util.List;
 import java.util.Objects;
 
-class SimpleNode implements AssemblyNode {
+public class GroupNode implements AssemblyNode {
     private final List<? extends AssemblyNode> children;
 
-    SimpleNode(List<? extends AssemblyNode> children) {
+    GroupNode(List<? extends AssemblyNode> children) {
         this.children = children;
     }
 
@@ -19,7 +19,7 @@ class SimpleNode implements AssemblyNode {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SimpleNode that = (SimpleNode) o;
+        GroupNode that = (GroupNode) o;
         return Objects.equals(children, that.children);
     }
 

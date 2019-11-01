@@ -43,7 +43,7 @@ class SimpleAssemblerTest {
                 .withModifiers(Set.of(Modifier.SINGLE))
                 .withChildren(singletonList(print))
                 .build();
-        var expectedRoot = new SimpleNode(singletonList(internal));
+        var expectedRoot = new GroupNode(singletonList(internal));
         assertEquals(expectedRoot, actualRoot);
     }
 }

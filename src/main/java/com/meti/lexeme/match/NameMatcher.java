@@ -9,7 +9,7 @@ public class NameMatcher implements Matcher {
 	public Optional<Match> build(LexerState lexerState) {
 		if (lexerState.trailing(1).equals("[") ||
 				lexerState.trailing(1).equals("=")) {
-			return Optional.of(new InlineMatch(lexerState.compute()));
+			return Optional.of(new InlineMatch(lexerState.compute().trim()));
 		} else {
 			return Optional.empty();
 		}

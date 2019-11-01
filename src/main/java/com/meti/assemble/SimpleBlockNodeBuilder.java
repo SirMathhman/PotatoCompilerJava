@@ -41,6 +41,6 @@ public class SimpleBlockNodeBuilder implements BlockNodeBuilder {
 
     @Override
     public AssemblyNode build() {
-        return new BlockNode(name, modifiers, arguments, children);
+        return new SimpleBlockNode(name, modifiers, arguments, children);
     }
 }
