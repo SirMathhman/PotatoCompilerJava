@@ -24,10 +24,10 @@ class LexerTest {
 
 	private static final class EvenBuilder implements TokenBuilder {
 		@Override
-		public Optional<Token> build(String subValue) {
+		public Optional<Token> build(LexerState lexerState) {
 			Optional<Token> result;
 			try {
-				int value = Integer.parseInt(subValue);
+				int value = Integer.parseInt(lexerState.compute());
 				result = value % 2 == 0 ? of(new InlineToken("even")) : empty();
 			} catch (NumberFormatException e) {
 				result = empty();
@@ -38,10 +38,10 @@ class LexerTest {
 
 	private static final class OddBuilder implements TokenBuilder {
 		@Override
-		public Optional<Token> build(String subValue) {
+		public Optional<Token> build(LexerState lexerState) {
 			Optional<Token> result;
 			try {
-				int value = Integer.parseInt(subValue);
+				int value = Integer.parseInt(lexerState.compute());
 				result = value % 2 != 1 ? empty() : of(new InlineToken("odd"));
 			} catch (NumberFormatException e) {
 				result = empty();

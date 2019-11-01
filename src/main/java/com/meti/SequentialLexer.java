@@ -1,39 +1,39 @@
 package com.meti;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class SequentialLexer implements Lexer {
-    private final List<? extends TokenBuilder> builders;
+	private final List<? extends TokenBuilder> builders;
 
-    SequentialLexer(List<TokenBuilder> builders) {
-        this.builders = builders;
-    }
+	SequentialLexer(List<? extends TokenBuilder> builders) {
+		this.builders = builders;
+	}
 
-    @Override
-    public List<? extends Token> parse(String value) {
-        int beginning = 0;
-        int end = 1;
-        List<Token> tokens = new ArrayList<>();
-        do {
-            Token token = null;
-            String subValue = value.substring(beginning, end);
-            for (TokenBuilder builder : builders) {
-                Optional<Token> optional = builder.build(subValue);
-                if (optional.isPresent()) {
-                    token = optional.get();
-                }
-            }
-            tokens.add(token);
-            if (token == null) {
-                end++;
-            } else {
-                beginning = end;
-                end = beginning + 1;
-            }
-        } while (beginning != value.length());
+	@Override
+	public List<? extends Token> parse(String value) {
+		LexerState state = new SimpleLexerState(value);
+		List<Token> tokens = new ArrayList<>();
+		boolean shouldContinue;
+		do {
+			shouldContinue = buildNextToken(state, tokens);
+		} while (shouldContinue);
+		return tokens;
+	}
 
-        return tokens;
-    }
+	private boolean buildNextToken(LexerState state, Collection<? super Token> tokens) {
+		builders.stream()
+				.map(builder -> builder.build(state))
+				.flatMap(Optional::stream)
+				.findAny()
+				.ifPresentOrElse(token -> {
+					state.reset();
+					tokens.add(token);
+				}, state::advance);
+		return state.hasMoreCharacters();
+	}
 }
