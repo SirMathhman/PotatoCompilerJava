@@ -18,7 +18,7 @@ class BlockNodeTest {
                 .withArguments(Map.of("value", Primitive.STRING))
                 .withModifiers(Collections.singleton(Modifier.SINGLE))
                 .build();
-        HashMap<String, Primitive> map = new HashMap<>();
+        Map<String, Type> map = new HashMap<>();
         map.put("value", Primitive.STRING);
         var modifier = new HashSet<Modifier>();
         modifier.add(Modifier.SINGLE);
