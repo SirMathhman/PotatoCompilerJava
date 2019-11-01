@@ -1,11 +1,9 @@
 package com.meti.assemble;
 
-import com.meti.lexeme.match.Match;
-
-import java.util.Queue;
+import java.util.Optional;
 
 public interface Recognizer {
 	String name();
 
-	Pattern locate(Queue<? extends Match> matches);
+	Optional<AssemblyNode> locate(AssemblerState assemblerState);
 }

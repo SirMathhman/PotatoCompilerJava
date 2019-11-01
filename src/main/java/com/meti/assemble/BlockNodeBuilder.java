@@ -5,14 +5,14 @@ import java.util.*;
 public class BlockNodeBuilder {
     private String name;
     private Set<Modifier> modifiers;
-    private Map<Type, String> arguments;
+    private Map<String, Type> arguments;
     private List<? extends AssemblyNode> children;
 
     public BlockNodeBuilder() {
         this("", new HashSet<>(), new HashMap<>(), new ArrayList<>());
     }
 
-    public BlockNodeBuilder(String name, Set<Modifier> modifiers, Map<Type, String> arguments, List<? extends AssemblyNode> children) {
+    public BlockNodeBuilder(String name, Set<Modifier> modifiers, Map<String, Type> arguments, List<? extends AssemblyNode> children) {
         this.name = name;
         this.modifiers = modifiers;
         this.arguments = arguments;
@@ -27,7 +27,7 @@ public class BlockNodeBuilder {
         return new BlockNodeBuilder(name, modifiers, arguments, children);
     }
 
-    public BlockNodeBuilder withArguments(Map<Type, String> arguments) {
+    public BlockNodeBuilder withArguments(Map<String, Type> arguments) {
         return new BlockNodeBuilder(name, modifiers, arguments, children);
     }
 

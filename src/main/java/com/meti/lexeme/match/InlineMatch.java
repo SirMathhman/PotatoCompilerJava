@@ -5,7 +5,7 @@ import java.util.Objects;
 public class InlineMatch implements StringMatch {
 	private final String value;
 
-	InlineMatch(String value) {
+	public InlineMatch(String value) {
 		this.value = value;
 	}
 

@@ -24,7 +24,7 @@ class ExternalTest {
 				BlockMatch.class,
 				KeywordMatch.class,
 				InlineMatch.class,
-				ArgumentMatch.class,
+				ParameterMatch.class,
 				BlockMatch.class
 		), tokens);
 	}

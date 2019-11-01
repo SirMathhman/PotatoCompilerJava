@@ -16,7 +16,7 @@ public class ArgumentMatcher implements Matcher {
 					.split(","))
 					.map(s -> s.split(" "))
 					.collect(Collectors.toMap(strings -> strings[0], strings -> strings[1]));
-			return Optional.of(new ArgumentMatch(types));
+			return Optional.of(new ParameterMatch(types));
 		}
 		return Optional.empty();
 	}
