@@ -5,5 +5,5 @@ import com.meti.lexeme.match.Match;
 import java.util.List;
 
 interface Assembler {
-	AssemblyTree assemble(List<? extends Match> tokens);
+	AssemblyNode assemble(List<? extends Match> tokens);
 }

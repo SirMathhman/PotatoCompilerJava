@@ -15,7 +15,7 @@ class SimpleAssembler implements Assembler {
 	}
 
 	@Override
-	public AssemblyTree assemble(List<? extends Match> tokens) {
+	public AssemblyNode assemble(List<? extends Match> tokens) {
 		Queue<? extends Match> tokenQueue = new PriorityQueue<>(tokens);
 
 		return null;
