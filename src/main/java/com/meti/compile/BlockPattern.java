@@ -23,7 +23,7 @@ class BlockPattern implements Pattern {
 				.map(s -> generator.next())
 				.collect(Collectors.toList());
 
-		compiler.put(block.name(), new Function(funcID, parameters.size()));
+		compiler.put(block.name(), funcID);
 		compiler.depth().add(block.name());
 
 		if (!block.modifiers().contains(Modifier.SINGLE)) {

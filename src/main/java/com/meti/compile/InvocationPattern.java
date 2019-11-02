@@ -20,8 +20,7 @@ class InvocationPattern implements Pattern {
 		var invocation = (InvocationNode) node;
 		var name = invocation.methodName();
 		var function = compiler.get(name).orElseThrow(() -> throwNoSuchMethod(name));
-		var funcName = function.name();
-		return funcName + "(" + format(invocation.parameters()) + ");";
+		return function + "(" + format(invocation.parameters()) + ");";
 	}
 
 	private RuntimeException throwNoSuchMethod(List<String> name) {
