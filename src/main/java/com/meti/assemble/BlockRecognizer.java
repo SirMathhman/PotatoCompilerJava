@@ -11,11 +11,6 @@ import java.util.stream.Collectors;
 
 class BlockRecognizer implements Recognizer {
     @Override
-    public String name() {
-        return "function";
-    }
-
-    @Override
     public Optional<AssemblyNode> locate(AssemblerState state) {
         Optional<AssemblyNode> result;
         var nameOptional = state.indexOf(InlineMatch.class);
