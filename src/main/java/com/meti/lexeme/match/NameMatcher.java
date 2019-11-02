@@ -11,7 +11,7 @@ public class NameMatcher implements Matcher {
 				lexerState.trailing(1).equals(".") ||
 				lexerState.trailing(1).equals("(") ||
 				lexerState.trailing(1).equals("=") ?
-				Optional.of(new InlineMatch(lexerState.compute()
+				Optional.of(new NameMatch(lexerState.compute()
 						.trim()
 						.replace(".", ""))) :
 				Optional.empty();

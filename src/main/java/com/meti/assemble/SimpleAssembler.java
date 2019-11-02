@@ -22,7 +22,7 @@ class SimpleAssembler implements Assembler {
 	public List<AssemblyNode> assembleChildren(List<? extends Match> tokens) {
 		var state = new ListAssemblerState(tokens, this);
 		return recognizers.stream()
-				.map(recognizer -> recognizer.locate(state))
+				.map(recognizer -> recognizer.recognize(state))
 				.flatMap(Optional::stream)
 				.collect(Collectors.toList());
 	}

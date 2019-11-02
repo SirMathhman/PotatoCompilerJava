@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 class InvocationRecognizer implements Recognizer {
 
 	@Override
-	public Optional<AssemblyNode> locate(AssemblerState state) {
-		var indices = state.indices(InvocationMatch.class);
+	public Optional<AssemblyNode> recognize(AssemblerState state) {
+		var indices = state.findAll(InvocationMatch.class);
 		if (indices.size() < 2) return Optional.empty();
-		var names = state.sub(0, indices.get(0), ValuedMatch.class)
+		var names = state.slice(0, indices.get(0), ValuedMatch.class)
 				.stream()
 				.map(ValuedMatch::value)
 				.collect(Collectors.toList());
-		var args = state.sub(indices.get(0) + 1, indices.get(1), ValuedMatch.class)
+		var args = state.slice(indices.get(0) + 1, indices.get(1), ValuedMatch.class)
 				.stream()
 				.collect(Collectors.toMap(ValuedMatch::value, this::findType));
 		return Optional.of(new SimpleInvocationNode(names, args));

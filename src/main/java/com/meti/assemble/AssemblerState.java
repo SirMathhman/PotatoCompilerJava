@@ -1,29 +1,26 @@
 package com.meti.assemble;
 
-import com.meti.lexeme.match.InvocationMatch;
 import com.meti.lexeme.match.Match;
 
 import java.util.List;
 import java.util.Optional;
 
 interface AssemblerState {
-    List<Integer> indices(Class<? extends Match> clazz);
+	Assembler assembler();
 
-    Assembler parent();
+	Optional<Integer> find(Class<? extends Match> clazz);
 
-    List<? extends Match> matches();
+	List<Integer> findAll(Class<? extends Match> clazz);
 
-    Optional<Integer> indexOf(Class<? extends Match> clazz);
+	<T extends Match> T get(int index, Class<T> clazz);
 
-    List<? extends Match> sub(int from, int to);
+	boolean has(int index, Class<? extends Match> clazz);
 
-    List<? extends Match> sub(int index);
+	boolean has(Class<? extends Match> clazz);
 
-    <T extends Match> T get(int index, Class<? extends T> clazz);
+	int size();
 
-    <T> List<T> sub(int from, int to, Class<? extends T> clazz);
+	List<? extends Match> slice(int from, int to);
 
-    boolean isType(int index, Class<?> clazz);
-
-    int size();
+	<T> List<T> slice(int from, int to, Class<? extends T> clazz);
 }

@@ -2,10 +2,10 @@ package com.meti.lexeme.match;
 
 import java.util.Objects;
 
-public class InlineMatch implements ValuedMatch {
+public class NameMatch implements ValuedMatch {
 	private final String value;
 
-	public InlineMatch(String value) {
+	public NameMatch(String value) {
 		this.value = value;
 	}
 
@@ -22,7 +22,7 @@ public class InlineMatch implements ValuedMatch {
 
 	@Override
 	public String toString() {
-		return "InlineMatch{" +
+		return "NameMatch{" +
 				"value='" + value + '\'' +
 				'}';
 	}

@@ -20,10 +20,10 @@ class ExternalTest {
 				.collect(Collectors.toList());
 		assertIterableEquals(List.of(
 				KeywordMatch.class,
-				InlineMatch.class,
+				NameMatch.class,
 				BlockMatch.class,
 				KeywordMatch.class,
-				InlineMatch.class,
+				NameMatch.class,
 				ParameterMatch.class,
 				BlockMatch.class
 		), tokens);
