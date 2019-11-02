@@ -17,10 +17,16 @@ class BlockRecognizer implements Recognizer {
 
     @Override
     public Optional<AssemblyNode> locate(AssemblerState state) {
+        Optional<AssemblyNode> result;
         var nameOptional = state.indexOf(InlineMatch.class);
-        if (nameOptional.isEmpty()) return Optional.empty();
-        if(state.indexOf(InvocationMatch.class).isPresent()) return Optional.empty();
-        return buildBlock(state, nameOptional.get());
+        if (nameOptional.isEmpty()) {
+            result = Optional.empty();
+        } else if (state.indexOf(InvocationMatch.class).isPresent()) {
+            result = Optional.empty();
+        } else {
+            result = buildBlock(state, nameOptional.get());
+        }
+        return result;
     }
 
     private Optional<AssemblyNode> buildBlock(AssemblerState state, int nameIndex) {

@@ -5,5 +5,5 @@ import java.util.Optional;
 interface Recognizer {
 	String name();
 
-	Optional<AssemblyNode> locate(AssemblerState assemblerState);
+	Optional<AssemblyNode> locate(AssemblerState state);
 }
