@@ -1,6 +1,7 @@
 package com.meti.compile;
 
 import com.meti.assemble.AssemblyNode;
+import com.meti.util.ArrayListBuilder;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -63,10 +64,10 @@ class SimpleCompiler implements Compiler {
 
     @Override
     public void put(String name, Function function) {
-        List<String> depthCopy = new ArrayList<>(depth());
-        depthCopy.add(name);
-        if (functions.put(depthCopy, function) != null) {
-            throw new IllegalArgumentException("Function with name \"" + name + "\" already exists.");
-        }
+        var list = new ArrayListBuilder<>(depth)
+                .append(name)
+                .build();
+        if (functions.put(list, function) != null)
+            throw new IllegalArgumentException("Function " + list + " already exists.");
     }
 }

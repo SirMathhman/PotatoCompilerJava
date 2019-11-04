@@ -3,7 +3,7 @@ package com.meti.util;
 import java.util.Collection;
 import java.util.List;
 
-interface ListBuilder<T> {
+public interface ListBuilder<T> {
     default ListBuilder<T> append(T... ts) {
         return append(List.of(ts));
     }
