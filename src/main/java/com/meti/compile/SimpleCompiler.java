@@ -57,6 +57,11 @@ class SimpleCompiler implements Compiler {
     }
 
     @Override
+    public boolean contains(String... name) {
+        return functions.containsKey(List.of(name));
+    }
+
+    @Override
     public void put(String name, Function function) {
         List<String> depthCopy = new ArrayList<>(depth());
         depthCopy.add(name);

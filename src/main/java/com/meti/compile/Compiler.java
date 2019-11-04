@@ -16,5 +16,7 @@ public interface Compiler {
 
 	Optional<Function> get(List<String> name);
 
-	void put(String name, Function function);
+    boolean contains(String... name);
+
+    void put(String name, Function function);
 }
