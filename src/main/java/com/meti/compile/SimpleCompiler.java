@@ -12,11 +12,15 @@ class SimpleCompiler implements Compiler {
     private final Generator generator;
     private final List<? extends Pattern> patterns;
 
+    SimpleCompiler() {
+        this(new HashMap<>());
+    }
+
     SimpleCompiler(Map<List<String>, Function> map) {
         this(new ArrayList<>(), new SimpleGenerator(), map);
     }
 
-	private SimpleCompiler(List<? extends Pattern> patterns, Generator generator, Map<List<String>, Function> functions) {
+    private SimpleCompiler(List<? extends Pattern> patterns, Generator generator, Map<List<String>, Function> functions) {
         this.patterns = patterns;
         this.generator = generator;
         this.functions = functions;
