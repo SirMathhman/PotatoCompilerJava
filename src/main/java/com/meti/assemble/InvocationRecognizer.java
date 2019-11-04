@@ -10,11 +10,6 @@ import java.util.stream.Collectors;
 
 class InvocationRecognizer implements Recognizer {
 	@Override
-	public String name() {
-		return "invocation";
-	}
-
-	@Override
 	public Optional<AssemblyNode> locate(AssemblerState state) {
 		var indices = state.indices(InvocationMatch.class);
 		if (indices.size() < 2) return Optional.empty();

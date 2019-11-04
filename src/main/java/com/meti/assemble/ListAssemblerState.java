@@ -27,13 +27,8 @@ class ListAssemblerState implements AssemblerState {
     }
 
     @Override
-    public Assembler parent(){
+    public Assembler assembler(){
         return assembler;
-    }
-
-    @Override
-    public List<? extends Match> matches() {
-        return matches;
     }
 
     @Override
@@ -47,11 +42,6 @@ class ListAssemblerState implements AssemblerState {
     @Override
     public List<? extends Match> sub(int from, int to) {
         return matches.subList(from, to);
-    }
-
-    @Override
-    public List<? extends Match> sub(int index) {
-        return matches.subList(index, matches.size());
     }
 
     @Override

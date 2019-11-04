@@ -19,9 +19,9 @@ class SimpleAssemblerTest {
         var actualRoot = assembler.assembleChildren(lexemes);
 
         AssemblyNode print = new SimpleBlockNodeBuilder()
-                .withName("print")
-                .withModifiers(Set.of(Modifier.EXTERN))
-                .withArguments(Map.of("value", Primitive.STRING))
+                .setName("print")
+                .setModifiers(Set.of(Modifier.EXTERN))
+                .setParameters(Map.of("value", Primitive.STRING))
                 .build();
         assertEquals(print, actualRoot.get(0));
     }
@@ -34,14 +34,14 @@ class SimpleAssemblerTest {
         var actualRoot = assembler.assembleSingle(lexemes);
 
         AssemblyNode print = new SimpleBlockNodeBuilder()
-                .withName("print")
-                .withModifiers(Set.of(Modifier.EXTERN))
-                .withArguments(Map.of("value", Primitive.STRING))
+                .setName("print")
+                .setModifiers(Set.of(Modifier.EXTERN))
+                .setParameters(Map.of("value", Primitive.STRING))
                 .build();
         AssemblyNode internal = new SimpleBlockNodeBuilder()
-                .withName("Internal")
-                .withModifiers(Set.of(Modifier.SINGLE))
-                .withChildren(singletonList(print))
+                .setName("Internal")
+                .setModifiers(Set.of(Modifier.SINGLE))
+                .setChildren(singletonList(print))
                 .build();
         var expectedRoot = new GroupNode(singletonList(internal));
         assertEquals(expectedRoot, actualRoot);

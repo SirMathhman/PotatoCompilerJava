@@ -26,9 +26,4 @@ public class GroupNode implements AssemblyNode {
         GroupNode that = (GroupNode) o;
         return Objects.equals(children, that.children);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(children);
-    }
 }
