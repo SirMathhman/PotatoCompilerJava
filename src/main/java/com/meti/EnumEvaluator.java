@@ -6,7 +6,7 @@ import java.util.Optional;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
-class EnumEvaluator<E extends Enum<E>> implements Evaluator {
+class EnumEvaluator<E extends Enum<E>> implements FilteredEvaluator {
 	private final String delimiter;
 	private final Class<E> e;
 	private final Map<E, ? extends Evaluator> evaluators;

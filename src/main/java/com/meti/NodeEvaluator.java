@@ -2,10 +2,10 @@ package com.meti;
 
 import java.util.Collection;
 
-class NodeEvaluator implements Evaluator {
-	private final Collection<? extends Evaluator> evaluators;
+class NodeEvaluator implements FilteredEvaluator {
+	private final Collection<? extends FilteredEvaluator> evaluators;
 
-	NodeEvaluator(Collection<? extends Evaluator> evaluators) {
+	NodeEvaluator(Collection<? extends FilteredEvaluator> evaluators) {
 		this.evaluators = evaluators;
 	}
 
