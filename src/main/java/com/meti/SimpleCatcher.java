@@ -1,9 +1,9 @@
 package com.meti;
 
 class SimpleCatcher<T> implements Catcher<T> {
-	private final Tryable<T> tryable;
+	private final Tryable<? extends T> tryable;
 
-	SimpleCatcher(Tryable<T> tryable) {
+	SimpleCatcher(Tryable<? extends T> tryable) {
 		this.tryable = tryable;
 	}
 

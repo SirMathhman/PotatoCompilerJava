@@ -11,7 +11,7 @@ class EnumEvaluator<E extends Enum<E>> implements FilteredEvaluator {
 	private final Class<E> e;
 	private final Map<E, ? extends Evaluator> evaluators;
 
-	EnumEvaluator(Map<E, ? extends Evaluator> evaluators, String delimiter, Class<E> e) {
+	EnumEvaluator(Class<E> e, Map<E, ? extends Evaluator> evaluators, String delimiter) {
 		this.evaluators = evaluators;
 		this.delimiter = delimiter;
 		this.e = e;
