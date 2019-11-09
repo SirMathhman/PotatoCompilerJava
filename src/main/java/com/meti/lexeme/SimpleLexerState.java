@@ -13,10 +13,9 @@ public class SimpleLexerState implements LexerState {
 
 	@Override
 	public void advance() {
-		if (end != value.length()) end++;
-		else {
+		if (end == value.length()) {
 			throw new IllegalStateException("Could not parse:\"" + compute() + "\"");
-		}
+		} else end++;
 	}
 
 	@Override
