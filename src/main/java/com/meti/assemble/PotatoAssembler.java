@@ -3,7 +3,7 @@ package com.meti.assemble;
 import java.util.Collection;
 import java.util.List;
 
-public class PotatoAssembler extends SimpleAssembler {
+public class PotatoAssembler extends ListAssembler {
 	public static final Assembler PotatoAssembler = new PotatoAssembler(List.of
 			(new BlockRecognizer(),
 			new InvocationRecognizer()));
