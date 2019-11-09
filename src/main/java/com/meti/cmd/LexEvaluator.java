@@ -13,7 +13,7 @@ class LexEvaluator implements Evaluator {
 		var lexer = PotatoLexer.INSTANCE;
 		return lexer.parse(value)
 				.stream()
-				.map((Function<Match, String>) Object::toString)
+				.map((Function<Match<?>, String>) Object::toString)
 				.collect(Collectors.joining("\n"));
 	}
 }

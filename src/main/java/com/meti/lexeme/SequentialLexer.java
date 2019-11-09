@@ -16,9 +16,9 @@ public class SequentialLexer implements Lexer {
 	}
 
 	@Override
-	public List<? extends Match> parse(String value) {
+	public List<? extends Match<?>> parse(String value) {
 		LexerState state = new SimpleLexerState(value);
-		List<Match> matches = new ArrayList<>();
+		List<Match<?>> matches = new ArrayList<>();
 		boolean shouldContinue;
 		do {
 			shouldContinue = buildNextToken(state, matches);
@@ -26,7 +26,7 @@ public class SequentialLexer implements Lexer {
 		return matches;
 	}
 
-	private boolean buildNextToken(LexerState state, Collection<? super Match> tokens) {
+	private boolean buildNextToken(LexerState state, Collection<? super Match<?>> tokens) {
 		builders.stream()
 				.map(builder -> builder.build(state))
 				.flatMap(Optional::stream)
