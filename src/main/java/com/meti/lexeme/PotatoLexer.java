@@ -9,6 +9,7 @@ import com.meti.lexeme.match.primitive.ArrayMatcher;
 import com.meti.lexeme.match.primitive.BooleanMatcher;
 import com.meti.lexeme.match.primitive.IntegerMatcher;
 import com.meti.lexeme.match.primitive.StringMatcher;
+import com.meti.lexeme.match.struct.BlockMatcher;
 import com.meti.lexeme.match.struct.OperatorMatcher;
 import com.meti.lexeme.match.struct.VariableMatcher;
 
@@ -24,6 +25,7 @@ public final class PotatoLexer extends SequentialLexer {
 			new BooleanMatcher(),
 			new StringMatcher(),
 			new ArrayMatcher(),
+			new BlockMatcher(),
 			new ListMatcher(),
 			new ContentMatcher()
 	));

@@ -1,5 +1,7 @@
 package com.meti.lexeme;
 
+import java.util.Optional;
+
 public interface LexerState {
 	void advance();
 
@@ -7,13 +9,11 @@ public interface LexerState {
 
 	boolean hasMoreCharacters();
 
-	boolean hasTerminated();
-
 	void reset();
 
 	void skipWhitespace();
 
 	String trailing(int count);
 
-	char trailing();
+	Optional<Character> trailing();
 }

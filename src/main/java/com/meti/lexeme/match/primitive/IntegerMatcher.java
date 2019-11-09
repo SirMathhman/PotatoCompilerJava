@@ -9,7 +9,8 @@ import java.util.Optional;
 public class IntegerMatcher implements Matcher {
 	@Override
 	public Optional<Match<?>> build(LexerState state) {
-		if(!Character.isDigit(state.trailing())){
+		var trailing = state.trailing();
+		if(trailing.isPresent() && !Character.isDigit(trailing.get())){
 			try {
 				return Optional.of(new IntegerMatch(Integer.parseInt(state.compute())));
 			} catch (NumberFormatException e) {

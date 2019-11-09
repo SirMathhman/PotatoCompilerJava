@@ -15,7 +15,7 @@ public class ContentMatcher implements Matcher {
 	private static final Set<String> trailing = new HashSet<>();
 
 	static {
-		trailing.addAll(Set.of(";", " "));
+		trailing.addAll(Set.of(";", " ", "{"));
 		trailing.addAll(Arrays.stream(Operator.values())
 				.map(Operator::value)
 				.collect(Collectors.toSet()));

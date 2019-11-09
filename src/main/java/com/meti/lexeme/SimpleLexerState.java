@@ -1,5 +1,7 @@
 package com.meti.lexeme;
 
+import java.util.Optional;
+
 public class SimpleLexerState implements LexerState {
 	private final String value;
 	private int beginning = 0;
@@ -25,11 +27,6 @@ public class SimpleLexerState implements LexerState {
 	}
 
 	@Override
-	public boolean hasTerminated() {
-		return end == value.length();
-	}
-
-	@Override
 	public void reset() {
 		beginning = end;
 		if(end != value.length()) end = beginning + 1;
@@ -42,8 +39,10 @@ public class SimpleLexerState implements LexerState {
 	}
 
 	@Override
-	public char trailing() {
-		return value.charAt(end);
+	public Optional<Character> trailing() {
+		return end < value.length() ?
+				Optional.of(value.charAt(end)) :
+				Optional.empty();
 	}
 
 	@Override
