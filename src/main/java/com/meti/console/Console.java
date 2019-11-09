@@ -1,5 +1,5 @@
 package com.meti.console;
 
-interface Console {
+public interface Console {
 	String run(String input);
 }

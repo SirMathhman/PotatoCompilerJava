@@ -8,12 +8,12 @@ import java.util.Optional;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
-class EnumEvaluator<E extends Enum<E>> implements FilteredEvaluator {
+public class EnumEvaluator<E extends Enum<E>> implements FilteredEvaluator {
 	private final String delimiter;
 	private final Class<E> e;
 	private final Map<E, ? extends Evaluator> evaluators;
 
-	EnumEvaluator(Class<E> e, Map<E, ? extends Evaluator> evaluators, String delimiter) {
+	public EnumEvaluator(Class<E> e, Map<E, ? extends Evaluator> evaluators, String delimiter) {
 		this.evaluators = evaluators;
 		this.delimiter = delimiter;
 		this.e = e;

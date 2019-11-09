@@ -1,5 +1,5 @@
 package com.meti.console;
 
-interface Evaluator {
+public interface Evaluator {
 	String evaluate(String value);
 }

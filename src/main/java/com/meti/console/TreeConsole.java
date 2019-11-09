@@ -3,10 +3,10 @@ package com.meti.console;
 import java.util.Collection;
 import java.util.List;
 
-class TreeConsole implements Console {
+public class TreeConsole implements Console {
 	private final Collection<? extends FilteredEvaluator> evaluators;
 
-	TreeConsole(FilteredEvaluator... evaluators) {
+	public TreeConsole(FilteredEvaluator... evaluators) {
 		this(List.of(evaluators));
 	}
 
