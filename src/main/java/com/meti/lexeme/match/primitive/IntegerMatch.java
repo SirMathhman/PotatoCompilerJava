@@ -1,4 +1,6 @@
-package com.meti.lexeme.match;
+package com.meti.lexeme.match.primitive;
+
+import com.meti.lexeme.match.Match;
 
 class IntegerMatch implements Match<Integer> {
 	private final int value;

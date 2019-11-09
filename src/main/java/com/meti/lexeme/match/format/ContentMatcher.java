@@ -1,6 +1,9 @@
-package com.meti.lexeme.match;
+package com.meti.lexeme.match.format;
 
 import com.meti.lexeme.LexerState;
+import com.meti.lexeme.match.Match;
+import com.meti.lexeme.match.Matcher;
+import com.meti.lexeme.match.struct.Operator;
 
 import java.util.Arrays;
 import java.util.HashSet;

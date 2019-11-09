@@ -1,4 +1,6 @@
-package com.meti.lexeme.match;
+package com.meti.lexeme.match.format;
+
+import com.meti.lexeme.match.Match;
 
 class QuantityMatch implements Match<Boolean> {
 	private final Boolean value;

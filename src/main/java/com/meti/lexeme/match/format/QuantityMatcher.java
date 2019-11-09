@@ -1,10 +1,12 @@
-package com.meti.lexeme.match;
+package com.meti.lexeme.match.format;
 
 import com.meti.lexeme.LexerState;
+import com.meti.lexeme.match.Match;
+import com.meti.lexeme.match.Matcher;
 
 import java.util.Optional;
 
-public class QuantityMatcher implements Matcher{
+public class QuantityMatcher implements Matcher {
 	@Override
 	public Optional<Match<?>> build(LexerState state) {
 		var value = state.compute();

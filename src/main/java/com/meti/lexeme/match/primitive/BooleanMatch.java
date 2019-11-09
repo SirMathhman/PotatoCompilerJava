@@ -1,4 +1,6 @@
-package com.meti.lexeme.match;
+package com.meti.lexeme.match.primitive;
+
+import com.meti.lexeme.match.Match;
 
 class BooleanMatch implements Match<Boolean> {
 	private final boolean value;

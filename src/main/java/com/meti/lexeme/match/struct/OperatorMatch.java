@@ -1,4 +1,6 @@
-package com.meti.lexeme.match;
+package com.meti.lexeme.match.struct;
+
+import com.meti.lexeme.match.Match;
 
 class OperatorMatch implements Match<Valued> {
 	private final Valued operator;
