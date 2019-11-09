@@ -6,8 +6,8 @@ import java.util.Optional;
 
 public class VariableMatcher implements Matcher {
 	@Override
-	public Optional<Match<?>> build(LexerState lexerState) {
-		var value = lexerState.compute();
+	public Optional<Match<?>> build(LexerState state) {
+		var value = state.compute();
 		switch (value) {
 			case "var":
 				return Optional.of(new VariableMatch(true));

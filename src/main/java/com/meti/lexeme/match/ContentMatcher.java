@@ -19,10 +19,11 @@ public class ContentMatcher implements Matcher {
 	}
 
 	@Override
-	public Optional<Match<?>> build(LexerState lexerState) {
-		if (trailing.stream().noneMatch(s -> lexerState.trailing(1).equals(s))) {
+	public Optional<Match<?>> build(LexerState state) {
+		if(!state.compute().isEmpty() && state.compute().charAt(0) == '\"') return Optional.empty();
+		if (trailing.stream().noneMatch(s -> state.trailing(1).equals(s))) {
 			return Optional.empty();
 		}
-		return Optional.of(new ContentMatch(lexerState.compute()));
+		return Optional.of(new ContentMatch(state.compute()));
 	}
 }

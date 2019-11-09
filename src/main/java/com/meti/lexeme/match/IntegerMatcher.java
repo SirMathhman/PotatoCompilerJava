@@ -6,10 +6,10 @@ import java.util.Optional;
 
 public class IntegerMatcher implements Matcher {
 	@Override
-	public Optional<Match<?>> build(LexerState lexerState) {
-		if(!Character.isDigit(lexerState.trailing())){
+	public Optional<Match<?>> build(LexerState state) {
+		if(!Character.isDigit(state.trailing())){
 			try {
-				return Optional.of(new IntegerMatch(Integer.parseInt(lexerState.compute())));
+				return Optional.of(new IntegerMatch(Integer.parseInt(state.compute())));
 			} catch (NumberFormatException e) {
 				return Optional.empty();
 			}

@@ -8,9 +8,9 @@ import java.util.function.Function;
 
 public class OperatorMatcher implements Matcher {
 	@Override
-	public Optional<Match<?>> build(LexerState lexerState) {
+	public Optional<Match<?>> build(LexerState state) {
 		return Arrays.stream(Operator.values())
-				.filter(operator -> operator.value().equals(lexerState.compute()))
+				.filter(operator -> operator.value().equals(state.compute()))
 				.map((Function<Operator, Match<?>>) OperatorMatch::new)
 				.findAny();
 	}

@@ -6,8 +6,8 @@ import java.util.Optional;
 
 public class EndLineMatcher implements Matcher {
 	@Override
-	public Optional<Match<?>> build(LexerState lexerState) {
-		if (lexerState.compute().equals(";")) return Optional.of(new EndLineMatch());
+	public Optional<Match<?>> build(LexerState state) {
+		if (state.compute().equals(";")) return Optional.of(new EndLineMatch());
 		else return Optional.empty();
 	}
 }
