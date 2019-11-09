@@ -4,6 +4,8 @@ import com.meti.lexeme.match.Match;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.IntFunction;
+import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -16,13 +18,8 @@ class ListAssemblerState implements AssemblerState {
         this.assembler = assembler;
     }
 
-	@Override
-	public boolean has(Class<? extends Match> clazz) {
-	    return find(clazz).isPresent();
-	}
-
     @Override
-    public List<Integer> findAll(Class<? extends Match> clazz) {
+    public List<Integer> indices(Class<? extends Match> clazz) {
         return IntStream.range(0, matches.size())
                 .filter(value -> matches.get(value).getClass().equals(clazz))
                 .boxed()
@@ -30,12 +27,17 @@ class ListAssemblerState implements AssemblerState {
     }
 
     @Override
-    public Assembler assembler(){
+    public Assembler parent(){
         return assembler;
     }
 
     @Override
-    public Optional<Integer> find(Class<? extends Match> clazz) {
+    public List<? extends Match> matches() {
+        return matches;
+    }
+
+    @Override
+    public Optional<Integer> indexOf(Class<? extends Match> clazz) {
         for (int i = 0, matchesSize = matches.size(); i < matchesSize; i++) {
             if (matches.get(i).getClass().equals(clazz)) return Optional.of(i);
         }
@@ -43,24 +45,29 @@ class ListAssemblerState implements AssemblerState {
     }
 
     @Override
-    public List<? extends Match> slice(int from, int to) {
+    public List<? extends Match> sub(int from, int to) {
         return matches.subList(from, to);
     }
 
     @Override
-    public <T extends Match> T get(int index, Class<T> clazz) {
+    public List<? extends Match> sub(int index) {
+        return matches.subList(index, matches.size());
+    }
+
+    @Override
+    public <T extends Match> T get(int index, Class<? extends T> clazz) {
         return clazz.cast(matches.get(index));
     }
 
     @Override
-    public <T> List<T> slice(int from, int to, Class<? extends T> clazz) {
+    public <T> List<T> sub(int from, int to, Class<? extends T> clazz) {
         return matches.subList(from, to).stream()
                 .map(clazz::cast)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public boolean has(int index, Class<? extends Match> clazz) {
+    public boolean isType(int index, Class<?> clazz) {
         return matches.get(index).getClass().equals(clazz);
     }
 

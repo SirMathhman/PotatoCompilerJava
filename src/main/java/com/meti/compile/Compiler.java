@@ -14,7 +14,7 @@ public interface Compiler {
 
 	Generator generator();
 
-	Optional<String> get(List<String> name);
+	Optional<Function> get(List<String> name);
 
-	void put(String name, String id);
+	void put(String name, Function function);
 }

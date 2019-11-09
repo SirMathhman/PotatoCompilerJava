@@ -10,6 +10,10 @@ public class GroupNode implements AssemblyNode {
         this.children = children;
     }
 
+    GroupNode(AssemblyNode... nodes) {
+        this(List.of(nodes));
+    }
+
     @Override
     public List<? extends AssemblyNode> children() {
         return children;
@@ -21,10 +25,5 @@ public class GroupNode implements AssemblyNode {
         if (o == null || getClass() != o.getClass()) return false;
         GroupNode that = (GroupNode) o;
         return Objects.equals(children, that.children);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(children);
     }
 }

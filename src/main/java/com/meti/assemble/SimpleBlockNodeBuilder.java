@@ -20,22 +20,22 @@ public class SimpleBlockNodeBuilder implements BlockNodeBuilder {
     }
 
     @Override
-    public BlockNodeBuilder withName(String name) {
+    public BlockNodeBuilder setName(String name) {
         return new SimpleBlockNodeBuilder(name, modifiers, arguments, children);
     }
 
     @Override
-    public BlockNodeBuilder withModifiers(Set<Modifier> modifiers) {
+    public BlockNodeBuilder setModifiers(Set<Modifier> modifiers) {
         return new SimpleBlockNodeBuilder(name, modifiers, arguments, children);
     }
 
     @Override
-    public BlockNodeBuilder withArguments(Map<String, Type> arguments) {
+    public BlockNodeBuilder setParameters(Map<String, Type> arguments) {
         return new SimpleBlockNodeBuilder(name, modifiers, arguments, children);
     }
 
     @Override
-    public BlockNodeBuilder withChildren(List<? extends AssemblyNode> children) {
+    public BlockNodeBuilder setChildren(List<? extends AssemblyNode> children) {
         return new SimpleBlockNodeBuilder(name, modifiers, arguments, children);
     }
 

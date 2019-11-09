@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Set;
 
 interface BlockNodeBuilder {
-    BlockNodeBuilder withName(String name);
+    BlockNodeBuilder setName(String name);
 
-    BlockNodeBuilder withModifiers(Set<Modifier> modifiers);
+    BlockNodeBuilder setModifiers(Set<Modifier> modifiers);
 
-    BlockNodeBuilder withArguments(Map<String, Type> arguments);
+    BlockNodeBuilder setParameters(Map<String, Type> arguments);
 
-    BlockNodeBuilder withChildren(List<? extends AssemblyNode> children);
+    BlockNodeBuilder setChildren(List<? extends AssemblyNode> children);
 
     AssemblyNode build();
 }

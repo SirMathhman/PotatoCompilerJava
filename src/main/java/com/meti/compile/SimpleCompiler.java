@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 class SimpleCompiler implements Compiler {
 	private final List<String> depth = new ArrayList<>();
-	private final Map<List<String>, String> functions = new HashMap<>();
+	private final Map<List<String>, Function> functions = new HashMap<>();
 	private final Generator generator;
 	private final List<? extends Pattern> patterns;
 
@@ -43,15 +43,15 @@ class SimpleCompiler implements Compiler {
 	}
 
 	@Override
-	public Optional<String> get(List<String> name) {
+	public Optional<Function> get(List<String> name) {
 		return Optional.ofNullable(functions.get(name));
 	}
 
 	@Override
-	public void put(String name, String id) {
+	public void put(String name, Function function) {
 		List<String> depthCopy = new ArrayList<>(depth());
 		depthCopy.add(name);
-		if (functions.put(depthCopy, id) != null) {
+		if (functions.put(depthCopy, function) != null) {
 			throw new IllegalArgumentException("Function with name \"" + name + "\" already exists.");
 		}
 	}
