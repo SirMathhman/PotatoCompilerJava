@@ -1,15 +1,15 @@
 package com.meti.lexeme;
 
-import com.meti.lexeme.match.Matcher;
-import com.meti.lexeme.match.OperatorMatcher;
-import com.meti.lexeme.match.VariableMatcher;
+import com.meti.lexeme.match.*;
 
 import java.util.List;
 
 public final class PotatoLexer extends SequentialLexer {
 	public static final Lexer INSTANCE = new PotatoLexer(List.of(
+			new VariableMatcher(),
 			new OperatorMatcher(),
-			new VariableMatcher()
+			new EndLineMatcher(),
+			new ContentMatcher()
 	));
 
 	private PotatoLexer(List<? extends Matcher> builders) {

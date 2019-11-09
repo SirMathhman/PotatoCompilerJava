@@ -40,4 +40,20 @@ public class SimpleLexerState implements LexerState {
 		int bound = Math.min(end + count, value.length());
 		return value.substring(end, bound);
 	}
+
+	@Override
+	public void skipWhitespace(){
+		if(beginning == value.length()) return;
+		while(value.charAt(beginning) == ' ') {
+			beginning++;
+			end++;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "SimpleLexerState{" +
+				"value=\'" + compute() + "\'" +
+				'}';
+	}
 }

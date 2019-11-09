@@ -6,13 +6,12 @@ import com.meti.lexeme.match.Matcher;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public class SequentialLexer implements Lexer {
-	private final List<? extends Matcher> builders;
+	private final List<? extends Matcher> matchers;
 
-	SequentialLexer(List<? extends Matcher> builders) {
-		this.builders = builders;
+	SequentialLexer(List<? extends Matcher> matchers) {
+		this.matchers = matchers;
 	}
 
 	@Override
@@ -26,15 +25,22 @@ public class SequentialLexer implements Lexer {
 		return matches;
 	}
 
-	private boolean buildNextToken(LexerState state, Collection<? super Match<?>> tokens) {
-		builders.stream()
-				.map(builder -> builder.build(state))
-				.flatMap(Optional::stream)
-				.findAny()
-				.ifPresentOrElse(token -> {
-					state.reset();
-					tokens.add(token);
-				}, state::advance);
+	private boolean buildNextToken(LexerState state, Collection<? super Match<?>> matches) {
+		Match<?> match = null;
+		for (Matcher matcher : matchers) {
+			var optional = matcher.build(state);
+			if (optional.isPresent()) {
+				match = optional.get();
+				break;
+			}
+		}
+		if (match != null) {
+			state.reset();
+			state.skipWhitespace();
+			matches.add(match);
+		} else {
+			state.advance();
+		}
 		return state.hasMoreCharacters();
 	}
 }

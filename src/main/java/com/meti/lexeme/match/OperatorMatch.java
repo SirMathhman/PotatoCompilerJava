@@ -1,21 +1,21 @@
 package com.meti.lexeme.match;
 
 class OperatorMatch implements Match<Valued> {
-	private final Valued valued;
+	private final Valued operator;
 
-	OperatorMatch(Valued valued) {
-		this.valued = valued;
+	OperatorMatch(Valued operator) {
+		this.operator = operator;
 	}
 
 	@Override
 	public String toString() {
 		return "OperatorMatch{" +
-				"valued=" + valued +
+				"operator=" + operator +
 				'}';
 	}
 
 	@Override
 	public Valued value() {
-		return valued;
+		return operator;
 	}
 }
