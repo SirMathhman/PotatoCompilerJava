@@ -1,6 +1,10 @@
 package com.meti.lexeme.match;
 
 public enum Operator implements Valued {
+	ADD("+"),
+	SUBTRACT("-"),
+	MULTIPLY("*"),
+	DIVIDE("/"),
 	EQUALS("=");
 
 	private final String value;
