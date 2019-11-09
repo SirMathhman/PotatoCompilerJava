@@ -10,7 +10,7 @@ import java.util.Map;
 import static com.meti.cmd.Command.LEX;
 
 class CompileConsole extends TreeConsole {
-	public static final Console console = init();
+	public static final Console INSTANCE = init();
 
 	private CompileConsole(FilteredEvaluator evaluator) {
 		super(evaluator);
