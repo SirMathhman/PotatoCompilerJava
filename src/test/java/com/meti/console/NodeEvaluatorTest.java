@@ -1,5 +1,7 @@
-package com.meti;
+package com.meti.console;
 
+import com.meti.console.FilteredEvaluator;
+import com.meti.console.NodeEvaluator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

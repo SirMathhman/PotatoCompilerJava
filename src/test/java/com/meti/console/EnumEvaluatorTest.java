@@ -1,5 +1,8 @@
-package com.meti;
+package com.meti.console;
 
+import com.meti.console.EnumEvaluator;
+import com.meti.console.Evaluator;
+import com.meti.console.FilteredEvaluator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

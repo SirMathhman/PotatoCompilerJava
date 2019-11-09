@@ -1,4 +1,4 @@
-package com.meti;
+package com.meti.console;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,4 +1,6 @@
-package com.meti;
+package com.meti.console;
+
+import com.meti.util.SimpleCatcher;
 
 import java.util.Map;
 import java.util.Optional;

@@ -1,5 +1,7 @@
-package com.meti;
+package com.meti.util;
 
+import com.meti.util.SimpleCatcher;
+import com.meti.util.Tryable;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
