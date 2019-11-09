@@ -22,6 +22,7 @@ public final class PotatoLexer extends SequentialLexer {
 			new QuantityMatcher(),
 			new BooleanMatcher(),
 			new EndLineMatcher(),
+			new GenericMatcher(),
 			new IntegerMatcher(),
 			new StringMatcher(),
 			new BlockMatcher(),

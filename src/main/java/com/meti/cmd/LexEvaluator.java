@@ -11,6 +11,9 @@ class LexEvaluator implements Evaluator {
 	@Override
 	public String evaluate(String value) {
 		var lexer = PotatoLexer.INSTANCE;
+		if (value.isBlank()) {
+			return "Nothing was entered to lexise.";
+		}
 		return lexer.parse(value)
 				.stream()
 				.map((Function<Match<?>, String>) Object::toString)

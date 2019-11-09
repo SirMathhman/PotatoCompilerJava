@@ -1,5 +1,7 @@
 package com.meti.console;
 
+import java.util.Optional;
+
 public interface Console {
-	String run(String input);
+	Optional<String> run(String input);
 }

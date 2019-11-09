@@ -12,7 +12,11 @@ class CompileRuntime {
 			line = scanner.nextLine();
 			if(line.equals("exit")) break;
 			var output = console.run(line);
-			System.out.println(output);
+			if(output.isPresent()) {
+				System.out.println(output.get());
+			} else {
+				System.err.println("Could not run command: \"" + line + "\"");
+			}
 		} while (true);
 	}
 }
