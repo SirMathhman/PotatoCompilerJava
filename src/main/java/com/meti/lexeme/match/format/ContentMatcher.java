@@ -15,7 +15,7 @@ public class ContentMatcher implements Matcher {
 	private static final Set<String> trailing = new HashSet<>();
 
 	static {
-		trailing.addAll(Set.of(";", " ", "{"));
+		trailing.addAll(Set.of(";", " ", "{", "[", ",", "]", ".", "("));
 		trailing.addAll(Arrays.stream(Operator.values())
 				.map(Operator::value)
 				.collect(Collectors.toSet()));
@@ -23,10 +23,11 @@ public class ContentMatcher implements Matcher {
 
 	@Override
 	public Optional<Match<?>> build(LexerState state) {
-		if(!state.compute().isEmpty() && state.compute().charAt(0) == '\"') return Optional.empty();
+		var value = state.compute();
+		if(!value.isEmpty() && (value.charAt(0) == '\"' || value.charAt(0) == '.')) return Optional.empty();
 		if (trailing.stream().noneMatch(s -> state.trailing(1).equals(s))) {
 			return Optional.empty();
 		}
-		return Optional.of(new ContentMatch(state.compute()));
+		return Optional.of(new ContentMatch(value));
 	}
 }

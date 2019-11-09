@@ -13,7 +13,10 @@ public class SimpleLexerState implements LexerState {
 
 	@Override
 	public void advance() {
-		if(end != value.length()) end++;
+		if (end != value.length()) end++;
+		else {
+			throw new IllegalStateException("Could not parse:\"" + compute() + "\"");
+		}
 	}
 
 	@Override
@@ -29,7 +32,16 @@ public class SimpleLexerState implements LexerState {
 	@Override
 	public void reset() {
 		beginning = end;
-		if(end != value.length()) end = beginning + 1;
+		if (end != value.length()) end = beginning + 1;
+	}
+
+	@Override
+	public void skipWhitespace() {
+		if (beginning == value.length()) return;
+		while (value.charAt(beginning) == ' ') {
+			beginning++;
+			end++;
+		}
 	}
 
 	@Override
@@ -43,15 +55,6 @@ public class SimpleLexerState implements LexerState {
 		return end < value.length() ?
 				Optional.of(value.charAt(end)) :
 				Optional.empty();
-	}
-
-	@Override
-	public void skipWhitespace(){
-		if(beginning == value.length()) return;
-		while(value.charAt(beginning) == ' ') {
-			beginning++;
-			end++;
-		}
 	}
 
 	@Override

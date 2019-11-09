@@ -5,6 +5,7 @@ public enum Operator implements Valued {
 	SUBTRACT("-"),
 	MULTIPLY("*"),
 	DIVIDE("/"),
+	RETURN(">>"),
 	EQUALS("=");
 
 	private final String value;

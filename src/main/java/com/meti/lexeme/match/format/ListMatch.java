@@ -2,14 +2,22 @@ package com.meti.lexeme.match.format;
 
 import com.meti.lexeme.match.Match;
 
-class ListMatch implements Match<Void> {
+class ListMatch implements Match<Boolean> {
+	private final boolean opening;
+
+	ListMatch(boolean opening) {
+		this.opening = opening;
+	}
+
 	@Override
-	public Void value() {
-		return null;
+	public Boolean value() {
+		return opening;
 	}
 
 	@Override
 	public String toString() {
-		return "ListMatch";
+		return "ListMatch{" +
+				"opening=" + opening +
+				'}';
 	}
 }

@@ -10,6 +10,8 @@ public class VariableMatcher implements Matcher {
 	@Override
 	public Optional<Match<?>> build(LexerState state) {
 		var value = state.compute();
+		var trailing = state.trailing();
+		if (trailing.isPresent() && trailing.get() != ' ') return Optional.empty();
 		switch (value) {
 			case "var":
 				return Optional.of(new VariableMatch(true));
