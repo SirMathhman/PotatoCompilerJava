@@ -8,10 +8,11 @@ public final class PotatoLexer extends SequentialLexer {
 	public static final Lexer INSTANCE = new PotatoLexer(List.of(
 			new VariableMatcher(),
 			new OperatorMatcher(),
+			new QuantityMatcher(),
 			new EndLineMatcher(),
 			new IntegerMatcher(),
-			new StringMatcher(),
 			new BooleanMatcher(),
+			new StringMatcher(),
 			new ContentMatcher()
 	));
 
