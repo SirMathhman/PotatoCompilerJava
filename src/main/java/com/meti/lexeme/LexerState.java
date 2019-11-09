@@ -14,4 +14,6 @@ public interface LexerState {
 	void skipWhitespace();
 
 	String trailing(int count);
+
+	char trailing();
 }

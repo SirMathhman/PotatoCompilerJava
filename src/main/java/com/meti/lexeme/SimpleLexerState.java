@@ -42,6 +42,11 @@ public class SimpleLexerState implements LexerState {
 	}
 
 	@Override
+	public char trailing() {
+		return value.charAt(end);
+	}
+
+	@Override
 	public void skipWhitespace(){
 		if(beginning == value.length()) return;
 		while(value.charAt(beginning) == ' ') {

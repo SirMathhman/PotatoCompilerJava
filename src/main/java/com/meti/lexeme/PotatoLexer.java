@@ -9,6 +9,7 @@ public final class PotatoLexer extends SequentialLexer {
 			new VariableMatcher(),
 			new OperatorMatcher(),
 			new EndLineMatcher(),
+			new IntegerMatcher(),
 			new ContentMatcher()
 	));
 
