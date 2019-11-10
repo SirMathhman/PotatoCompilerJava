@@ -2,7 +2,7 @@ package com.meti.lexeme.match.struct;
 
 import com.meti.lexeme.match.Match;
 
-class VariableMatch implements Match<Boolean> {
+public class VariableMatch implements Match<Boolean> {
 	private final boolean mutable;
 
 	VariableMatch(boolean mutable) {

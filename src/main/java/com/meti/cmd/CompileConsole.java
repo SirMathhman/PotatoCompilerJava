@@ -7,6 +7,7 @@ import com.meti.console.TreeConsole;
 
 import java.util.Map;
 
+import static com.meti.cmd.Command.ASSEMBLE;
 import static com.meti.cmd.Command.LEX;
 
 class CompileConsole extends TreeConsole {
@@ -18,7 +19,8 @@ class CompileConsole extends TreeConsole {
 
 	private static Console init() {
 		var evaluators = Map.of(
-				LEX, new LexEvaluator()
+				LEX, new LexEvaluator(),
+				ASSEMBLE, new AssembleEvaluator()
 		);
 		var evaluator = new EnumEvaluator<>(Command.class, evaluators, " ");
 		return new CompileConsole(evaluator);

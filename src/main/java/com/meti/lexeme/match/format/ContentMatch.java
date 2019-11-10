@@ -2,7 +2,7 @@ package com.meti.lexeme.match.format;
 
 import com.meti.lexeme.match.Match;
 
-class ContentMatch implements Match<String> {
+public class ContentMatch implements Match<String> {
 	private final String value;
 
 	ContentMatch(String value) {
