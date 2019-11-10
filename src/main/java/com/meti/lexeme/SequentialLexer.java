@@ -16,7 +16,7 @@ public class SequentialLexer implements Lexer {
 
 	@Override
 	public List<? extends Match<?>> parse(String value) {
-		LexerState state = new SimpleLexerState(value);
+		LexerState state = new StringLexerState(value);
 		List<Match<?>> matches = new ArrayList<>();
 		boolean shouldContinue;
 		do {

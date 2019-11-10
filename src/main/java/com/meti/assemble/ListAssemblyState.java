@@ -5,15 +5,32 @@ import com.meti.lexeme.match.Match;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ListAssemblyState implements AssemblyState {
 	private final Assembler assembler;
 	private final List<? extends Match<?>> matches;
+	private int depth;
 
 	public ListAssemblyState(List<? extends Match<?>> matches, Assembler assembler) {
+		this(matches, assembler, 0);
+	}
+
+	public ListAssemblyState(List<? extends Match<?>> matches, Assembler assembler, int depth) {
 		this.matches = matches;
 		this.assembler = assembler;
+		this.depth = depth;
+	}
+
+	@Override
+	public Assembler parent() {
+		return assembler;
+	}
+
+	@Override
+	public int depth() {
+		return depth;
 	}
 
 	@Override
@@ -29,32 +46,6 @@ public class ListAssemblyState implements AssemblyState {
 	@Override
 	public <T> T get(int index, Class<T> clazz) {
 		return clazz.cast(matches.get(index));
-	}
-
-	@Override
-	public OptionalInt index(int place, Class<?> clazz) {
-		int count = 0;
-		for (int i = 0; i < matches.size(); i++) {
-			if (clazz.isInstance(matches.get(i))) {
-				if (count == place - 1) {
-					return OptionalInt.of(i);
-				}
-				count++;
-			}
-		}
-		return OptionalInt.empty();
-	}
-
-	private int count(Class<?> clazz){
-		return Math.toIntExact(matches.stream()
-				.map(Object::getClass)
-				.filter(clazz::isAssignableFrom)
-				.count());
-	}
-
-	@Override
-	public OptionalInt last(Class<?> clazz) {
-		return index(count(clazz), clazz);
 	}
 
 	@Override
@@ -75,8 +66,34 @@ public class ListAssemblyState implements AssemblyState {
 	}
 
 	@Override
-	public Assembler parent() {
-		return assembler;
+	public OptionalInt index(int place, Class<?> clazz) {
+		int count = 0;
+		for (int i = 0; i < matches.size(); i++) {
+			if (clazz.isInstance(matches.get(i))) {
+				if (count == place - 1) {
+					return OptionalInt.of(i);
+				}
+				count++;
+			}
+		}
+		return OptionalInt.empty();
+	}
+
+	@Override
+	public OptionalInt last(Class<?> clazz) {
+		return index(count(clazz), clazz);
+	}
+
+	private int count(Class<?> clazz) {
+		return Math.toIntExact(matches.stream()
+				.map(Object::getClass)
+				.filter(clazz::isAssignableFrom)
+				.count());
+	}
+
+	@Override
+	public void sink() {
+		depth++;
 	}
 
 	@Override
@@ -85,15 +102,33 @@ public class ListAssemblyState implements AssemblyState {
 		List<Match<?>> subMatches = new ArrayList<>();
 		for (Match<?> match : matches) {
 			if (clazz.isInstance(match)) {
-				if(!subMatches.isEmpty()) lists.add(subMatches);
+				if (!subMatches.isEmpty()) lists.add(subMatches);
 				subMatches = new ArrayList<>();
 			} else {
 				subMatches.add(match);
 			}
 		}
-		if(!subMatches.isEmpty()) lists.add(subMatches);
+		if (!subMatches.isEmpty()) lists.add(subMatches);
 		return lists.stream()
-				.map(others -> new ListAssemblyState(others, assembler))
+				.map(others -> new ListAssemblyState(others, assembler, depth))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public <T> List<? extends AssemblyState> split(Class<T> clazz, Predicate<T> predicate) {
+		List<List<Match<?>>> lists = new ArrayList<>();
+		List<Match<?>> subMatches = new ArrayList<>();
+		for (Match<?> match : matches) {
+			if (clazz.isInstance(match) && predicate.test(clazz.cast(match))) {
+				if (!subMatches.isEmpty()) lists.add(subMatches);
+				subMatches = new ArrayList<>();
+			} else {
+				subMatches.add(match);
+			}
+		}
+		if (!subMatches.isEmpty()) lists.add(subMatches);
+		return lists.stream()
+				.map(others -> new ListAssemblyState(others, assembler, depth))
 				.collect(Collectors.toList());
 	}
 
@@ -117,12 +152,12 @@ public class ListAssemblyState implements AssemblyState {
 
 	@Override
 	public AssemblyState sub(int index) {
-		return new ListAssemblyState(matches.subList(index, matches.size()), assembler);
+		return new ListAssemblyState(matches.subList(index, matches.size()), assembler, depth);
 	}
 
 	@Override
 	public AssemblyState sub(int fromInclusive, int toExclusive) {
-		return new ListAssemblyState(matches.subList(fromInclusive, toExclusive), assembler);
+		return new ListAssemblyState(matches.subList(fromInclusive, toExclusive), assembler, depth);
 	}
 
 	@Override
@@ -131,6 +166,11 @@ public class ListAssemblyState implements AssemblyState {
 				.stream()
 				.map(clazz::cast)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public void surface() {
+		depth--;
 	}
 
 	@Override

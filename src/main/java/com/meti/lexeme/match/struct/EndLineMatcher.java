@@ -10,7 +10,7 @@ public class EndLineMatcher implements Matcher {
 	@Override
 	public Optional<Match<?>> build(LexerState state) {
 		if(state.compute().equals(";")){
-			return Optional.of(new EndLineMatch());
+			return Optional.of(new EndLineMatch(state.depth()));
 		}
 		return Optional.empty();
 	}

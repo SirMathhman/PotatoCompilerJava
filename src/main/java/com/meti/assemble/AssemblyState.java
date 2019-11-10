@@ -1,16 +1,19 @@
 package com.meti.assemble;
 
 import com.meti.lexeme.match.Match;
-import com.meti.lexeme.match.format.ContentMatch;
-import com.meti.lexeme.match.format.ListMatch;
 
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.function.Predicate;
 
 public interface AssemblyState {
 	default AssemblyNode assemble(AssemblyState state1) {
 		return parent().assemble(state1);
 	}
+
+	Assembler parent();
+
+	int depth();
 
 	OptionalInt first(Class<?> clazz);
 
@@ -23,10 +26,6 @@ public interface AssemblyState {
 	default <T> T getLast(Class<T> clazz) {
 		return get(size() - 1, clazz);
 	}
-
-	OptionalInt index(int place, Class<?> clazz);
-
-	OptionalInt last(Class<?> clazz);
 
 	int size();
 
@@ -42,13 +41,19 @@ public interface AssemblyState {
 		return has(size() - 1, clazz);
 	}
 
+	OptionalInt index(int place, Class<?> clazz);
+
 	default boolean isSingle() {
 		return size() == 1;
 	}
 
-	Assembler parent();
+	OptionalInt last(Class<?> clazz);
+
+	void sink();
 
 	List<? extends AssemblyState> split(Class<?> clazz);
+
+	<T> List<? extends AssemblyState> split(Class<T> clazz, Predicate<T> predicate);
 
 	<T extends Match<?>> List<List<T>> splitByMatch(Class<?> clazz, Class<? extends T> contentMatchClass);
 
@@ -57,4 +62,6 @@ public interface AssemblyState {
 	AssemblyState sub(int fromInclusive, int toExclusive);
 
 	<T extends Match<?>> List<T> subMatch(int startInclusive, int endExclusive, Class<T> clazz);
+
+	void surface();
 }

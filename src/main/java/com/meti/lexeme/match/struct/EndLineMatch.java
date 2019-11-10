@@ -2,9 +2,15 @@ package com.meti.lexeme.match.struct;
 
 import com.meti.lexeme.match.Match;
 
-public class EndLineMatch implements Match<Void> {
+public class EndLineMatch implements Match<Integer> {
+	private final int depth;
+
+	public EndLineMatch(int depth) {
+		this.depth = depth;
+	}
+
 	@Override
-	public Void value() {
-		return null;
+	public Integer value() {
+		return depth;
 	}
 }

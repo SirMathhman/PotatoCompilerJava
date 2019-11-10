@@ -38,11 +38,13 @@ class FunctionPattern implements Pattern {
 			}
 		}
 		var blockStartIndex = state.first(BlockMatch.class).orElseThrow();
+		state.sink();
 		var content = state.sub(blockStartIndex + 1, state.size() - 1)
-				.split(EndLineMatch.class)
+				.split(EndLineMatch.class, endLineMatch -> endLineMatch.value() == state.depth())
 				.stream()
 				.map(state::assemble)
 				.collect(Collectors.toList());
+		state.surface();
 		return new FunctionNode(name, paramMap, content);
 	}
 }

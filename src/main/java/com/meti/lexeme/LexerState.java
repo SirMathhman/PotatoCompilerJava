@@ -7,11 +7,17 @@ public interface LexerState {
 
 	String compute();
 
+	int depth();
+
 	boolean hasMoreCharacters();
 
 	void reset();
 
+	void sink();
+
 	void skipWhitespace();
+
+	void surface();
 
 	String trailing(int count);
 

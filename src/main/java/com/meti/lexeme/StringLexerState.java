@@ -2,12 +2,13 @@ package com.meti.lexeme;
 
 import java.util.Optional;
 
-public class SimpleLexerState implements LexerState {
+public class StringLexerState implements LexerState {
 	private final String value;
 	private int beginning = 0;
+	private int depth = 0;
 	private int end = 1;
 
-	SimpleLexerState(String value) {
+	StringLexerState(String value) {
 		this.value = value;
 	}
 
@@ -24,6 +25,11 @@ public class SimpleLexerState implements LexerState {
 	}
 
 	@Override
+	public int depth() {
+		return depth;
+	}
+
+	@Override
 	public boolean hasMoreCharacters() {
 		return beginning != value.length();
 	}
@@ -35,12 +41,22 @@ public class SimpleLexerState implements LexerState {
 	}
 
 	@Override
+	public void sink() {
+		depth++;
+	}
+
+	@Override
 	public void skipWhitespace() {
 		if (beginning == value.length()) return;
 		while (value.charAt(beginning) == ' ') {
 			beginning++;
 			end++;
 		}
+	}
+
+	@Override
+	public void surface() {
+		depth--;
 	}
 
 	@Override
@@ -54,12 +70,5 @@ public class SimpleLexerState implements LexerState {
 		return end < value.length() ?
 				Optional.of(value.charAt(end)) :
 				Optional.empty();
-	}
-
-	@Override
-	public String toString() {
-		return "SimpleLexerState{" +
-				"value=\'" + compute() + "\'" +
-				'}';
 	}
 }
