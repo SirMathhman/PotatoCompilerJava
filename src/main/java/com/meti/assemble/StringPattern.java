@@ -5,7 +5,7 @@ import com.meti.lexeme.match.primitive.StringMatch;
 class StringPattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
-		return state.has(0, StringMatch.class) && state.size() == 1;
+		return state.hasFirst(StringMatch.class) && state.size() == 1;
 	}
 
 	@Override

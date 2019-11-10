@@ -8,7 +8,7 @@ import com.meti.lexeme.match.struct.VariableMatch;
 class AssignmentPattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
-		return state.has(0, VariableMatch.class) &&
+		return state.hasFirst(VariableMatch.class) &&
 				state.has(1, ContentMatch.class) &&
 				state.has(2, OperatorMatch.class) &&
 				state.get(2, OperatorMatch.class).value().equals(Operator.EQUALS);

@@ -32,6 +32,20 @@ public class ListAssemblyState implements AssemblyState {
 	}
 
 	@Override
+	public OptionalInt index(int place, Class<?> clazz) {
+		int count = 0;
+		for (int i = 0; i < matches.size(); i++) {
+			if (clazz.isInstance(matches.get(i))) {
+				if (count == place - 1) {
+					return OptionalInt.of(i);
+				}
+				count++;
+			}
+		}
+		return OptionalInt.empty();
+	}
+
+	@Override
 	public int size() {
 		return matches.size();
 	}
@@ -49,13 +63,6 @@ public class ListAssemblyState implements AssemblyState {
 	}
 
 	@Override
-	public String toString() {
-		return "ListAssemblyState{" +
-				"matches=" + matches +
-				'}';
-	}
-
-	@Override
 	public Assembler parent() {
 		return assembler;
 	}
@@ -66,19 +73,17 @@ public class ListAssemblyState implements AssemblyState {
 		List<Match<?>> subMatches = new ArrayList<>();
 		for (Match<?> match : matches) {
 			if (clazz.isInstance(match)) {
-				lists.add(subMatches);
+				if(!subMatches.isEmpty()) lists.add(subMatches);
 				subMatches = new ArrayList<>();
 			} else {
 				subMatches.add(match);
 			}
 		}
-		lists.add(subMatches);
+		if(!subMatches.isEmpty()) lists.add(subMatches);
 		return lists.stream()
 				.map(others -> new ListAssemblyState(others, assembler))
 				.collect(Collectors.toList());
 	}
-
-	//TODO: merge split algorithms
 
 	@Override
 	public <T extends Match<?>> List<List<T>> splitByMatch(Class<?> clazz, Class<? extends T> contentMatchClass) {
@@ -96,6 +101,8 @@ public class ListAssemblyState implements AssemblyState {
 		return lists;
 	}
 
+	//TODO: merge split algorithms
+
 	@Override
 	public AssemblyState sub(int index) {
 		return new ListAssemblyState(matches.subList(index, matches.size()), assembler);
@@ -104,5 +111,20 @@ public class ListAssemblyState implements AssemblyState {
 	@Override
 	public AssemblyState sub(int fromInclusive, int toExclusive) {
 		return new ListAssemblyState(matches.subList(fromInclusive, toExclusive), assembler);
+	}
+
+	@Override
+	public <T extends Match<?>> List<T> subMatch(int startInclusive, int endExclusive, Class<T> clazz) {
+		return matches.subList(startInclusive, endExclusive)
+				.stream()
+				.map(clazz::cast)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public String toString() {
+		return "ListAssemblyState{" +
+				"matches=" + matches +
+				'}';
 	}
 }

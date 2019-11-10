@@ -5,7 +5,7 @@ import com.meti.lexeme.match.primitive.IntegerMatch;
 class IntegerPattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
-		return state.has(0, IntegerMatch.class) &&
+		return state.hasFirst(IntegerMatch.class) &&
 				state.size() == 1;
 	}
 

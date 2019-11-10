@@ -1,6 +1,8 @@
 package com.meti.assemble;
 
 import com.meti.lexeme.match.Match;
+import com.meti.lexeme.match.format.ContentMatch;
+import com.meti.lexeme.match.format.ListMatch;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -21,6 +23,8 @@ public interface AssemblyState {
 	default <T> T getLast(Class<T> clazz) {
 		return get(size() - 1, clazz);
 	}
+
+	OptionalInt index(int place, Class<?> clazz);
 
 	int size();
 
@@ -49,4 +53,6 @@ public interface AssemblyState {
 	AssemblyState sub(int index);
 
 	AssemblyState sub(int fromInclusive, int toExclusive);
+
+	<T extends Match<?>> List<T> subMatch(int startInclusive, int endExclusive, Class<T> clazz);
 }
