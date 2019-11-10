@@ -2,7 +2,7 @@ package com.meti.lexeme.match.primitive;
 
 import com.meti.lexeme.match.Match;
 
-class StringMatch implements Match<String> {
+public class StringMatch implements Match<String> {
 	private final String value;
 
 	StringMatch(String value) {

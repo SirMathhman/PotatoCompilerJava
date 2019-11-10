@@ -8,11 +8,12 @@ public class PotatoAssembler extends PatternAssembler {
 	private static Assembler build() {
 		return new PotatoAssembler(List.of(
 				new AssignmentPattern(),
-				new IntegerPattern()
+				new IntegerPattern(),
+				new StringPattern()
 		));
 	}
 
-	PotatoAssembler(List<? extends Pattern> patterns) {
+	private PotatoAssembler(List<? extends Pattern> patterns) {
 		super(patterns);
 	}
 }
