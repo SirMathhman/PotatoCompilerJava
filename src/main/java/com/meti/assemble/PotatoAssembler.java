@@ -7,6 +7,7 @@ public final class PotatoAssembler extends PatternAssembler {
 
 	private static Assembler build() {
 		return new PotatoAssembler(List.of(
+				new ContentArrayPattern(),
 				new AssignmentPattern(),
 				new OperatorPattern(),
 				new VariablePattern(),

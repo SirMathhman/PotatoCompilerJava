@@ -2,7 +2,7 @@ package com.meti.lexeme.match.format;
 
 import com.meti.lexeme.match.Match;
 
-class ListMatch implements Match<Boolean> {
+public class ListMatch implements Match<Boolean> {
 	private final boolean opening;
 
 	ListMatch(boolean opening) {

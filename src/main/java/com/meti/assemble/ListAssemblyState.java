@@ -2,8 +2,11 @@ package com.meti.assemble;
 
 import com.meti.lexeme.match.Match;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ListAssemblyState implements AssemblyState {
 	private final Assembler assembler;
@@ -30,8 +33,8 @@ public class ListAssemblyState implements AssemblyState {
 	}
 
 	@Override
-	public boolean has(int index, Class<?> clazz) {
-		return clazz.isAssignableFrom(matches.get(index).getClass());
+	public int size() {
+		return matches.size();
 	}
 
 	@Override
@@ -42,13 +45,31 @@ public class ListAssemblyState implements AssemblyState {
 	}
 
 	@Override
+	public boolean has(int index, Class<?> clazz) {
+		return clazz.isAssignableFrom(matches.get(index).getClass());
+	}
+
+	@Override
 	public Assembler parent() {
 		return assembler;
 	}
 
 	@Override
-	public int size() {
-		return matches.size();
+	public List<? extends AssemblyState> split(Class<?> clazz) {
+		List<List<Match<?>>> lists = new ArrayList<>();
+		List<Match<?>> subMatches = new ArrayList<>();
+		for (Match<?> match : matches) {
+			if (clazz.isInstance(match)) {
+				lists.add(subMatches);
+				subMatches = new ArrayList<>();
+			} else {
+				subMatches.add(match);
+			}
+		}
+		lists.add(subMatches);
+		return lists.stream()
+				.map(others -> new ListAssemblyState(others, assembler))
+				.collect(Collectors.toList());
 	}
 
 	@Override
