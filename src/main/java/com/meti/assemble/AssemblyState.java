@@ -26,6 +26,8 @@ public interface AssemblyState {
 
 	OptionalInt index(int place, Class<?> clazz);
 
+	OptionalInt last(Class<?> clazz);
+
 	int size();
 
 	boolean has(Class<?> clazz);

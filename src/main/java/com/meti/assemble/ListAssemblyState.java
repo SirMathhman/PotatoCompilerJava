@@ -45,6 +45,18 @@ public class ListAssemblyState implements AssemblyState {
 		return OptionalInt.empty();
 	}
 
+	private int count(Class<?> clazz){
+		return Math.toIntExact(matches.stream()
+				.map(Object::getClass)
+				.filter(clazz::isAssignableFrom)
+				.count());
+	}
+
+	@Override
+	public OptionalInt last(Class<?> clazz) {
+		return index(count(clazz), clazz);
+	}
+
 	@Override
 	public int size() {
 		return matches.size();

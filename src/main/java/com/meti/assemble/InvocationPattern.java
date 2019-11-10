@@ -3,6 +3,7 @@ package com.meti.assemble;
 import com.meti.lexeme.match.format.ContentMatch;
 import com.meti.lexeme.match.format.SeparatorMatch;
 import com.meti.lexeme.match.struct.ArgumentMatch;
+import com.meti.lexeme.match.struct.BlockMatch;
 import com.meti.lexeme.match.struct.ChildMatch;
 
 import java.util.stream.Collectors;
@@ -10,13 +11,14 @@ import java.util.stream.Collectors;
 class InvocationPattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
-		var contentIndex = state.first(ContentMatch.class);
+		if(state.has(BlockMatch.class)) return false;
+		var contentIndex = state.last(ContentMatch.class);
 		var argIndex = state.first(ArgumentMatch.class);
 		return contentIndex.isPresent() && argIndex.isPresent() &&
-				(argIndex.getAsInt() >= contentIndex.getAsInt()) &&
+				(argIndex.getAsInt() == contentIndex.getAsInt() + 1) &&
 				state.get(argIndex.getAsInt(), ArgumentMatch.class).value() &&
-				state.hasLast(ArgumentMatch.class) &&
-				!state.getLast(ArgumentMatch.class).value();
+				state.has(state.size() - 1, ArgumentMatch.class) &&
+				!state.get(state.size() - 1, ArgumentMatch.class).value();
 	}
 
 	@Override
