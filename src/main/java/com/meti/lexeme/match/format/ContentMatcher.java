@@ -24,10 +24,15 @@ public class ContentMatcher implements Matcher {
 	@Override
 	public Optional<Match<?>> build(LexerState state) {
 		var value = state.compute();
-		if(!value.isEmpty() && (value.charAt(0) == '\"' || value.charAt(0) == '.')) return Optional.empty();
-		if (trailing.stream().noneMatch(s -> state.trailing(1).equals(s))) {
-			return Optional.empty();
-		}
-		return Optional.of(new ContentMatch(value));
+		return (doesNotStartWithChars(value) || (state.trailing().isPresent() && hasValidTrail(state))) ?
+				Optional.empty() : Optional.of(new ContentMatch(value));
+	}
+
+	private boolean doesNotStartWithChars(String value) {
+		return !value.isEmpty() && (value.charAt(0) == '\"' || value.charAt(0) == '.');
+	}
+
+	private boolean hasValidTrail(LexerState state) {
+		return trailing.stream().noneMatch(s -> state.trailing(1).equals(s));
 	}
 }
