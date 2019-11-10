@@ -2,7 +2,7 @@ package com.meti.lexeme.match.primitive;
 
 import com.meti.lexeme.match.Match;
 
-class BooleanMatch implements Match<Boolean> {
+public class BooleanMatch implements Match<Boolean> {
 	private final boolean value;
 
 	BooleanMatch(boolean value) {

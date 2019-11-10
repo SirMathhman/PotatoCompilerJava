@@ -13,4 +13,11 @@ public class EndLineMatch implements Match<Integer> {
 	public Integer value() {
 		return depth;
 	}
+
+	@Override
+	public String toString() {
+		return "EndLineMatch{" +
+				"depth=" + depth +
+				'}';
+	}
 }

@@ -7,61 +7,66 @@ import java.util.OptionalInt;
 import java.util.function.Predicate;
 
 public interface AssemblyState {
-	default AssemblyNode assemble(AssemblyState state1) {
-		return parent().assemble(state1);
-	}
+	@Deprecated
+    default AssemblyNode assemble(AssemblyState state1) {
+        return parent().assemble(state1);
+    }
 
-	Assembler parent();
+    default AssemblyNode assemble() {
+        return parent().assemble(this);
+    }
 
-	int depth();
+    Assembler parent();
 
-	OptionalInt first(Class<?> clazz);
+    int depth();
 
-	default <T> T getFirst(Class<T> clazz) {
-		return get(0, clazz);
-	}
+    OptionalInt first(Class<?> clazz);
 
-	<T> T get(int index, Class<T> clazz);
+    default <T> T getFirst(Class<T> clazz) {
+        return get(0, clazz);
+    }
 
-	default <T> T getLast(Class<T> clazz) {
-		return get(size() - 1, clazz);
-	}
+    <T> T get(int index, Class<T> clazz);
 
-	int size();
+    default <T> T getLast(Class<T> clazz) {
+        return get(size() - 1, clazz);
+    }
 
-	boolean has(Class<?> clazz);
+    int size();
 
-	default boolean hasFirst(Class<?> clazz) {
-		return size() > 0 && has(0, clazz);
-	}
+    boolean has(Class<?> clazz);
 
-	boolean has(int index, Class<?> clazz);
+    default boolean hasFirst(Class<?> clazz) {
+        return size() > 0 && has(0, clazz);
+    }
 
-	default boolean hasLast(Class<?> clazz) {
-		return has(size() - 1, clazz);
-	}
+    boolean has(int index, Class<?> clazz);
 
-	OptionalInt index(int place, Class<?> clazz);
+    default boolean hasLast(Class<?> clazz) {
+        return has(size() - 1, clazz);
+    }
 
-	default boolean isSingle() {
-		return size() == 1;
-	}
+    OptionalInt index(int place, Class<?> clazz);
 
-	OptionalInt last(Class<?> clazz);
+    default boolean isSingle() {
+        return size() == 1;
+    }
 
-	void sink();
+    OptionalInt last(Class<?> clazz);
 
-	List<? extends AssemblyState> split(Class<?> clazz);
+    void sink();
 
-	<T> List<? extends AssemblyState> split(Class<T> clazz, Predicate<T> predicate);
+    List<? extends AssemblyState> split(Class<?> clazz);
 
-	<T extends Match<?>> List<List<T>> splitByMatch(Class<?> clazz, Class<? extends T> contentMatchClass);
+    <T> List<? extends AssemblyState> split(Class<T> clazz, Predicate<T> predicate);
 
-	AssemblyState sub(int index);
+    <T extends Match<?>> List<List<T>> splitByMatch(Class<?> clazz, Class<? extends T> contentMatchClass);
 
-	AssemblyState sub(int fromInclusive, int toExclusive);
+    AssemblyState sub(int index);
 
-	<T extends Match<?>> List<T> subMatch(int startInclusive, int endExclusive, Class<T> clazz);
+    AssemblyState sub(int fromInclusive, int toExclusive);
 
-	void surface();
+    <T extends Match<?>> List<T> subMatch(int startInclusive, int endExclusive, Class<T> clazz);
+
+    void surface();
 }
