@@ -16,7 +16,7 @@ class AssignmentNode implements AssemblyNode {
 		return "AssignmentNode{" +
 				"name='" + name + '\'' +
 				", mutable=" + mutable +
-				", value=\n\t" + value + "\n" +
+				", value=\n\t" + value.format() + "\n" +
 				'}';
 	}
 }
