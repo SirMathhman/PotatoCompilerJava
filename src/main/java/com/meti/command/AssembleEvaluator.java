@@ -1,14 +1,9 @@
-package com.meti.cmd;
+package com.meti.command;
 
 import com.meti.assemble.ListAssemblyState;
 import com.meti.assemble.PotatoAssembler;
 import com.meti.console.Evaluator;
 import com.meti.lexeme.PotatoLexer;
-import com.meti.lexeme.match.Match;
-
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 class AssembleEvaluator implements Evaluator {
 	@Override

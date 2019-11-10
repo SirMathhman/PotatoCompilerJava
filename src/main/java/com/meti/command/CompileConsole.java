@@ -1,4 +1,4 @@
-package com.meti.cmd;
+package com.meti.command;
 
 import com.meti.console.Console;
 import com.meti.console.EnumEvaluator;
@@ -7,8 +7,8 @@ import com.meti.console.TreeConsole;
 
 import java.util.Map;
 
-import static com.meti.cmd.Command.ASSEMBLE;
-import static com.meti.cmd.Command.LEX;
+import static com.meti.command.Command.ASSEMBLE;
+import static com.meti.command.Command.LEX;
 
 class CompileConsole extends TreeConsole {
 	public static final Console INSTANCE = init();

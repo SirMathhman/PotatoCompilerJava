@@ -1,4 +1,4 @@
-package com.meti.cmd;
+package com.meti.command;
 
 public enum Command {
 	LEX,

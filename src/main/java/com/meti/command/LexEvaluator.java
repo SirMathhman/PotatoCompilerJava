@@ -1,4 +1,4 @@
-package com.meti.cmd;
+package com.meti.command;
 
 import com.meti.console.Evaluator;
 import com.meti.lexeme.PotatoLexer;
