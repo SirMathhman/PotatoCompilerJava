@@ -2,11 +2,12 @@ package com.meti.assemble;
 
 import com.meti.lexeme.match.format.ContentMatch;
 import com.meti.lexeme.match.format.ListMatch;
-import com.meti.lexeme.match.struct.*;
+import com.meti.lexeme.match.struct.BlockMatch;
+import com.meti.lexeme.match.struct.EndLineMatch;
+import com.meti.lexeme.match.struct.Operator;
+import com.meti.lexeme.match.struct.OperatorMatch;
 
 import java.util.HashMap;
-import java.util.OptionalInt;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 class FunctionPattern implements Pattern {
@@ -27,10 +28,10 @@ class FunctionPattern implements Pattern {
 		var name = state.getFirst(ContentMatch.class).value();
 		var paramMap = new HashMap<String, String>();
 		var paramStart = state.first(ListMatch.class);
-		if(paramStart.isPresent()) {
+		if (paramStart.isPresent()) {
 			var paramEnd = state.index(2, ListMatch.class).orElseThrow();
 			var params = state.subMatch(paramStart.getAsInt() + 1, paramEnd, ContentMatch.class);
-			for (int i = 0; i < params.size(); i+=2) {
+			for (int i = 0; i < params.size(); i += 2) {
 				var key = params.get(i).value();
 				var value = params.get(i + 1).value();
 				paramMap.put(key, value);
