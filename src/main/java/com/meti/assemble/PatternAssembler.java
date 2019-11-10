@@ -2,6 +2,7 @@ package com.meti.assemble;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 class PatternAssembler implements Assembler {
 	private final List<? extends Pattern> patterns;
@@ -15,7 +16,7 @@ class PatternAssembler implements Assembler {
 		return patterns.stream()
 				.filter((Predicate<Pattern>) pattern -> pattern.canAssemble(state))
 				.findAny()
-				.orElseThrow()
+				.orElseThrow((Supplier<IllegalStateException>) () -> new IllegalStateException("Cannot parse state: " + state))
 				.assemble(state);
 	}
 }

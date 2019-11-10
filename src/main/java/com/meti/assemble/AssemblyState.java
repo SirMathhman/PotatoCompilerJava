@@ -1,11 +1,15 @@
 package com.meti.assemble;
 
-import com.meti.lexeme.match.format.SeparatorMatch;
+import com.meti.lexeme.match.Match;
 
 import java.util.List;
 import java.util.OptionalInt;
 
 public interface AssemblyState {
+	default AssemblyNode assemble(AssemblyState state1) {
+		return parent().assemble(state1);
+	}
+
 	OptionalInt first(Class<?> clazz);
 
 	default <T> T getFirst(Class<T> clazz) {
@@ -23,7 +27,7 @@ public interface AssemblyState {
 	boolean has(Class<?> clazz);
 
 	default boolean hasFirst(Class<?> clazz) {
-		return has(0, clazz);
+		return size() > 0 && has(0, clazz);
 	}
 
 	boolean has(int index, Class<?> clazz);
@@ -39,6 +43,8 @@ public interface AssemblyState {
 	Assembler parent();
 
 	List<? extends AssemblyState> split(Class<?> clazz);
+
+	<T extends Match<?>> List<List<T>> splitByMatch(Class<?> clazz, Class<? extends T> contentMatchClass);
 
 	AssemblyState sub(int index);
 

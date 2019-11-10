@@ -5,7 +5,6 @@ import com.meti.lexeme.match.Match;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ListAssemblyState implements AssemblyState {
@@ -50,6 +49,13 @@ public class ListAssemblyState implements AssemblyState {
 	}
 
 	@Override
+	public String toString() {
+		return "ListAssemblyState{" +
+				"matches=" + matches +
+				'}';
+	}
+
+	@Override
 	public Assembler parent() {
 		return assembler;
 	}
@@ -70,6 +76,24 @@ public class ListAssemblyState implements AssemblyState {
 		return lists.stream()
 				.map(others -> new ListAssemblyState(others, assembler))
 				.collect(Collectors.toList());
+	}
+
+	//TODO: merge split algorithms
+
+	@Override
+	public <T extends Match<?>> List<List<T>> splitByMatch(Class<?> clazz, Class<? extends T> contentMatchClass) {
+		List<List<T>> lists = new ArrayList<>();
+		List<T> subMatches = new ArrayList<>();
+		for (Match<?> match : matches) {
+			if (clazz.isInstance(match)) {
+				lists.add(subMatches);
+				subMatches = new ArrayList<>();
+			} else {
+				subMatches.add(contentMatchClass.cast(match));
+			}
+		}
+		lists.add(subMatches);
+		return lists;
 	}
 
 	@Override

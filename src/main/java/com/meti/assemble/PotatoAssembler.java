@@ -9,6 +9,7 @@ public final class PotatoAssembler extends PatternAssembler {
 		return new PotatoAssembler(List.of(
 				new ContentArrayPattern(),
 				new AssignmentPattern(),
+				new InvocationPattern(),
 				new OperatorPattern(),
 				new VariablePattern(),
 				new IntegerPattern(),

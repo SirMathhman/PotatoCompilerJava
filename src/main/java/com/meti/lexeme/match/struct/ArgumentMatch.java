@@ -2,7 +2,7 @@ package com.meti.lexeme.match.struct;
 
 import com.meti.lexeme.match.Match;
 
-class ArgumentMatch implements Match<Boolean> {
+public class ArgumentMatch implements Match<Boolean> {
 	private final boolean opening;
 
 	ArgumentMatch(boolean opening) {
