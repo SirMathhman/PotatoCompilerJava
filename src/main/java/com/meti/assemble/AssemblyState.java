@@ -7,7 +7,7 @@ import java.util.OptionalInt;
 import java.util.function.Predicate;
 
 public interface AssemblyState {
-	@Deprecated
+    @Deprecated
     default AssemblyNode assemble(AssemblyState state1) {
         return parent().assemble(state1);
     }
@@ -21,6 +21,8 @@ public interface AssemblyState {
     int depth();
 
     OptionalInt first(Class<?> clazz);
+
+    <T> OptionalInt first(Class<T> clazz, Predicate<T> predicate);
 
     default <T> T getFirst(Class<T> clazz) {
         return get(0, clazz);
@@ -69,4 +71,6 @@ public interface AssemblyState {
     <T extends Match<?>> List<T> subMatch(int startInclusive, int endExclusive, Class<T> clazz);
 
     void surface();
+
+    <T> boolean has(Class<T> clazz, Predicate<T> predicate);
 }
