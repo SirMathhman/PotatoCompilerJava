@@ -14,6 +14,7 @@ public final class JSPotatoCompiler extends UnitCompiler {
 				new JSAssignmentUnit(),
 				new JSFunctionUnit(),
 				new JSInvocationUnit(),
+				new JSReturnUnit(),
 				new JSIfElseUnit(),
 				new JSValueUnit());
 		var generator = new SimpleGenerator();

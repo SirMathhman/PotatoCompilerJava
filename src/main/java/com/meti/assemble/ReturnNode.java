@@ -1,6 +1,6 @@
 package com.meti.assemble;
 
-class ReturnNode implements AssemblyNode {
+public class ReturnNode implements AssemblyNode {
     private final AssemblyNode value;
 
     ReturnNode(AssemblyNode value) {
@@ -12,5 +12,9 @@ class ReturnNode implements AssemblyNode {
         return "ReturnNode{" +
                 "value=" + value +
                 '}';
+    }
+
+    public AssemblyNode value() {
+        return value;
     }
 }

@@ -1,5 +1,3 @@
-Optional[value string] = {
-    get?string={
-        return value;
-    }
+get?string={
+    return "Hello World!";
 }
