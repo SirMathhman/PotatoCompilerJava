@@ -23,6 +23,6 @@ class CollectionLoader implements Loader {
                 .filter(loader -> loader.canLoad(node))
                 .map(loader -> loader.load(node, interpreter))
                 .findAny()
-				.orElseThrow(() -> new IllegalArgumentException("Could not load node: " + node));
+				.orElseThrow(() -> new IllegalArgumentException("Could not load node:\n" + node.format()));
     }
 }
