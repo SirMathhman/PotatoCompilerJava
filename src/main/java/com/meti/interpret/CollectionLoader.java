@@ -18,10 +18,10 @@ class CollectionLoader implements Loader {
 	}
 
 	@Override
-	public Statement load(AssemblyNode node, Interpreter root) {
+	public Statement load(AssemblyNode node, Interpreter interpreter) {
 		return loaders.stream()
 				.filter(loader -> loader.canLoad(node))
-				.map(loader -> loader.load(node, root))
+				.map(loader -> loader.load(node, interpreter))
 				.findAny()
 				.orElseThrow();
 	}

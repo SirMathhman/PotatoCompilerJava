@@ -3,19 +3,46 @@ package com.meti.interpret;
 import com.meti.assemble.AssemblyNode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 class ListInterpreter implements Interpreter {
 	private final Loader root;
 	private final List<Statement> statements = new ArrayList<>();
 
+	@Override
+	public List<Statement> statements() {
+		return Collections.unmodifiableList(statements);
+	}
+
+	@Override
+	public Optional<Function> byName(String name) {
+		return statements.stream()
+				.filter(Function.class::isInstance)
+				.map(Function.class::cast)
+				.filter(function -> function.name().equals(name))
+				.findAny();
+	}
+
+	@Override
+	public void clear(){
+		statements.clear();
+	}
+
 	ListInterpreter(Loader root) {
 		this.root = root;
 	}
 
 	@Override
-	public Function find(String... names) {
+	public Type find(String... names) {
+		if(names.length == 1) {
+			try {
+				return PrimitiveType.valueOf(names[0].toUpperCase());
+			} catch (IllegalArgumentException ignored) {
+			}
+		}
 		var statements = this.statements
 				.stream()
 				.filter(Function.class::isInstance)
@@ -31,7 +58,7 @@ class ListInterpreter implements Interpreter {
 			statements = toReturn.subFunctions();
 		}
 		if (toReturn == null) throw new IllegalArgumentException("Could not find function for name: " + names);
-		return toReturn;
+		return new InlineType(toReturn.name());
 	}
 
 	@Override

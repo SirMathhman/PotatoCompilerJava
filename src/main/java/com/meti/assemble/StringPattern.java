@@ -11,6 +11,6 @@ class StringPattern implements Pattern {
 	@Override
 	public AssemblyNode assemble(AssemblyState state) {
 		var value = state.get(0, StringMatch.class).value();
-		return new StringNode(value);
+		return new InlineStringNode(value);
 	}
 }

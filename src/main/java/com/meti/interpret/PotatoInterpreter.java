@@ -1,6 +1,6 @@
 package com.meti.interpret;
 
-import java.util.Collections;
+import java.util.Set;
 
 public final class PotatoInterpreter extends ListInterpreter {
 	public static final Interpreter INSTANCE = init();
@@ -10,7 +10,10 @@ public final class PotatoInterpreter extends ListInterpreter {
 	}
 
 	private static PotatoInterpreter init() {
-		var root = new CollectionLoader(Collections.emptySet());
+		var root = new CollectionLoader(Set.of(
+				new FunctionLoader(),
+				new ValueLoader()
+		));
 		return new PotatoInterpreter(root);
 	}
 }

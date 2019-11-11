@@ -7,7 +7,7 @@ public enum Operator implements Valued {
     DIVIDE("/"),
 
     EQUALS("="),
-    RETURN(">>"),
+    RETURN("?"),
 
     LESS_THAN("<"),
     GREATER_THAN(">"),

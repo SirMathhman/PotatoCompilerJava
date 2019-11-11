@@ -5,5 +5,7 @@ public enum Command {
 	ASSEMBLE,
 	INTERPRET,
 	COMPILE,
-	EXECUTE
+	EXECUTE,
+	CLEAR,
+	LIST
 }

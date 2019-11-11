@@ -20,7 +20,9 @@ class CompileConsole extends TreeConsole {
 		var evaluators = Map.of(
 				LEX, new LexEvaluator(),
 				ASSEMBLE, new AssembleEvaluator(),
-				INTERPRET, new InterpretEvaluator()
+				INTERPRET, new InterpretEvaluator(),
+				CLEAR, new ClearEvaluator(),
+				LIST, new ListEvaluator()
 		);
 		var evaluator = new EnumEvaluator<>(Command.class, evaluators, " ");
 		return new CompileConsole(evaluator);
