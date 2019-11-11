@@ -14,6 +14,7 @@ public final class PotatoInterpreter extends ListInterpreter {
                 new AssignmentLoader(),
                 new InvocationLoader(),
                 new FunctionLoader(),
+                new VariableLoader(),
                 new IfElseLoader(),
                 new ReturnLoader(),
                 new ValueLoader()

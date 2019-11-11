@@ -1,6 +1,6 @@
 package com.meti.assemble;
 
-class VariableNode implements AssemblyNode {
+public class VariableNode implements AssemblyNode {
 	private final String name;
 
 	VariableNode(String name) {
@@ -12,5 +12,9 @@ class VariableNode implements AssemblyNode {
 		return "VariableNode{" +
 				"name='" + name + '\'' +
 				'}';
+	}
+
+	public String name() {
+		return name;
 	}
 }

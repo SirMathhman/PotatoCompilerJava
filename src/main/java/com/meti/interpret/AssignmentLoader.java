@@ -13,7 +13,7 @@ class AssignmentLoader implements Loader {
     public Statement load(AssemblyNode node, Interpreter interpreter) {
         var assignment = (AssignmentNode) node;
         var type = interpreter.resolve(assignment.value());
-        var variable = new InlineVariable(type, assignment.name(), assignment.isMutable());
+        var variable = new InlineDeclaration(type, assignment.name(), assignment.isMutable());
         return new InlineAssignment(variable, interpreter.loadChild(assignment.value()));
     }
 }

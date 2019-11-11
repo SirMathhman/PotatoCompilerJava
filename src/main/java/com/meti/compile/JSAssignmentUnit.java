@@ -17,7 +17,7 @@ class JSAssignmentUnit implements Unit {
         var builder = new StringBuilder();
         var variable = assignment.variable();
         builder.append("var ")
-                .append(variable.name())
+                .append(state.alias(variable.name()))
                 .append("=");
         var valueString = compiler.compile(Collections.singletonList(assignment.value()));
         builder.append(valueString)

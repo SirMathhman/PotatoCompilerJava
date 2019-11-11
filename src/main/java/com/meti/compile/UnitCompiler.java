@@ -19,7 +19,7 @@ class UnitCompiler implements Compiler {
     public String compile(List<? extends Statement> statements) {
         return statements.stream()
                 .map(this::compile)
-                .collect(Collectors.joining());
+                .collect(Collectors.joining("\n"));
     }
 
     @Override
