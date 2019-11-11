@@ -22,7 +22,8 @@ class CompileConsole extends TreeConsole {
 				ASSEMBLE, new AssembleEvaluator(),
 				INTERPRET, new InterpretEvaluator(),
 				CLEAR, new ClearEvaluator(),
-				LIST, new ListEvaluator()
+				LIST, new ListEvaluator(),
+				COMPILE, new CompileEvaluator()
 		);
 		var evaluator = new EnumEvaluator<>(Command.class, evaluators, " ");
 		return new CompileConsole(evaluator);

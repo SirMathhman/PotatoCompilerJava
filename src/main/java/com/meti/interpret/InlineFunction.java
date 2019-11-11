@@ -37,8 +37,23 @@ class InlineFunction implements Function  {
 	}
 
 	@Override
+	public List<Statement> content() {
+		return content;
+	}
+
+	@Override
+	public boolean hasModifier(Keyword modifier) {
+		return flags.contains(modifier);
+	}
+
+	@Override
 	public String name() {
 		return name;
+	}
+
+	@Override
+	public Map<String, Type> parameters() {
+		return parameters;
 	}
 
 	@Override
