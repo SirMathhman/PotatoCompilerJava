@@ -1,9 +1,9 @@
 package com.meti.compile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 class InlineCompilerState implements CompilerState {
 	private final Map<String[], String> aliases = new HashMap<>();
@@ -21,7 +21,9 @@ class InlineCompilerState implements CompilerState {
 
 	@Override
 	public boolean has(String... key) {
-		return aliases.containsKey(key);
+		return aliases.keySet()
+				.stream()
+				.anyMatch(strings -> Arrays.deepEquals(strings, key));
 	}
 
 	@Override
@@ -36,6 +38,11 @@ class InlineCompilerState implements CompilerState {
 
 	@Override
 	public String get(String... key) {
-		return aliases.get(key);
+		return aliases.keySet()
+				.stream()
+				.filter(strings -> Arrays.deepEquals(strings, key))
+				.map(aliases::get)
+				.findAny()
+				.orElseThrow();
 	}
 }
