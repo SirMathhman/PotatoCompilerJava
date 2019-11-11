@@ -14,6 +14,7 @@ public final class PotatoInterpreter extends ListInterpreter {
                 new AssignmentLoader(),
                 new InvocationLoader(),
                 new FunctionLoader(),
+                new IfElseLoader(),
                 new ValueLoader()
         ));
         var resolvers = Set.of(new IntegerResolver(),

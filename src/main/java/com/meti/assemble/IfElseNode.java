@@ -1,6 +1,6 @@
 package com.meti.assemble;
 
-class IfElseNode implements AssemblyNode {
+public class IfElseNode implements AssemblyNode {
     private final AssemblyNode condition;
     private final AssemblyNode ifBlock;
     private final AssemblyNode elseBlock;
@@ -9,6 +9,18 @@ class IfElseNode implements AssemblyNode {
         this.condition = condition;
         this.ifBlock = ifBlock;
         this.elseBlock = elseBlock;
+    }
+
+    public AssemblyNode condition() {
+        return condition;
+    }
+
+    public AssemblyNode ifBlock() {
+        return ifBlock;
+    }
+
+    public AssemblyNode elseBlock() {
+        return elseBlock;
     }
 
     @Override
