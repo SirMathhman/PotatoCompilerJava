@@ -20,6 +20,7 @@ public final class PotatoAssembler extends PatternAssembler {
                 new BooleanPattern(),
                 new IntegerPattern(),
                 new IfElsePattern(),
+                new ReturnPattern(),
 				new StringPattern(),
                 new IfPattern()
         ));
