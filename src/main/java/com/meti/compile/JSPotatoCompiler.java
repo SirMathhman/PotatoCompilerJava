@@ -2,7 +2,7 @@ package com.meti.compile;
 
 import java.util.Set;
 
-public class JSPotatoCompiler extends UnitCompiler {
+public final class JSPotatoCompiler extends UnitCompiler {
 	public static final Compiler INSTANCE = init();
 
 	private JSPotatoCompiler(Set<? extends Unit> units, CompilerState state) {
@@ -10,7 +10,7 @@ public class JSPotatoCompiler extends UnitCompiler {
 	}
 
 	private static Compiler init() {
-		var units = Set.of(new JSFunctionUnit());
+		var units = Set.of(new JSFunctionUnit(), new JSInvocationUnit());
 		var generator = new SimpleGenerator();
 		var state = new InlineCompilerState(generator);
 		return new JSPotatoCompiler(units, state);

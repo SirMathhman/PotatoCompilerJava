@@ -42,6 +42,6 @@ class InvocationPattern implements Pattern {
                     .map(state::assemble)
                     .collect(Collectors.toList());
 		}
-        return new InvocationNode(caller, matches);
+        return new InlineInvocationNode(caller, matches);
     }
 }

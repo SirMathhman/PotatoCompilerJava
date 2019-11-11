@@ -1,18 +1,22 @@
 package com.meti.compile;
 
+import java.util.List;
+
 public interface CompilerState {
-	default String alias(String key) {
-		if (!has(key)) {
-			put(key, generator().next());
+	default String alias(String... keys) {
+		if (!has(keys)) {
+			put(generator().next(), keys);
 		}
-		return get(key);
+		return get(keys);
 	}
 
-	boolean has(String key);
+	List<String> name();
 
-	void put(String key, String value);
+	boolean has(String... key);
+
+	void put(String value, String... key);
 
 	Generator generator();
 
-	String get(String key);
+	String get(String... key);
 }

@@ -18,17 +18,20 @@ class JSFunctionUnit implements Unit {
 	public String compile(Statement statement, CompilerState state, Compiler compiler) {
 		var builder = new StringBuilder();
 		var function = (Function) statement;
+		state.name().add(function.name());
+		var alias = state.alias(state.name().toArray(String[]::new));
 		var compiledContent = compiler.compile(function.content());
 		var compiledFunctions = compiler.compile(function.subFunctions());
+		state.name().remove(function.name());
 		if (function.hasModifier(SINGLE)) {
 			builder.append(compiledContent);
 			builder.append(compiledFunctions);
 		} else {
-			var alias = state.alias(function.name());
-			var parameterMAp = function.parameters();
+
+			var parameterMap = function.parameters();
 			builder.append("function ")
 					.append(alias);
-			var params = parameterMAp.keySet().stream()
+			var params = parameterMap.keySet().stream()
 					.map(state::alias)
 					.collect(Collectors.joining(","));
 			builder.append("(")

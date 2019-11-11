@@ -9,8 +9,9 @@ public final class PotatoInterpreter extends ListInterpreter {
 		super(root);
 	}
 
-	private static PotatoInterpreter init() {
+	private static Interpreter init() {
 		var root = new CollectionLoader(Set.of(
+				new InvocationLoader(),
 				new FunctionLoader(),
 				new ValueLoader()
 		));

@@ -2,15 +2,16 @@ package com.meti.interpret;
 
 import com.meti.assemble.AssemblyNode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class ListInterpreter implements Interpreter {
 	private final Loader root;
 	private final List<Statement> statements = new ArrayList<>();
+
+	ListInterpreter(Loader root) {
+		this.root = root;
+	}
 
 	@Override
 	public List<Statement> statements() {
@@ -27,17 +28,13 @@ class ListInterpreter implements Interpreter {
 	}
 
 	@Override
-	public void clear(){
+	public void clear() {
 		statements.clear();
-	}
-
-	ListInterpreter(Loader root) {
-		this.root = root;
 	}
 
 	@Override
 	public Type find(String... names) {
-		if(names.length == 1) {
+		if (names.length == 1) {
 			try {
 				return PrimitiveType.valueOf(names[0].toUpperCase());
 			} catch (IllegalArgumentException ignored) {
@@ -57,7 +54,8 @@ class ListInterpreter implements Interpreter {
 					.orElseThrow();
 			statements = toReturn.subFunctions();
 		}
-		if (toReturn == null) throw new IllegalArgumentException("Could not find function for name: " + names);
+		if (toReturn == null)
+			throw new IllegalArgumentException("Could not find function for name: " + Arrays.toString(names));
 		return new InlineType(toReturn.name());
 	}
 
