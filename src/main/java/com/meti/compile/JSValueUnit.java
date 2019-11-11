@@ -1,18 +1,23 @@
 package com.meti.compile;
 
-import com.meti.assemble.StringNode;
 import com.meti.interpret.Statement;
-import com.meti.interpret.StringValue;
+import com.meti.interpret.Value;
 
 class JSValueUnit implements Unit {
-	@Override
-	public boolean canCompile(Statement statement) {
-		return statement instanceof StringValue;
-	}
+    @Override
+    public boolean canCompile(Statement statement) {
+        return statement instanceof Value;
+    }
 
-	@Override
-	public String compile(Statement statement, CompilerState state, Compiler compiler) {
-		var string = (StringValue) statement;
-		return "\"" + string.value() + "\"";
-	}
+    @Override
+    public String compile(Statement statement, CompilerState state, Compiler compiler) {
+        var valueStatement = (Value<?>) statement;
+        var value = valueStatement.value();
+        if (value instanceof String) {
+            return "\"" + valueStatement.value() + "\"";
+        } else if (value instanceof Integer) {
+            return String.valueOf((int) value);
+        }
+        throw new IllegalStateException("Unknown value type: " + value.getClass());
+    }
 }

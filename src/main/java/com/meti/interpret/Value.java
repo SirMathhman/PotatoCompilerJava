@@ -1,5 +1,6 @@
 package com.meti.interpret;
 
-interface Value extends Statement {
+public interface Value<T> extends Statement {
 	Type type();
+	T value();
 }

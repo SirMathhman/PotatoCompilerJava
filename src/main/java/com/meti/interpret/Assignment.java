@@ -1,5 +1,7 @@
 package com.meti.interpret;
 
-class Assignment implements Statement {
-	
+public interface Assignment extends Statement {
+    Variable variable();
+
+    Statement value();
 }

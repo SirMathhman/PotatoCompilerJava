@@ -1,17 +1,20 @@
 package com.meti.interpret;
 
 import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.StringNode;
+import com.meti.assemble.ValueNode;
 
 class ValueLoader implements Loader {
-	@Override
-	public boolean canLoad(AssemblyNode node) {
-		return node instanceof StringNode;
-	}
+    @Override
+    public boolean canLoad(AssemblyNode node) {
+        return node instanceof ValueNode;
+    }
 
-	@Override
-	public Statement load(AssemblyNode node, Interpreter interpreter) {
-		var stringNode = (StringNode) node;
-		return new InlineStringValue(stringNode);
-	}
+    @Override
+    public Statement load(AssemblyNode node, Interpreter interpreter) {
+        var valueNode = (ValueNode<?>) node;
+        var value = valueNode.value();
+        if (String.class.equals(value.getClass())) return new InlineStringValue((String) value);
+        else if (Integer.class.equals(value.getClass())) return new InlineIntegerValue((int) value);
+        throw new IllegalArgumentException("Unknown type: " + value.getClass());
+    }
 }

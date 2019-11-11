@@ -1,10 +1,8 @@
 package com.meti.assemble;
 
-class IntegerNode implements AssemblyNode {
-	private final int value;
-
+public class IntegerNode extends InlineValueNode<Integer> {
 	IntegerNode(int value) {
-		this.value = value;
+		super(value);
 	}
 
 	@Override

@@ -22,6 +22,6 @@ class AssignmentPattern implements Pattern {
 		AssemblyNode child = !state.hasLast(EndLineMatch.class) ?
 				state.sub(3).assemble() :
 				state.sub(3, state.size() - 1).assemble();
-		return new AssignmentNode(name, mutable, child);
+		return new InlineAssignmentNode(name, mutable, child);
 	}
 }

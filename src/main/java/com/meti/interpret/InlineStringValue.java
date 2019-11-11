@@ -1,21 +1,19 @@
 package com.meti.interpret;
 
-import com.meti.assemble.StringNode;
-
 class InlineStringValue implements StringValue {
-	private final StringNode stringNode;
+    private final String value;
 
-	public InlineStringValue(StringNode stringNode) {
-		this.stringNode = stringNode;
-	}
+    InlineStringValue(String value) {
+        this.value = value;
+    }
 
-	@Override
-	public String value() {
-		return stringNode.value();
-	}
+    @Override
+    public String value() {
+		return value;
+    }
 
-	@Override
-	public Type type() {
-		return PrimitiveType.STRING;
-	}
+    @Override
+    public Type type() {
+        return PrimitiveType.STRING;
+    }
 }
