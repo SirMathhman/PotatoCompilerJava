@@ -5,7 +5,7 @@ public enum PrimitiveType implements Type {
 	INT;
 
 	@Override
-	public String value() {
-		return name().toLowerCase();
+	public String[] value() {
+		return new String[]{name().toLowerCase()};
 	}
 }

@@ -12,6 +12,14 @@ class InlineInvocation implements Invocation {
 	}
 
 	@Override
+	public String toString() {
+		return "InlineInvocation{" +
+				"callerType=" + callerType +
+				", parameters=" + parameters +
+				'}';
+	}
+
+	@Override
 	public Type type() {
 		return callerType;
 	}

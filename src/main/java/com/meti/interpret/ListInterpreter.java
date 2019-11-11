@@ -56,7 +56,7 @@ class ListInterpreter implements Interpreter {
 		}
 		if (toReturn == null)
 			throw new IllegalArgumentException("Could not find function for name: " + Arrays.toString(names));
-		return new InlineType(toReturn.name());
+		return new InlineType(names);
 	}
 
 	@Override

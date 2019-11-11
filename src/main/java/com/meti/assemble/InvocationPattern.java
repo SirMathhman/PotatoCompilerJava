@@ -33,13 +33,13 @@ class InvocationPattern implements Pattern {
                 .map(ContentMatch::value)
                 .collect(Collectors.toList());
         List<AssemblyNode> matches;
-        if (state.has(state.size() - 2, ArgumentMatch.class)) {
+        if (state.has(state.size() - 3, ArgumentMatch.class)) {
             matches = new ArrayList<>();
         } else {
-            var sub = state.sub(firstIndex.getAsInt() + 1, state.size() - 1);
+            var sub = state.sub(firstIndex.getAsInt() + 1, state.size() - 2);
             matches = sub.split(SeparatorMatch.class)
                     .stream()
-                    .map(state::assemble)
+                    .map(AssemblyState::assemble)
                     .collect(Collectors.toList());
 		}
         return new InlineInvocationNode(caller, matches);

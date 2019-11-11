@@ -10,7 +10,10 @@ public final class JSPotatoCompiler extends UnitCompiler {
 	}
 
 	private static Compiler init() {
-		var units = Set.of(new JSFunctionUnit(), new JSInvocationUnit());
+		var units = Set.of(
+				new JSFunctionUnit(),
+				new JSInvocationUnit(),
+				new JSValueUnit());
 		var generator = new SimpleGenerator();
 		var state = new InlineCompilerState(generator);
 		return new JSPotatoCompiler(units, state);
