@@ -18,12 +18,14 @@ class CompileConsole extends TreeConsole {
 
 	private static Console init() {
 		var evaluators = Map.of(
-				LEX, new LexEvaluator(),
-				ASSEMBLE, new AssembleEvaluator(),
 				INTERPRET, new InterpretEvaluator(),
+				ASSEMBLE, new AssembleEvaluator(),
+				GENERATE, new GenerateEvaluator(),
+				COMPILE, new CompileEvaluator(),
 				CLEAR, new ClearEvaluator(),
 				LIST, new ListEvaluator(),
-				COMPILE, new CompileEvaluator()
+				LOAD, new LoadEvaluator(),
+				LEX, new LexEvaluator()
 		);
 		var evaluator = new EnumEvaluator<>(Command.class, evaluators, " ");
 		return new CompileConsole(evaluator);

@@ -1,11 +1,12 @@
 package com.meti.command;
 
 public enum Command {
-	LEX,
-	ASSEMBLE,
 	INTERPRET,
+	ASSEMBLE,
+	GENERATE,
 	COMPILE,
-	EXECUTE,
 	CLEAR,
-	LIST
+	LIST,
+	LOAD,
+	LEX,
 }

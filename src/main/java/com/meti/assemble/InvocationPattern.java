@@ -19,8 +19,8 @@ class InvocationPattern implements Pattern {
         return contentIndex.isPresent() && argIndex.isPresent() &&
                 (argIndex.getAsInt() == contentIndex.getAsInt() + 1) &&
                 state.get(argIndex.getAsInt(), ArgumentMatch.class).value() &&
-                state.has(state.size() - 2, ArgumentMatch.class) &&
-                !state.get(state.size() - 2, ArgumentMatch.class).value();
+                state.has(state.size() - 1, ArgumentMatch.class) &&
+                !state.get(state.size() - 1, ArgumentMatch.class).value();
     }
 
     @Override
@@ -33,10 +33,10 @@ class InvocationPattern implements Pattern {
                 .map(ContentMatch::value)
                 .collect(Collectors.toList());
         List<AssemblyNode> matches;
-        if (state.has(state.size() - 3, ArgumentMatch.class)) {
+        if (state.has(state.size() - 2, ArgumentMatch.class)) {
             matches = new ArrayList<>();
         } else {
-            var sub = state.sub(firstIndex.getAsInt() + 1, state.size() - 2);
+            var sub = state.sub(firstIndex.getAsInt() + 1, state.size() - 1);
             matches = sub.split(SeparatorMatch.class)
                     .stream()
                     .map(AssemblyState::assemble)
