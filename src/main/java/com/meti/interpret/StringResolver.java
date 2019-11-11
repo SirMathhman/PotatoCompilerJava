@@ -6,7 +6,7 @@ import com.meti.assemble.StringNode;
 class StringResolver implements TypeResolver {
     @Override
     public boolean canResolve(AssemblyNode node) {
-        return node instanceof StringNode;
+        return node instanceof StringNode   ;
     }
 
     @Override
