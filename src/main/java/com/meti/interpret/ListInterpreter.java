@@ -3,7 +3,6 @@ package com.meti.interpret;
 import com.meti.assemble.AssemblyNode;
 
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 class ListInterpreter implements Interpreter {
@@ -54,12 +53,16 @@ class ListInterpreter implements Interpreter {
                     .stream()
                     .filter(function -> function.name().equals(name))
                     .findAny()
-                    .orElseThrow();
+                    .orElseThrow(() -> throwInvalidFunction(names));
             statements = toReturn.subFunctions();
         }
         if (toReturn == null)
-            throw new IllegalArgumentException("Could not find function for name: " + Arrays.toString(names));
+            throw throwInvalidFunction(names);
         return new InlineType(names);
+    }
+
+    private IllegalArgumentException throwInvalidFunction(String[] names) {
+        return new IllegalArgumentException("Could not find function for name: " + Arrays.toString(names));
     }
 
     @Override
@@ -78,6 +81,6 @@ class ListInterpreter implements Interpreter {
                 .filter(resolver -> resolver.canResolve(value))
                 .map(resolver -> resolver.resolve(value, this))
                 .findAny()
-				.orElseThrow(() -> new IllegalArgumentException("Could not resolve type of node: " + value.toString()));
+                .orElseThrow(() -> new IllegalArgumentException("Could not resolve type of node: " + value.toString()));
     }
 }

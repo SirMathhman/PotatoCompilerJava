@@ -15,9 +15,8 @@ class JSValueUnit implements Unit {
         var value = valueStatement.value();
         if (value instanceof String) {
             return "\"" + valueStatement.value() + "\"";
-        } else if (value instanceof Integer) {
-            return String.valueOf((int) value);
+        } else {
+            return String.valueOf(value);
         }
-        throw new IllegalStateException("Unknown value type: " + value.getClass());
     }
 }

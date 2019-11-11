@@ -2,7 +2,7 @@ package com.meti.interpret;
 
 public enum PrimitiveType implements Type {
 	STRING,
-    INTEGER;
+    INTEGER, BOOLEAN;
 
 	@Override
 	public String[] value() {

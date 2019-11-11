@@ -1,10 +1,8 @@
 package com.meti.assemble;
 
-class BooleanNode implements AssemblyNode {
-    private final boolean value;
-
-    BooleanNode(boolean value) {
-        this.value = value;
+class BooleanNode extends InlineValueNode<Boolean> {
+    BooleanNode(Boolean value) {
+        super(value);
     }
 
     @Override
