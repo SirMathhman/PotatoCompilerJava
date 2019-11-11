@@ -13,17 +13,13 @@ import java.util.stream.Collectors;
 class FunctionPattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
-		if (state.has(OperatorMatch.class, match -> match.value().equals(Operator.RETURN))) {
-			var optional = state.index(2, OperatorMatch.class);
-			if (optional.isEmpty()) return false;
-			var secondIndex = optional.getAsInt();
-			return state.get(secondIndex, OperatorMatch.class).value().equals(Operator.EQUALS);
-		} else {
-			var optional = state.first(OperatorMatch.class);
-			if (optional.isEmpty()) return false;
-			var firstIndex = optional.getAsInt();
-			return state.get(firstIndex, OperatorMatch.class).value().equals(Operator.EQUALS);
-		}
+		if(state.has(VariableMatch.class)) return false;
+		var optional = state.has(OperatorMatch.class, match -> match.value().equals(Operator.RETURN)) ?
+				state.index(2, OperatorMatch.class) :
+				state.first(OperatorMatch.class);
+		if (optional.isEmpty()) return false;
+		var secondIndex = optional.getAsInt();
+		return state.get(secondIndex, OperatorMatch.class).value().equals(Operator.EQUALS);
 	}
 
 	@Override
