@@ -1,6 +1,7 @@
 package com.meti.assemble;
 
 import com.meti.lexeme.match.format.ContentMatch;
+import com.meti.lexeme.match.struct.EndLineMatch;
 import com.meti.lexeme.match.struct.Operator;
 import com.meti.lexeme.match.struct.OperatorMatch;
 import com.meti.lexeme.match.struct.VariableMatch;
@@ -18,8 +19,9 @@ class AssignmentPattern implements Pattern {
 	public AssemblyNode assemble(AssemblyState state) {
 		var mutable = state.get(0, VariableMatch.class).value();
 		var name = state.get(1, ContentMatch.class).value();
-		var subState = state.sub(3);
-		var child = state.parent().assemble(subState);
+		AssemblyNode child = !state.hasLast(EndLineMatch.class) ?
+				state.sub(3).assemble() :
+				state.sub(3, state.size() - 1).assemble();
 		return new AssignmentNode(name, mutable, child);
 	}
 }
