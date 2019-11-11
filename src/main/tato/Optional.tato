@@ -1,0 +1,5 @@
+Optional<T>[value T] = {
+    get?T={
+        return value;
+    }
+}
