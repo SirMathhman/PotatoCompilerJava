@@ -12,7 +12,7 @@ class IfElseLoader implements Loader {
     @Override
     public Statement load(AssemblyNode node, Interpreter interpreter) {
         var ifElse = (IfElseNode) node;
-        return new IfStatement(interpreter.loadChild(ifElse.condition()),
+        return new IfElseStatement(interpreter.loadChild(ifElse.condition()),
                 interpreter.loadChild(ifElse.ifBlock()),
                 interpreter.loadChild(ifElse.elseBlock()));
     }

@@ -1,25 +1,25 @@
 package com.meti.interpret;
 
-class IfStatement implements Statement {
+public class IfElseStatement implements Statement {
     private final Statement condition;
     private final Statement ifBlock;
     private final Statement elseBlock;
 
-    public IfStatement(Statement condition, Statement ifBlock, Statement elseBlock) {
+    public IfElseStatement(Statement condition, Statement ifBlock, Statement elseBlock) {
         this.condition = condition;
         this.ifBlock = ifBlock;
         this.elseBlock = elseBlock;
     }
 
-    public Statement getCondition() {
+    public Statement condition() {
         return condition;
     }
 
-    public Statement getIfBlock() {
+    public Statement ifBlock() {
         return ifBlock;
     }
 
-    public Statement getElseBlock() {
+    public Statement elseBlock() {
         return elseBlock;
     }
 }
