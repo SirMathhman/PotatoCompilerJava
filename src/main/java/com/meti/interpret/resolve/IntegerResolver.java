@@ -14,6 +14,6 @@ public class IntegerResolver implements TypeResolver {
 
     @Override
     public Type resolve(AssemblyNode node, Interpreter interpreter) {
-        return PrimitiveType.INTEGER;
+        return PrimitiveType.INT;
     }
 }

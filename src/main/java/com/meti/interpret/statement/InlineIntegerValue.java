@@ -17,6 +17,6 @@ public class InlineIntegerValue implements IntegerValue {
 
     @Override
     public Type type() {
-        return PrimitiveType.INTEGER;
+        return PrimitiveType.INT;
     }
 }
