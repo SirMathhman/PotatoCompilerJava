@@ -1,7 +1,7 @@
 package com.meti.interpret;
 
 import com.meti.assemble.node.AssemblyNode;
-import com.meti.interpret.statement.FunctionStatement;
+import com.meti.interpret.statement.Function;
 import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.Type;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface Interpreter {
 	void addGenerics(List<String> generics);
 
-	Optional<FunctionStatement> byName(String name);
+	Optional<Function> byName(String name);
 
 	void clear();
 

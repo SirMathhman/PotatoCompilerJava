@@ -3,13 +3,12 @@ package com.meti.interpret.load;
 import com.meti.assemble.node.AssemblyNode;
 import com.meti.assemble.node.control.FunctionNode;
 import com.meti.interpret.Interpreter;
-import com.meti.interpret.statement.FunctionStatement;
-import com.meti.interpret.statement.InlineFunctionStatement;
+import com.meti.interpret.statement.Function;
+import com.meti.interpret.statement.InlineFunction;
 import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.Type;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class FunctionLoader implements Loader {
@@ -25,7 +24,7 @@ public class FunctionLoader implements Loader {
 		var parameterMap = functionNode.parameters();
 		var parameters = parameterMap.keySet()
 				.stream()
-				.collect(Collectors.toMap(Function.identity(), s -> findType(interpreter, parameterMap.get(s)
+				.collect(Collectors.toMap(java.util.function.Function.identity(), s -> findType(interpreter, parameterMap.get(s)
 				)));
 		Type returnType = null;
 		var returnOptional = functionNode.returnType();
@@ -33,10 +32,10 @@ public class FunctionLoader implements Loader {
 			returnType = findType(interpreter, returnOptional.get());
 		}
 		var content = new ArrayList<Statement>();
-		var subFunctions = new ArrayList<FunctionStatement>();
+		var subFunctions = new ArrayList<Function>();
 		for (AssemblyNode assemblyNode : functionNode.getContent()) {
 			if (assemblyNode instanceof FunctionNode) {
-				var subFunction = (FunctionStatement) interpreter.loadChild(assemblyNode);
+				var subFunction = (Function) interpreter.loadChild(assemblyNode);
 				subFunctions.add(subFunction);
 			} else {
 				content.add(interpreter.loadChild(assemblyNode));
@@ -44,7 +43,7 @@ public class FunctionLoader implements Loader {
 		}
 
 		interpreter.removeGenerics(functionNode.generics());
-		return new InlineFunctionStatement(functionNode.name(),
+		return new InlineFunction(functionNode.name(),
 				functionNode.keywords(),
 				parameters,
 				returnType,

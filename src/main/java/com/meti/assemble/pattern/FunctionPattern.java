@@ -90,8 +90,9 @@ public class FunctionPattern implements Pattern {
 
     private String parseReturnType(AssemblyState state) {
         var returnFlag = state.first(OperatorMatch.class, match -> match.value().equals(Operator.RETURN));
+        var equalsFlag = state.first(OperatorMatch.class, match -> match.value().equals(Operator.EQUALS));
         String returnType = null;
-        if (returnFlag.isPresent()) {
+        if (returnFlag.isPresent() && equalsFlag.isPresent() && returnFlag.getAsInt() < equalsFlag.getAsInt()) {
             var returnTypeMatch = state.get(returnFlag.getAsInt() + 1, ContentMatch.class);
             returnType = returnTypeMatch.value();
         }

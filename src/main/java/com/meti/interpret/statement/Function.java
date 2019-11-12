@@ -5,8 +5,11 @@ import com.meti.lexeme.match.struct.Keyword;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-public interface FunctionStatement extends Statement {
+public interface Function extends Statement {
+	Optional<Type> returnType();
+
 	List<Statement> content();
 
 	boolean hasModifier(Keyword modifier);
@@ -15,5 +18,5 @@ public interface FunctionStatement extends Statement {
 
 	Map<String, Type> parameters();
 
-	List<FunctionStatement> subFunctions();
+	List<Function> subFunctions();
 }
