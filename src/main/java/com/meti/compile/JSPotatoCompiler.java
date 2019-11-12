@@ -1,5 +1,7 @@
 package com.meti.compile;
 
+import com.meti.compile.unit.*;
+
 import java.util.Set;
 
 public final class JSPotatoCompiler extends UnitCompiler {

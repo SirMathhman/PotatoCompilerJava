@@ -1,5 +1,8 @@
-package com.meti.compile;
+package com.meti.compile.unit;
 
+import com.meti.compile.Compiler;
+import com.meti.compile.CompilerState;
+import com.meti.compile.Unit;
 import com.meti.interpret.Function;
 import com.meti.interpret.Statement;
 
@@ -8,7 +11,7 @@ import java.util.stream.Collectors;
 import static com.meti.lexeme.match.struct.Keyword.EXTERNAL;
 import static com.meti.lexeme.match.struct.Keyword.SINGLE;
 
-class JSFunctionUnit implements Unit {
+public class JSFunctionUnit implements Unit {
 	@Override
 	public boolean canCompile(Statement statement) {
 		return statement instanceof Function;

@@ -1,12 +1,15 @@
-package com.meti.compile;
+package com.meti.compile.unit;
 
+import com.meti.compile.Compiler;
+import com.meti.compile.CompilerState;
+import com.meti.compile.Unit;
 import com.meti.interpret.Invocation;
 import com.meti.interpret.Statement;
 
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-class JSInvocationUnit implements Unit {
+public class JSInvocationUnit implements Unit {
 	@Override
 	public boolean canCompile(Statement statement) {
 		return statement instanceof Invocation;
