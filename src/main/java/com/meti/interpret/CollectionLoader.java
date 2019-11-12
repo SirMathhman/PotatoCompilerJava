@@ -1,6 +1,6 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
+import com.meti.assemble.node.AssemblyNode;
 
 import java.util.Collection;
 

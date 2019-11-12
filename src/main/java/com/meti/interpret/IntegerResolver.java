@@ -1,7 +1,7 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.IntegerNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.value.IntegerNode;
 
 class IntegerResolver implements TypeResolver {
     @Override

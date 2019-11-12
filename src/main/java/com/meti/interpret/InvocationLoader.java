@@ -1,8 +1,8 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.InlineInvocationNode;
-import com.meti.assemble.InvocationNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.control.InlineInvocationNode;
+import com.meti.assemble.node.control.InvocationNode;
 
 import java.util.stream.Collectors;
 

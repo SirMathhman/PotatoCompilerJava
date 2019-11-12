@@ -1,7 +1,7 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.ValueNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.value.ValueNode;
 
 class ValueLoader implements Loader {
     @Override

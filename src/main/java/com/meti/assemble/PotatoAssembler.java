@@ -1,5 +1,7 @@
 package com.meti.assemble;
 
+import com.meti.assemble.pattern.*;
+
 import java.util.List;
 
 public final class PotatoAssembler extends PatternAssembler {

@@ -1,8 +1,8 @@
 package com.meti.assemble;
 
-import com.meti.lexeme.match.struct.EndLineMatch;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.pattern.Pattern;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;

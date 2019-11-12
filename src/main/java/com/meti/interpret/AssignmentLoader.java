@@ -1,7 +1,7 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.AssignmentNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.AssignmentNode;
 
 class AssignmentLoader implements Loader {
     @Override

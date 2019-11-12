@@ -1,7 +1,7 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.FunctionNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.control.FunctionNode;
 
 import java.util.ArrayList;
 import java.util.function.Function;

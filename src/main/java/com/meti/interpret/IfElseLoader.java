@@ -1,12 +1,13 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.IfElseNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.control.IfElseNode;
+import com.meti.assemble.node.control.InlineIfElseNode;
 
 class IfElseLoader implements Loader {
     @Override
     public boolean canLoad(AssemblyNode node) {
-        return node instanceof IfElseNode;
+        return node instanceof InlineIfElseNode;
     }
 
     @Override

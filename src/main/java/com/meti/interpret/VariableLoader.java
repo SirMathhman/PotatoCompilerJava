@@ -1,12 +1,13 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.VariableNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.InlineVariableNode;
+import com.meti.assemble.node.VariableNode;
 
 class VariableLoader implements Loader {
     @Override
     public boolean canLoad(AssemblyNode node) {
-        return node instanceof VariableNode;
+        return node instanceof InlineVariableNode;
     }
 
     @Override

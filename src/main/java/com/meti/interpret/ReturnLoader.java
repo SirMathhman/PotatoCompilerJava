@@ -1,12 +1,13 @@
 package com.meti.interpret;
 
-import com.meti.assemble.AssemblyNode;
-import com.meti.assemble.ReturnNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.control.InlineReturnNode;
+import com.meti.assemble.node.control.ReturnNode;
 
 class ReturnLoader implements Loader {
     @Override
     public boolean canLoad(AssemblyNode node) {
-        return node instanceof ReturnNode;
+        return node instanceof InlineReturnNode;
     }
 
     @Override

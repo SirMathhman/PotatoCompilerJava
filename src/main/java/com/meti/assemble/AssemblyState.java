@@ -1,5 +1,6 @@
 package com.meti.assemble;
 
+import com.meti.assemble.node.AssemblyNode;
 import com.meti.lexeme.match.Match;
 
 import java.util.List;
