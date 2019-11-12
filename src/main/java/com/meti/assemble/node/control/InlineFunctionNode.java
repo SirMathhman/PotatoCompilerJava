@@ -17,9 +17,9 @@ public class InlineFunctionNode implements FunctionNode {
 	private final Map<String, String> parameters;
 	private final String returnType;
 
-	InlineFunctionNode(String name, Set<Keyword> keywords, Map<String, String> parameters, String returnType,
-	                   List<AssemblyNode> content,
-	                   boolean isAbstract) {
+	public InlineFunctionNode(String name, Set<Keyword> keywords, Map<String, String> parameters, String returnType,
+	                          List<AssemblyNode> content,
+	                          boolean isAbstract) {
 		this.name = name;
 		this.keywords = keywords;
 		this.parameters = parameters;

@@ -1,4 +1,4 @@
-package com.meti.command;
+package com.meti.command.evaluate;
 
 import com.meti.console.Evaluator;
 import com.meti.lexeme.PotatoLexer;
@@ -7,7 +7,7 @@ import com.meti.lexeme.match.Match;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class LexEvaluator implements Evaluator {
+public class LexEvaluator implements Evaluator {
 	@Override
 	public String evaluate(String value) {
 		var lexer = PotatoLexer.INSTANCE;

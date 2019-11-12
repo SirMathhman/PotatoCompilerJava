@@ -6,7 +6,7 @@ import com.meti.assemble.node.control.InlineReturnNode;
 import com.meti.lexeme.match.struct.Keyword;
 import com.meti.lexeme.match.struct.KeywordMatch;
 
-class ReturnPattern implements Pattern {
+public class ReturnPattern implements Pattern {
     @Override
     public boolean canAssemble(AssemblyState state) {
         return state.has(0, KeywordMatch.class) &&

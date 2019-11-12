@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class InvocationPattern implements Pattern {
+public class InvocationPattern implements Pattern {
     @Override
     public boolean canAssemble(AssemblyState state) {
         if (state.has(BlockMatch.class)) return false;

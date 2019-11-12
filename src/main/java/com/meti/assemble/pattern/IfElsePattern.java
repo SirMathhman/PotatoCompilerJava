@@ -6,7 +6,7 @@ import com.meti.assemble.node.control.InlineIfElseNode;
 import com.meti.lexeme.match.format.ContentMatch;
 import com.meti.lexeme.match.struct.ArgumentMatch;
 
-class IfElsePattern implements Pattern {
+public class IfElsePattern implements Pattern {
     @Override
     public boolean canAssemble(AssemblyState state) {
         return state.hasFirst(ContentMatch.class) &&

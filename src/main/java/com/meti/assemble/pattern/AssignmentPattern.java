@@ -9,7 +9,7 @@ import com.meti.lexeme.match.struct.Operator;
 import com.meti.lexeme.match.struct.OperatorMatch;
 import com.meti.lexeme.match.struct.VariableMatch;
 
-class AssignmentPattern implements Pattern {
+public class AssignmentPattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
 		return state.hasFirst(VariableMatch.class) &&

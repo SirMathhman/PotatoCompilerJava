@@ -5,7 +5,7 @@ public class InlineAssignmentNode implements AssignmentNode {
 	private final String name;
 	private final AssemblyNode value;
 
-	InlineAssignmentNode(String name, boolean mutable, AssemblyNode value) {
+	public InlineAssignmentNode(String name, boolean mutable, AssemblyNode value) {
 		this.name = name;
 		this.mutable = mutable;
 		this.value = value;

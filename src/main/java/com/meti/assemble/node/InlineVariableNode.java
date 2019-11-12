@@ -3,7 +3,7 @@ package com.meti.assemble.node;
 public class InlineVariableNode implements VariableNode {
 	private final String name;
 
-	InlineVariableNode(String name) {
+	public InlineVariableNode(String name) {
 		this.name = name;
 	}
 

@@ -1,16 +1,14 @@
 package com.meti.assemble.node.value;
 
-import com.meti.assemble.node.value.ValueNode;
+public abstract class InlineValueNode<T> implements ValueNode<T> {
+	protected final T value;
 
-abstract class InlineValueNode<T> implements ValueNode<T> {
-    protected final T value;
+    protected InlineValueNode(T value) {
+		this.value = value;
+	}
 
-    InlineValueNode(T value) {
-        this.value = value;
-    }
-
-    @Override
-    public T value() {
-        return value;
-    }
+	@Override
+	public T value() {
+		return value;
+	}
 }

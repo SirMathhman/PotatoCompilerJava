@@ -5,7 +5,7 @@ import com.meti.assemble.AssemblyState;
 import com.meti.assemble.node.value.InlineStringNode;
 import com.meti.lexeme.match.primitive.StringMatch;
 
-class StringPattern implements Pattern {
+public class StringPattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
 		return state.hasFirst(StringMatch.class) && state.size() == 1;

@@ -1,4 +1,4 @@
-package com.meti.command;
+package com.meti.command.build;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,19 +6,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-class BuildSystem {
+public class BuildSystem {
     public static final BuildSystem INSTANCE = new BuildSystem();
     public static final Path DEFAULT_TEST = Paths.get("src", "test", "tato");
     public static final Path DEFAULT_OUT = Paths.get("out", "tato");
     public static final Path DEFAULT_SRC = Paths.get("src", "main", "tato");
     private static final Path DEFAULT_PATH = Paths.get(".build");
 
-    public BuildState load() throws IOException {
+    public BuildState<Path> load() throws IOException {
         Properties properties = new Properties();
         try (var reader = Files.newBufferedReader(DEFAULT_PATH)) {
             properties.load(reader);
         }
-        return new BuildState(Paths.get(properties.getProperty("srcDir")),
+        return new PathBuildState(Paths.get(properties.getProperty("srcDir")),
                 Paths.get(properties.getProperty("testDir")),
                 Paths.get(properties.getProperty("outDir")));
     }

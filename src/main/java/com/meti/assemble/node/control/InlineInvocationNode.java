@@ -8,7 +8,7 @@ public class InlineInvocationNode implements InvocationNode {
 	private final List<String> caller;
 	private final List<AssemblyNode> values;
 
-	InlineInvocationNode(List<String> caller, List<AssemblyNode> values) {
+	public InlineInvocationNode(List<String> caller, List<AssemblyNode> values) {
 		this.caller = caller;
 		this.values = values;
 	}

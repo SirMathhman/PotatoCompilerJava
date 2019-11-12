@@ -1,14 +1,14 @@
 package com.meti.assemble.pattern;
 
-import com.meti.assemble.node.AssemblyNode;
 import com.meti.assemble.AssemblyState;
-import com.meti.assemble.ContentArrayNode;
+import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.ContentArrayNode;
 import com.meti.lexeme.match.format.ListMatch;
 import com.meti.lexeme.match.format.SeparatorMatch;
 
 import java.util.stream.Collectors;
 
-class ContentArrayPattern implements Pattern {
+public class ContentArrayPattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
 		return state.hasFirst(ListMatch.class) && state.getFirst(ListMatch.class).value() &&

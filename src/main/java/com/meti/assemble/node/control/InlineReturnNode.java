@@ -5,7 +5,7 @@ import com.meti.assemble.node.AssemblyNode;
 public class InlineReturnNode implements ReturnNode {
     private final AssemblyNode value;
 
-    InlineReturnNode(AssemblyNode value) {
+    public InlineReturnNode(AssemblyNode value) {
         this.value = value;
     }
 

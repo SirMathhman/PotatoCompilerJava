@@ -1,9 +1,10 @@
-package com.meti.command;
+package com.meti.command.evaluate;
 
 import com.meti.assemble.Assembler;
 import com.meti.assemble.AssemblyState;
 import com.meti.assemble.ListAssemblyState;
 import com.meti.assemble.PotatoAssembler;
+import com.meti.command.build.BuildSystem;
 import com.meti.console.Evaluator;
 import com.meti.interpret.Interpreter;
 import com.meti.interpret.PotatoInterpreter;
@@ -18,7 +19,7 @@ import java.nio.file.Paths;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-class InterpretEvaluator implements Evaluator {
+public class InterpretEvaluator implements Evaluator {
     public static final Lexer LEXER = PotatoLexer.INSTANCE;
     public static final Assembler ASSEMBLER = PotatoAssembler.INSTANCE;
     public static final Interpreter INTERPRETER = PotatoInterpreter.INSTANCE;

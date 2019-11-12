@@ -5,7 +5,7 @@ import com.meti.assemble.AssemblyState;
 import com.meti.assemble.node.InlineVariableNode;
 import com.meti.lexeme.match.format.ContentMatch;
 
-class VariablePattern implements Pattern {
+public class VariablePattern implements Pattern {
 	@Override
 	public boolean canAssemble(AssemblyState state) {
 		return state.has(ContentMatch.class) && state.isSingle();

@@ -7,7 +7,7 @@ public class InlineIfElseNode implements IfElseNode {
     private final AssemblyNode ifBlock;
     private final AssemblyNode elseBlock;
 
-    InlineIfElseNode(AssemblyNode condition, AssemblyNode ifBlock, AssemblyNode elseBlock) {
+    public InlineIfElseNode(AssemblyNode condition, AssemblyNode ifBlock, AssemblyNode elseBlock) {
         this.condition = condition;
         this.ifBlock = ifBlock;
         this.elseBlock = elseBlock;

@@ -1,7 +1,7 @@
 package com.meti.assemble.node.value;
 
 public class InlineStringNode extends InlineValueNode<String> {
-	InlineStringNode(String value) {
+	public InlineStringNode(String value) {
 		super(value);
 	}
 

@@ -1,7 +1,7 @@
 package com.meti.assemble.node.value;
 
-class BooleanNode extends InlineValueNode<Boolean> {
-    BooleanNode(Boolean value) {
+public class BooleanNode extends InlineValueNode<Boolean> {
+    public BooleanNode(Boolean value) {
         super(value);
     }
 

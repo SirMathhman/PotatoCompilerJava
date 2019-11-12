@@ -1,11 +1,11 @@
-package com.meti.command;
+package com.meti.command.evaluate;
 
 import com.meti.console.Evaluator;
 import com.meti.interpret.PotatoInterpreter;
 
 import java.util.stream.Collectors;
 
-class ListEvaluator implements Evaluator {
+public class ListEvaluator implements Evaluator {
 
 	@Override
 	public String evaluate(String value) {

@@ -1,6 +1,5 @@
-package com.meti.command;
+package com.meti.command.evaluate;
 
-import com.meti.assemble.AssemblyState;
 import com.meti.assemble.ListAssemblyState;
 import com.meti.assemble.PotatoAssembler;
 import com.meti.console.Evaluator;
@@ -8,12 +7,11 @@ import com.meti.lexeme.PotatoLexer;
 import com.meti.lexeme.match.struct.EndLineMatch;
 
 import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static com.meti.command.InterpretEvaluator.ASSEMBLER;
+import static com.meti.command.evaluate.InterpretEvaluator.ASSEMBLER;
 
-class AssembleEvaluator implements Evaluator {
+public class AssembleEvaluator implements Evaluator {
 	@Override
 	public String evaluate(String value) {
 		var lexer = PotatoLexer.INSTANCE;
