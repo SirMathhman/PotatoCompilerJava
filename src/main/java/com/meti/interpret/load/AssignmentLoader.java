@@ -19,6 +19,7 @@ public class AssignmentLoader implements Loader {
 		var child = interpreter.loadChild(assignment.value());
 		var type = interpreter.resolve(child);
         var variable = new InlineDeclaration(type, assignment.name(), assignment.isMutable());
+        interpreter.variables().put(assignment.name(), type);
 		return new InlineAssignment(variable, child);
 	}
 }

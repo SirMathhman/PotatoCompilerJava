@@ -6,9 +6,13 @@ import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.Type;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface Interpreter {
+	Map<String, Type> variables
+			();
+
 	void addGenerics(List<String> generics);
 
 	Optional<Function> byName(String name);

@@ -17,10 +17,16 @@ class ListInterpreter implements Interpreter {
 	private final Set<? extends Resolver> resolvers;
 	private final Loader root;
 	private final List<Statement> statements = new ArrayList<>();
+	private final Map<String, Type> variables = new HashMap<>();
 
 	ListInterpreter(Loader root, Set<? extends Resolver> resolvers) {
 		this.root = root;
 		this.resolvers = resolvers;
+	}
+
+	@Override
+	public Map<String, Type> variables() {
+		return variables;
 	}
 
 	@Override

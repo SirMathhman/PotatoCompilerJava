@@ -7,6 +7,10 @@ public class ArrayType implements Type {
         this.child = child;
     }
 
+    public Type child() {
+        return child;
+    }
+
     @Override
     public String[] value() {
         var childValue = child.value();
