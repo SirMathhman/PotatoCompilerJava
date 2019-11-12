@@ -1,5 +1,10 @@
 package com.meti.interpret;
 
+import com.meti.interpret.load.*;
+import com.meti.interpret.resolve.IntegerResolver;
+import com.meti.interpret.resolve.StringResolver;
+import com.meti.interpret.resolve.TypeResolver;
+
 import java.util.Set;
 
 public final class PotatoInterpreter extends ListInterpreter {

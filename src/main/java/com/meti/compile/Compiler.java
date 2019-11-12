@@ -1,6 +1,6 @@
 package com.meti.compile;
 
-import com.meti.interpret.Statement;
+import com.meti.interpret.statement.Statement;
 
 import java.util.Collections;
 import java.util.List;

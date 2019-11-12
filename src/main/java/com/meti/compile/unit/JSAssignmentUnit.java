@@ -3,8 +3,8 @@ package com.meti.compile.unit;
 import com.meti.compile.Compiler;
 import com.meti.compile.CompilerState;
 import com.meti.compile.Unit;
-import com.meti.interpret.Assignment;
-import com.meti.interpret.Statement;
+import com.meti.interpret.statement.Assignment;
+import com.meti.interpret.statement.Statement;
 
 import java.util.Collections;
 

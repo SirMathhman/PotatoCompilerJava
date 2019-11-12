@@ -1,8 +1,6 @@
 package com.meti.compile;
 
-import com.meti.compile.Compiler;
-import com.meti.compile.CompilerState;
-import com.meti.interpret.Statement;
+import com.meti.interpret.statement.Statement;
 
 public interface Unit {
 	boolean canCompile(Statement statement);

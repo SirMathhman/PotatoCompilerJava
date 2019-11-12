@@ -1,6 +1,9 @@
 package com.meti.interpret;
 
 import com.meti.assemble.node.AssemblyNode;
+import com.meti.interpret.statement.Function;
+import com.meti.interpret.statement.Statement;
+import com.meti.interpret.type.Type;
 
 import java.util.List;
 import java.util.Optional;
