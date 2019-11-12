@@ -11,21 +11,29 @@ import java.util.stream.Collectors;
 
 public class InlineFunctionNode implements FunctionNode {
 	private final List<AssemblyNode> content;
+	private final List<String> genericBounds;
 	private final boolean isAbstract;
 	private final Set<Keyword> keywords;
 	private final String name;
 	private final Map<String, String> parameters;
 	private final String returnType;
 
-	public InlineFunctionNode(String name, Set<Keyword> keywords, Map<String, String> parameters, String returnType,
+	public InlineFunctionNode(String name, Set<Keyword> keywords, List<String> genericBounds,
+	                          Map<String, String> parameters, String returnType,
 	                          List<AssemblyNode> content,
 	                          boolean isAbstract) {
 		this.name = name;
 		this.keywords = keywords;
+		this.genericBounds = genericBounds;
 		this.parameters = parameters;
 		this.returnType = returnType;
 		this.content = content;
 		this.isAbstract = isAbstract;
+	}
+
+	@Override
+	public List<String> getGenericBounds() {
+		return genericBounds;
 	}
 
 	@Override
@@ -64,12 +72,14 @@ public class InlineFunctionNode implements FunctionNode {
 				.map(AssemblyNode::format)
 				.map(value -> "\n\t" + value)
 				.collect(Collectors.joining());
-		return "FunctionNode{" +
+		return "InlineFunctionNode{" +
 				"name='" + name + '\'' +
-				"keywords='" + keywords + '\'' +
 				", parameters=" + parameters +
-				", content=" + contentString +
+				", returnType='" + returnType + '\'' +
+				", keywords=" + keywords +
+				", genericBounds=" + genericBounds +
 				", isAbstract=" + isAbstract +
+				", content=" + contentString +
 				'}';
 	}
 }

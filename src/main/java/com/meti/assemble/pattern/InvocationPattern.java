@@ -20,7 +20,6 @@ public class InvocationPattern implements Pattern {
         var contentIndex = state.last(ContentMatch.class);
         var argIndex = state.first(ArgumentMatch.class);
         return contentIndex.isPresent() && argIndex.isPresent() &&
-                (argIndex.getAsInt() == contentIndex.getAsInt() + 1) &&
                 state.get(argIndex.getAsInt(), ArgumentMatch.class).value() &&
                 state.has(state.size() - 1, ArgumentMatch.class) &&
                 !state.get(state.size() - 1, ArgumentMatch.class).value();

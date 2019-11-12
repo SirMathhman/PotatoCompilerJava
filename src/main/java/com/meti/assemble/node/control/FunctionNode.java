@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface FunctionNode extends AssemblyNode {
+	List<String> getGenericBounds();
+
 	Optional<String> returnType();
 
 	List<AssemblyNode> getContent();

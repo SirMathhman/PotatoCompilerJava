@@ -4,7 +4,10 @@ import com.meti.assemble.AssemblyState;
 import com.meti.assemble.node.AssemblyNode;
 import com.meti.assemble.node.OperatorNode;
 import com.meti.lexeme.match.struct.BlockMatch;
+import com.meti.lexeme.match.struct.Operator;
 import com.meti.lexeme.match.struct.OperatorMatch;
+
+import java.util.function.Predicate;
 
 public class OperatorPattern implements Pattern {
 	@Override
@@ -12,6 +15,7 @@ public class OperatorPattern implements Pattern {
 		if (!state.has(OperatorMatch.class)) return false;
 		var firstOperator = state.first(OperatorMatch.class);
 		if (firstOperator.isEmpty()) return false;
+		if(state.index(2, OperatorMatch.class, match -> match.value().equals(Operator.GREATER_THAN))) return false;
 		return !state.has(firstOperator.getAsInt() + 1, BlockMatch.class);
 	}
 

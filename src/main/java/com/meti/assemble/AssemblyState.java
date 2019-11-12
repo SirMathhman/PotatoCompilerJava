@@ -8,70 +8,81 @@ import java.util.OptionalInt;
 import java.util.function.Predicate;
 
 public interface AssemblyState {
-    @Deprecated
-    default AssemblyNode assemble(AssemblyState state1) {
-        return parent().assemble(state1);
-    }
+	@Deprecated
+	default AssemblyNode assemble(AssemblyState state1) {
+		return parent().assemble(state1);
+	}
 
-    default AssemblyNode assemble() {
-        return parent().assemble(this);
-    }
+	Assembler parent();
 
-    Assembler parent();
+	default AssemblyNode assemble() {
+		return parent().assemble(this);
+	}
 
-    int depth();
+	int depth();
 
-    OptionalInt first(Class<?> clazz);
+	OptionalInt first(Class<?> clazz);
 
-    <T> OptionalInt first(Class<T> clazz, Predicate<T> predicate);
+	<T> OptionalInt first(Class<T> clazz, Predicate<T> predicate);
 
-    default <T> T getFirst(Class<T> clazz) {
-        return get(0, clazz);
-    }
+	default <T> T getFirst(Class<T> clazz) {
+		return get(0, clazz);
+	}
 
-    <T> T get(int index, Class<T> clazz);
+	default <T> T getLast(Class<T> clazz) {
+		return get(size() - 1, clazz);
+	}
 
-    default <T> T getLast(Class<T> clazz) {
-        return get(size() - 1, clazz);
-    }
+	int size();
 
-    int size();
+	boolean has(Class<?> clazz);
 
-    boolean has(Class<?> clazz);
+	<T> boolean has(Class<T> clazz, Predicate<T> predicate);
 
-    default boolean hasFirst(Class<?> clazz) {
-        return size() > 0 && has(0, clazz);
-    }
+	default <T> boolean has(int index, Class<T> clazz, Predicate<T> predicate) {
+		if (!has(index, clazz)) return false;
+		return predicate.test(get(index, clazz));
+	}
 
-    boolean has(int index, Class<?> clazz);
+	boolean has(int index, Class<?> clazz);
 
-    default boolean hasLast(Class<?> clazz) {
-        return has(size() - 1, clazz);
-    }
+	default boolean hasFirst(Class<?> clazz) {
+		return size() > 0 && has(0, clazz);
+	}
 
-    OptionalInt index(int place, Class<?> clazz);
+	default boolean hasLast(Class<?> clazz) {
+		return has(size() - 1, clazz);
+	}
 
-    default boolean isSingle() {
-        return size() == 1;
-    }
+	default <T> boolean index(int index, Class<T> clazz, Predicate<T> predicate) {
+		var indexOptional = index(index, clazz);
+		if (indexOptional.isEmpty()) return false;
+		return predicate.test(get(indexOptional.getAsInt(), clazz));
+	}
 
-    OptionalInt last(Class<?> clazz);
+	OptionalInt index(int place, Class<?> clazz);
 
-    void sink();
+	<T> T get(int index, Class<T> clazz);
 
-    List<? extends AssemblyState> split(Class<?> clazz);
+	default boolean isSingle() {
+		return size() == 1;
+	}
 
-    <T> List<? extends AssemblyState> split(Class<T> clazz, Predicate<T> predicate);
+	OptionalInt last(Class<?> clazz);
 
-    <T extends Match<?>> List<List<T>> splitByMatch(Class<?> clazz, Class<? extends T> contentMatchClass);
+	void sink();
 
-    AssemblyState sub(int index);
+	List<? extends AssemblyState> split(Class<?> clazz);
 
-    AssemblyState sub(int fromInclusive, int toExclusive);
+	<T> List<? extends AssemblyState> split(Class<T> clazz, Predicate<T> predicate);
 
-    <T extends Match<?>> List<T> subMatch(int startInclusive, int endExclusive, Class<T> clazz);
+	<T extends Match<?>> List<List<T>> splitByMatch(Class<?> clazz, Class<? extends T> contentMatchClass);
 
-    void surface();
+	AssemblyState sub(int index);
 
-    <T> boolean has(Class<T> clazz, Predicate<T> predicate);
+	AssemblyState sub(int fromInclusive, int toExclusive);
+
+	<T extends Match<?>> List<T> subMatch(int startInclusive, int endExclusive, Class<T> clazz);
+
+	void surface();
 }
