@@ -1,6 +1,7 @@
 package com.meti.interpret.load;
 
 import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.node.ContentArrayNode;
 import com.meti.assemble.node.value.ValueNode;
 import com.meti.interpret.Interpreter;
 import com.meti.interpret.statement.InlineBooleanValue;
@@ -11,7 +12,7 @@ import com.meti.interpret.statement.Statement;
 public class ValueLoader implements Loader {
 	@Override
 	public boolean canLoad(AssemblyNode node) {
-		return node instanceof ValueNode;
+		return node instanceof ValueNode && !(node instanceof ContentArrayNode);
 	}
 
 	@Override

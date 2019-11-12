@@ -3,7 +3,7 @@ package com.meti.compile.unit;
 import com.meti.compile.Compiler;
 import com.meti.compile.CompilerState;
 import com.meti.compile.Unit;
-import com.meti.interpret.statement.Function;
+import com.meti.interpret.statement.FunctionStatement;
 import com.meti.interpret.statement.Statement;
 
 import java.util.stream.Collectors;
@@ -14,13 +14,13 @@ import static com.meti.lexeme.match.struct.Keyword.SINGLE;
 public class JSFunctionUnit implements Unit {
 	@Override
 	public boolean canCompile(Statement statement) {
-		return statement instanceof Function;
+		return statement instanceof FunctionStatement;
 	}
 
 	@Override
 	public String compile(Statement statement, CompilerState state, Compiler compiler) {
 		var builder = new StringBuilder();
-		var function = (Function) statement;
+		var function = (FunctionStatement) statement;
 		state.name().add(function.name());
 		var alias = state.alias(state.name().toArray(String[]::new));
 		var compiledContent = compiler.compile(function.content());

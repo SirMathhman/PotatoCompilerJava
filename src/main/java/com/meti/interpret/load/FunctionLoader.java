@@ -3,7 +3,8 @@ package com.meti.interpret.load;
 import com.meti.assemble.node.AssemblyNode;
 import com.meti.assemble.node.control.FunctionNode;
 import com.meti.interpret.Interpreter;
-import com.meti.interpret.statement.InlineFunction;
+import com.meti.interpret.statement.FunctionStatement;
+import com.meti.interpret.statement.InlineFunctionStatement;
 import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.Type;
 
@@ -32,10 +33,10 @@ public class FunctionLoader implements Loader {
 			returnType = findType(interpreter, returnOptional.get());
 		}
 		var content = new ArrayList<Statement>();
-		var subFunctions = new ArrayList<com.meti.interpret.statement.Function>();
+		var subFunctions = new ArrayList<FunctionStatement>();
 		for (AssemblyNode assemblyNode : functionNode.getContent()) {
 			if (assemblyNode instanceof FunctionNode) {
-				var subFunction = (com.meti.interpret.statement.Function) interpreter.loadChild(assemblyNode);
+				var subFunction = (FunctionStatement) interpreter.loadChild(assemblyNode);
 				subFunctions.add(subFunction);
 			} else {
 				content.add(interpreter.loadChild(assemblyNode));
@@ -43,7 +44,7 @@ public class FunctionLoader implements Loader {
 		}
 
 		interpreter.removeGenerics(functionNode.generics());
-		return new InlineFunction(functionNode.name(),
+		return new InlineFunctionStatement(functionNode.name(),
 				functionNode.keywords(),
 				parameters,
 				returnType,

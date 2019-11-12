@@ -7,22 +7,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class InlineFunction implements Function  {
+public class InlineFunctionStatement implements FunctionStatement {
 	private final String name;
 	private final Type returnType;
 	private final Map<String, Type> parameters;
 	private final Set<Keyword> flags;
 	private final List<Statement> content;
-	private final List<Function> subFunctions;
+	private final List<FunctionStatement> subFunctionStatements;
 
-	public InlineFunction(String name, Set<Keyword> flags, Map<String, Type> parameters, Type returnType,
-	                      List<Statement> content, List<Function> subFunctions) {
+	public InlineFunctionStatement(String name, Set<Keyword> flags, Map<String, Type> parameters, Type returnType,
+                                   List<Statement> content, List<FunctionStatement> subFunctionStatements) {
 		this.name = name;
 		this.returnType = returnType;
 		this.parameters = parameters;
 		this.flags = flags;
 		this.content = content;
-		this.subFunctions = subFunctions;
+		this.subFunctionStatements = subFunctionStatements;
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class InlineFunction implements Function  {
 				", parameters=" + parameters +
 				", flags=" + flags +
 				", content=" + content +
-				", subFunctions=" + subFunctions +
+				", subFunctions=" + subFunctionStatements +
 				'}';
 	}
 
@@ -58,7 +58,7 @@ public class InlineFunction implements Function  {
 	}
 
 	@Override
-	public List<Function> subFunctions() {
-		return subFunctions;
+	public List<FunctionStatement> subFunctions() {
+		return subFunctionStatements;
 	}
 }

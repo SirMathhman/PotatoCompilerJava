@@ -13,6 +13,7 @@ public final class JSPotatoCompiler extends UnitCompiler {
 
 	private static Compiler init() {
 		var units = Set.of(
+				new JSContentArrayUnit(),
 				new JSAssignmentUnit(),
 				new JSInvocationUnit(),
 				new JSFunctionUnit(),

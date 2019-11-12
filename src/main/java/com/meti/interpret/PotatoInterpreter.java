@@ -16,6 +16,7 @@ public final class PotatoInterpreter extends ListInterpreter {
 
     private static Interpreter init() {
         var root = new CollectionLoader(Set.of(
+                new ContentArrayLoader(),
                 new AssignmentLoader(),
                 new InvocationLoader(),
                 new FunctionLoader(),
@@ -24,8 +25,11 @@ public final class PotatoInterpreter extends ListInterpreter {
                 new ReturnLoader(),
                 new ValueLoader()
         ));
-        var resolvers = Set.of(new IntegerResolver(),
-                new StringResolver());
+        var resolvers = Set.of(
+                new IntegerResolver(),
+                new StringResolver(),
+                new ArrayResolver()
+        );
         return new PotatoInterpreter(root, resolvers);
     }
 }

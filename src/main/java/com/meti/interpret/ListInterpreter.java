@@ -3,7 +3,7 @@ package com.meti.interpret;
 import com.meti.assemble.node.AssemblyNode;
 import com.meti.interpret.load.Loader;
 import com.meti.interpret.resolve.TypeResolver;
-import com.meti.interpret.statement.Function;
+import com.meti.interpret.statement.FunctionStatement;
 import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.InlineType;
 import com.meti.interpret.type.PrimitiveType;
@@ -29,10 +29,10 @@ class ListInterpreter implements Interpreter {
 	}
 
 	@Override
-	public Optional<Function> byName(String name) {
+	public Optional<FunctionStatement> byName(String name) {
 		return statements.stream()
-				.filter(Function.class::isInstance)
-				.map(Function.class::cast)
+				.filter(FunctionStatement.class::isInstance)
+				.map(FunctionStatement.class::cast)
 				.filter(function -> function.name().equals(name))
 				.findAny();
 	}
@@ -52,10 +52,10 @@ class ListInterpreter implements Interpreter {
 		}
 		var statements = this.statements
 				.stream()
-				.filter(Function.class::isInstance)
-				.map(Function.class::cast)
+				.filter(FunctionStatement.class::isInstance)
+				.map(FunctionStatement.class::cast)
 				.collect(Collectors.toList());
-		var toReturn = Optional.<Function>empty();
+		var toReturn = Optional.<FunctionStatement>empty();
 		for (String name : names) {
 			toReturn = statements
 					.stream()
