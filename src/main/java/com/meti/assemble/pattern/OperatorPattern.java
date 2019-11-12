@@ -2,12 +2,10 @@ package com.meti.assemble.pattern;
 
 import com.meti.assemble.AssemblyState;
 import com.meti.assemble.node.AssemblyNode;
-import com.meti.assemble.node.OperatorNode;
+import com.meti.assemble.node.OperationNode;
 import com.meti.lexeme.match.struct.BlockMatch;
 import com.meti.lexeme.match.struct.Operator;
 import com.meti.lexeme.match.struct.OperatorMatch;
-
-import java.util.function.Predicate;
 
 public class OperatorPattern implements Pattern {
 	@Override
@@ -27,6 +25,6 @@ public class OperatorPattern implements Pattern {
 		var after = state.sub(index + 1);
 		var beforeNode = state.parent().assemble(before);
 		var afterNode = state.parent().assemble(after);
-		return new OperatorNode(operator, beforeNode, afterNode);
+		return new OperationNode(operator, beforeNode, afterNode);
 	}
 }

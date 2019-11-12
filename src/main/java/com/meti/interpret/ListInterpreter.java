@@ -2,7 +2,7 @@ package com.meti.interpret;
 
 import com.meti.assemble.node.AssemblyNode;
 import com.meti.interpret.load.Loader;
-import com.meti.interpret.resolve.TypeResolver;
+import com.meti.interpret.resolve.Resolver;
 import com.meti.interpret.statement.FunctionStatement;
 import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.InlineType;
@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 
 class ListInterpreter implements Interpreter {
 	private final List<String> generics = new ArrayList<>();
-	private final Set<? extends TypeResolver> resolvers;
+	private final Set<? extends Resolver> resolvers;
 	private final Loader root;
 	private final List<Statement> statements = new ArrayList<>();
 
-	ListInterpreter(Loader root, Set<? extends TypeResolver> resolvers) {
+	ListInterpreter(Loader root, Set<? extends Resolver> resolvers) {
 		this.root = root;
 		this.resolvers = resolvers;
 	}
@@ -93,7 +93,7 @@ class ListInterpreter implements Interpreter {
 	}
 
 	@Override
-	public Type resolve(AssemblyNode value) {
+	public Type resolve(Statement value) {
 		return resolvers.stream()
 				.filter(resolver -> resolver.canResolve(value))
 				.map(resolver -> resolver.resolve(value, this))

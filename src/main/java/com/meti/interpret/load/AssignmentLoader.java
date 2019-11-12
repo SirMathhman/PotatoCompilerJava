@@ -16,8 +16,9 @@ public class AssignmentLoader implements Loader {
 	@Override
 	public Statement load(AssemblyNode node, Interpreter interpreter) {
 		var assignment = (AssignmentNode) node;
-		var type = interpreter.resolve(assignment.value());
+		var child = interpreter.loadChild(assignment.value());
+		var type = interpreter.resolve(child);
         var variable = new InlineDeclaration(type, assignment.name(), assignment.isMutable());
-		return new InlineAssignment(variable, interpreter.loadChild(assignment.value()));
+		return new InlineAssignment(variable, child);
 	}
 }

@@ -1,19 +1,19 @@
 package com.meti.interpret.resolve;
 
-import com.meti.assemble.node.AssemblyNode;
-import com.meti.assemble.node.value.IntegerNode;
 import com.meti.interpret.Interpreter;
+import com.meti.interpret.statement.IntegerValue;
+import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.PrimitiveType;
 import com.meti.interpret.type.Type;
 
-public class IntegerResolver implements TypeResolver {
+public class IntegerResolver implements Resolver {
     @Override
-    public boolean canResolve(AssemblyNode node) {
-        return node instanceof IntegerNode;
+    public boolean canResolve(Statement statement) {
+        return statement instanceof IntegerValue;
     }
 
     @Override
-    public Type resolve(AssemblyNode node, Interpreter interpreter) {
+    public Type resolve(Statement statement, Interpreter interpreter) {
         return PrimitiveType.INT;
     }
 }

@@ -25,7 +25,7 @@ public interface Interpreter {
 
 	void removeGenerics(List<String> generics);
 
-	Type resolve(AssemblyNode value);
+	Type resolve(Statement value);
 
 	List<Statement> statements();
 }
