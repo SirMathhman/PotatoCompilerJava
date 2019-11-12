@@ -1,20 +1,14 @@
 package com.meti.compile;
 
-import com.meti.assemble.AssemblyNode;
+import com.meti.interpret.Statement;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public interface Compiler {
-	String compile(AssemblyNode node);
+    default String compile(Statement statement) {
+        return compile(Collections.singletonList(statement));
+    }
 
-	String compileAll(List<? extends AssemblyNode> children);
-
-	List<String> depth();
-
-	Generator generator();
-
-	Optional<Function> get(List<String> name);
-
-	void put(String name, Function function);
+    String compile(List<? extends Statement> statements);
 }

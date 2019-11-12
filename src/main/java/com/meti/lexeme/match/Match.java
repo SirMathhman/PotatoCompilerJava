@@ -1,4 +1,5 @@
 package com.meti.lexeme.match;
 
-public interface Match {
+public interface Match<T> {
+	T value();
 }

@@ -1,10 +1,9 @@
 package com.meti.assemble;
 
 import java.util.List;
-import java.util.Map;
 
 public interface InvocationNode extends AssemblyNode {
-	List<String> methodName();
+	List<String> caller();
 
-	Map<String, Type> parameters();
+	List<AssemblyNode> values();
 }

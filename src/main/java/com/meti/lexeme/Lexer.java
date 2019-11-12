@@ -5,5 +5,5 @@ import com.meti.lexeme.match.Match;
 import java.util.List;
 
 public interface Lexer {
-    List<? extends Match> parse(String value);
+    List<? extends Match<?>> parse(String value);
 }

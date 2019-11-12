@@ -1,26 +1,16 @@
 package com.meti.assemble;
 
 public enum Primitive implements Type {
-    INT("int", "", ""),
-    STRING("string", "\"", "\"");
+	INTEGER("int");
 
-    private final String value;
-    private final String pre;
-    private final String post;
+	private final String value;
 
-    Primitive(String value, String pre, String post) {
-        this.value = value;
-        this.pre = pre;
-        this.post = post;
-    }
+	Primitive(String value) {
+		this.value = value;
+	}
 
-    @Override
-    public String format(String value) {
-        return pre + value + post;
-    }
-
-    @Override
-    public String value() {
-        return value;
-    }
+	@Override
+	public String value() {
+		return value;
+	}
 }
