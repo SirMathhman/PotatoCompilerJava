@@ -19,6 +19,7 @@ public final class JSPotatoCompiler extends UnitCompiler {
 				new JSInlineUnit(),
 				new JSFunctionUnit(),
 				new JSVariableUnit(),
+				new JSOperationUnit(),
 				new JSReturnUnit(),
 				new JSIfElseUnit(),
 				new JSValueUnit());

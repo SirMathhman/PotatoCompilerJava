@@ -41,7 +41,7 @@ class FunctionApplicator implements Applicator {
                     content,
                     new ArrayList<>());
             for (var subFunction : function.subFunctions()) {
-                var appliedSubFunction = (Function) apply(statement, transformer);
+                var appliedSubFunction = (Function) apply(subFunction, transformer);
                 var subContent = subFunction.content();
                 var functionToAdd = new InlineFunction(
                         appliedSubFunction.name(),
