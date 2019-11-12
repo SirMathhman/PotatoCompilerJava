@@ -1,0 +1,5 @@
+#
+#Mon Nov 11 22:31:33 EST 2019
+srcDir=src\\main\\tato
+testDir=src\\test\\tato
+outDir=out\\tato
