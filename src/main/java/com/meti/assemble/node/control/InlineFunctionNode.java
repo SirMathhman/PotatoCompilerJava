@@ -32,7 +32,7 @@ public class InlineFunctionNode implements FunctionNode {
 	}
 
 	@Override
-	public List<String> getGenericBounds() {
+	public List<String> generics() {
 		return genericBounds;
 	}
 
@@ -57,7 +57,7 @@ public class InlineFunctionNode implements FunctionNode {
 	}
 
 	@Override
-	public Map<String, String> getParameters() {
+	public Map<String, String> parameters() {
 		return parameters;
 	}
 
@@ -77,7 +77,7 @@ public class InlineFunctionNode implements FunctionNode {
 				", parameters=" + parameters +
 				", returnType='" + returnType + '\'' +
 				", keywords=" + keywords +
-				", genericBounds=" + genericBounds +
+				", generics=" + genericBounds +
 				", isAbstract=" + isAbstract +
 				", content=" + contentString +
 				'}';

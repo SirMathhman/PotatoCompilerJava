@@ -19,7 +19,7 @@ public class InvocationLoader implements Loader {
 	public Statement load(AssemblyNode node, Interpreter interpreter) {
 		var invocation = (InvocationNode) node;
 		var callerArray = invocation.caller().toArray(String[]::new);
-		var callerType = interpreter.find(callerArray);
+		var callerType = interpreter.find(callerArray).orElseThrow();
 		var parameters = invocation.values()
 				.stream()
 				.map(interpreter::loadChild)

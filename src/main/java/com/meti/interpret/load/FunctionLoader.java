@@ -20,14 +20,16 @@ public class FunctionLoader implements Loader {
 	@Override
 	public Statement load(AssemblyNode node, Interpreter interpreter) {
 		var functionNode = (FunctionNode) node;
-		var parameterMap = functionNode.getParameters();
+		interpreter.addGenerics(functionNode.generics());
+		var parameterMap = functionNode.parameters();
 		var parameters = parameterMap.keySet()
 				.stream()
-				.collect(Collectors.toMap(Function.identity(), s -> interpreter.find(parameterMap.get(s))));
+				.collect(Collectors.toMap(Function.identity(), s -> findType(interpreter, parameterMap.get(s)
+				)));
 		Type returnType = null;
 		var returnOptional = functionNode.returnType();
 		if (returnOptional.isPresent()) {
-			returnType = interpreter.find(returnOptional.get());
+			returnType = findType(interpreter, returnOptional.get());
 		}
 		var content = new ArrayList<Statement>();
 		var subFunctions = new ArrayList<com.meti.interpret.statement.Function>();
@@ -40,11 +42,23 @@ public class FunctionLoader implements Loader {
 			}
 		}
 
+		interpreter.removeGenerics(functionNode.generics());
 		return new InlineFunction(functionNode.name(),
 				functionNode.keywords(),
 				parameters,
 				returnType,
 				content,
 				subFunctions);
+	}
+
+	private Type findType(Interpreter interpreter, String value) {
+		var typeOptional = interpreter.find(value);
+		if (typeOptional.isPresent()) {
+			return typeOptional.get();
+		} else if (interpreter.generics().contains(value)) {
+			return new GenericType(value);
+		} else {
+			throw new IllegalArgumentException("Could not resolve type: " + value);
+		}
 	}
 }

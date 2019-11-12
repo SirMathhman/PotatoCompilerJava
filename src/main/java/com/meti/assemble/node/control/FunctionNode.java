@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface FunctionNode extends AssemblyNode {
-	List<String> getGenericBounds();
+	List<String> generics();
 
 	Optional<String> returnType();
 
@@ -19,7 +19,7 @@ public interface FunctionNode extends AssemblyNode {
 
 	String name();
 
-	Map<String, String> getParameters();
+	Map<String, String> parameters();
 
 	boolean isAbstract();
 }

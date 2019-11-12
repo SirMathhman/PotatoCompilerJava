@@ -9,17 +9,23 @@ import java.util.List;
 import java.util.Optional;
 
 public interface Interpreter {
-    List<Statement> statements();
+	void addGenerics(List<String> generics);
 
-    Optional<Function> byName(String name);
+	Optional<Function> byName(String name);
 
-    void clear();
+	void clear();
 
-    Type find(String... names);
+	Optional<Type> find(String... names);
 
-    void load(AssemblyNode node);
+    List<String> generics();
 
-    Statement loadChild(AssemblyNode node);
+	void load(AssemblyNode node);
+
+	Statement loadChild(AssemblyNode node);
+
+	void removeGenerics(List<String> generics);
 
 	Type resolve(AssemblyNode value);
+
+	List<Statement> statements();
 }

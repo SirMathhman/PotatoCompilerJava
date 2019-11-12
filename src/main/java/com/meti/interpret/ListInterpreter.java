@@ -13,6 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 class ListInterpreter implements Interpreter {
+	private final List<String> generics = new ArrayList<>();
 	private final Set<? extends TypeResolver> resolvers;
 	private final Loader root;
 	private final List<Statement> statements = new ArrayList<>();
@@ -23,8 +24,8 @@ class ListInterpreter implements Interpreter {
 	}
 
 	@Override
-	public List<Statement> statements() {
-		return Collections.unmodifiableList(statements);
+	public void addGenerics(List<String> generics) {
+		this.generics.addAll(generics);
 	}
 
 	@Override
@@ -42,10 +43,10 @@ class ListInterpreter implements Interpreter {
 	}
 
 	@Override
-	public Type find(String... names) {
+	public Optional<Type> find(String... names) {
 		if (names.length == 1) {
 			try {
-				return PrimitiveType.valueOf(names[0].toUpperCase());
+				return Optional.of(PrimitiveType.valueOf(names[0].toUpperCase()));
 			} catch (IllegalArgumentException ignored) {
 			}
 		}
@@ -54,22 +55,26 @@ class ListInterpreter implements Interpreter {
 				.filter(Function.class::isInstance)
 				.map(Function.class::cast)
 				.collect(Collectors.toList());
-		Function toReturn = null;
+		var toReturn = Optional.<Function>empty();
 		for (String name : names) {
 			toReturn = statements
 					.stream()
 					.filter(function -> function.name().equals(name))
-					.findAny()
-					.orElseThrow(() -> throwInvalidFunction(names));
-			statements = toReturn.subFunctions();
+					.findAny();
+			if (toReturn.isPresent()) {
+				statements = toReturn.get().subFunctions();
+			} else {
+				break;
+			}
 		}
-		if (toReturn == null)
-			throw throwInvalidFunction(names);
-        return new InlineType(names);
+		return toReturn.isEmpty() ?
+				Optional.empty() :
+				Optional.of(new InlineType(names));
 	}
 
-	private IllegalArgumentException throwInvalidFunction(String[] names) {
-		return new IllegalArgumentException("Could not find function for name: " + Arrays.toString(names));
+	@Override
+	public List<String> generics() {
+		return Collections.unmodifiableList(generics);
 	}
 
 	@Override
@@ -83,11 +88,21 @@ class ListInterpreter implements Interpreter {
 	}
 
 	@Override
+	public void removeGenerics(List<String> generics) {
+		this.generics.removeAll(generics);
+	}
+
+	@Override
 	public Type resolve(AssemblyNode value) {
 		return resolvers.stream()
 				.filter(resolver -> resolver.canResolve(value))
 				.map(resolver -> resolver.resolve(value, this))
 				.findAny()
 				.orElseThrow(() -> new IllegalArgumentException("Could not resolve type of node: " + value));
+	}
+
+	@Override
+	public List<Statement> statements() {
+		return Collections.unmodifiableList(statements);
 	}
 }
