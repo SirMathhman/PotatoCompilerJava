@@ -12,27 +12,39 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ContentMatcher implements Matcher {
-	private static final Set<String> trailing = new HashSet<>();
+    private static final Set<String> validTrails = new HashSet<>();
 
-	static {
-		trailing.addAll(Set.of(";", " ", "{", "[", ",", "]", ".", "(", ")", "}", "<"));
-		trailing.addAll(Arrays.stream(Operator.values())
-				.map(Operator::value)
-				.collect(Collectors.toSet()));
-	}
+    static {
+        validTrails.addAll(Set.of(";", " ", "{", "[", ",", "]", ".", "(", ")", "}", "<"));
+        validTrails.addAll(Arrays.stream(Operator.values())
+                .map(Operator::value)
+                .collect(Collectors.toSet()));
+    }
 
-	@Override
-	public Optional<Match<?>> build(LexerState state) {
-		var value = state.compute();
-		return (doesNotStartWithChars(value) || (state.trailing().isPresent() && hasValidTrail(state))) ?
-				Optional.empty() : Optional.of(new ContentMatch(value));
-	}
+    @Override
+    public Optional<Match<?>> build(LexerState state) {
+        var value = state.compute();
+        if (doesNotStartWithChars(value)) {
+            return Optional.empty();
+        } else if (state.trailing().isPresent()) {
+            if (hasInvalidFinalCharacter(state)) {
+				return Optional.empty();
+            } else {
+                return Optional.of(new ContentMatch(value));
+            }
+        } else {
+            return Optional.of(new ContentMatch(value));
+        }
+    }
 
-	private boolean doesNotStartWithChars(String value) {
-		return !value.isEmpty() && (value.charAt(0) == '\"' || value.charAt(0) == '.');
-	}
+    private boolean doesNotStartWithChars(String value) {
+        return !value.isEmpty() &&
+                value.charAt(0) == '\"' ||
+                value.charAt(0) == '.';
+    }
 
-	private boolean hasValidTrail(LexerState state) {
-		return trailing.stream().noneMatch(s -> state.trailing(1).equals(s));
-	}
+    private boolean hasInvalidFinalCharacter(LexerState state) {
+        return validTrails.stream()
+                .noneMatch(s -> state.trailing(1).equals(s));
+    }
 }
