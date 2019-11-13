@@ -1,6 +1,6 @@
 package com.meti.lexeme;
 
-public class SimpleDepth implements Depth {
+public class CountedDepth implements Depth {
     private int depth = 0;
 
     @Override
@@ -9,12 +9,14 @@ public class SimpleDepth implements Depth {
     }
 
     @Override
-    public void sink() {
+    public Depth sink() {
         depth++;
+        return this;
     }
 
     @Override
-    public void surface() {
+    public Depth surface() {
         depth--;
+        return this;
     }
 }

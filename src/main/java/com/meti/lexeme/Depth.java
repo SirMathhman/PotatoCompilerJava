@@ -3,7 +3,7 @@ package com.meti.lexeme;
 public interface Depth {
     int value();
 
-    void sink();
+    Depth sink();
 
-    void surface();
+    Depth surface();
 }

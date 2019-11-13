@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public class StringState implements LexerState {
     private final String value;
-    private final Depth depth = new SimpleDepth();
+    private final Depth depth = new CountedDepth();
     private int beginning = 0;
     private int end = 1;
 
