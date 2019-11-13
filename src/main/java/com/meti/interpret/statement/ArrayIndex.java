@@ -10,7 +10,7 @@ public class ArrayIndex implements Statement {
 		return content;
 	}
 
-	public Statement getIndex() {
+	public Statement index() {
 		return index;
 	}
 

@@ -22,7 +22,8 @@ public final class JSPotatoCompiler extends UnitCompiler {
 				new JSOperationUnit(),
 				new JSReturnUnit(),
 				new JSIfElseUnit(),
-				new JSValueUnit());
+				new JSValueUnit(),
+				new JSArrayIndexUnit());
 		var generator = new SimpleGenerator();
 		var state = new InlineCompilerState(generator);
 		return new JSPotatoCompiler(units, state);

@@ -1,10 +1,11 @@
 package com.meti.interpret;
 
+import com.meti.interpret.resolve.Resolver;
 import com.meti.interpret.statement.InlineVariable;
 import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.Type;
 
-public class VariableResolver implements com.meti.interpret.resolve.Resolver {
+public class VariableResolver implements Resolver {
 	@Override
 	public boolean canResolve(Statement statement) {
 		return statement instanceof InlineVariable;
