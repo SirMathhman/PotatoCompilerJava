@@ -1,4 +1,4 @@
-package com.meti.assemble;
+package com.meti.assemble.node;
 
 import com.meti.assemble.node.AssemblyNode;
 

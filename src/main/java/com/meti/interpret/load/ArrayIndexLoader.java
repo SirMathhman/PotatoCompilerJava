@@ -1,9 +1,8 @@
 package com.meti.interpret.load;
 
-import com.meti.assemble.ArrayIndexNode;
+import com.meti.assemble.node.ArrayIndexNode;
 import com.meti.assemble.node.AssemblyNode;
 import com.meti.interpret.Interpreter;
-import com.meti.interpret.load.Loader;
 import com.meti.interpret.statement.ArrayIndex;
 import com.meti.interpret.statement.Statement;
 

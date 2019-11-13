@@ -1,5 +1,7 @@
-package com.meti.assemble;
+package com.meti.assemble.pattern;
 
+import com.meti.assemble.AssemblyState;
+import com.meti.assemble.node.ArrayIndexNode;
 import com.meti.assemble.node.AssemblyNode;
 import com.meti.assemble.pattern.Pattern;
 import com.meti.lexeme.match.format.ListMatch;
