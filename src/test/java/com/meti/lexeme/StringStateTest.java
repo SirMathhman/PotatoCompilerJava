@@ -9,7 +9,7 @@ class StringStateTest {
     @Test
     void advance() {
         var result = new StringState("test")
-                .advance()
+                .extend()
                 .compute();
         assertEquals("te", result);
     }
@@ -32,7 +32,7 @@ class StringStateTest {
     @Test
     void hasMoreCharactersSingle() {
         var canParseMore = new StringState("t")
-                .reset()
+                .advance()
                 .canParseMore();
         assertFalse(canParseMore);
     }
@@ -40,10 +40,10 @@ class StringStateTest {
     @Test
     void hasMoreCharactersMultiple(){
         var canParseMore = new StringState("test")
-                .reset()
-                .reset()
-                .reset()
-                .reset()
+                .advance()
+                .advance()
+                .advance()
+                .advance()
                 .canParseMore();
         assertFalse(canParseMore);
     }
@@ -51,7 +51,7 @@ class StringStateTest {
     @Test
     void reset() {
         var result = new StringState("test")
-                .reset()
+                .advance()
                 .compute();
         assertEquals("e", result);
     }

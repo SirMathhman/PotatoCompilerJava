@@ -13,7 +13,7 @@ public class StringState implements LexerState {
     }
 
     @Override
-    public LexerState advance() {
+    public LexerState extend() {
         if (end == value.length()) {
             throw new IllegalStateException("Could not parse:\"" + compute() + "\"");
         } else end++;
@@ -36,7 +36,7 @@ public class StringState implements LexerState {
     }
 
     @Override
-    public LexerState reset() {
+    public LexerState advance() {
         beginning = end;
         if (end != value.length()) end = beginning + 1;
         return this;

@@ -3,7 +3,7 @@ package com.meti.lexeme;
 import java.util.Optional;
 
 public interface LexerState {
-	LexerState advance();
+	LexerState extend();
 
 	String compute();
 
@@ -11,7 +11,7 @@ public interface LexerState {
 
 	boolean canParseMore();
 
-	LexerState reset();
+	LexerState advance();
 
 	LexerState skipWhitespace();
 
