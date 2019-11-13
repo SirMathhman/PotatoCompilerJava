@@ -24,17 +24,9 @@ public class ContentMatcher implements Matcher {
     @Override
     public Optional<Match<?>> build(LexerState state) {
         var value = state.compute();
-        if (doesNotStartWithChars(value)) {
-            return Optional.empty();
-        } else if (state.trailing().isPresent()) {
-            if (hasInvalidFinalCharacter(state)) {
-				return Optional.empty();
-            } else {
-                return Optional.of(new ContentMatch(value));
-            }
-        } else {
-            return Optional.of(new ContentMatch(value));
-        }
+        return doesNotStartWithChars(value) || state.trailing().isPresent() && hasInvalidFinalCharacter(state) ?
+                Optional.empty() :
+                Optional.of(new ContentMatch(value));
     }
 
     private boolean doesNotStartWithChars(String value) {
