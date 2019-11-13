@@ -2,7 +2,7 @@ package com.meti.interpret.statement;
 
 import com.meti.interpret.type.Type;
 
-public class InlineDeclaration implements Variable {
+public class InlineDeclaration implements Declaration {
     private final Type type;
     private final String name;
     private final boolean mutable;

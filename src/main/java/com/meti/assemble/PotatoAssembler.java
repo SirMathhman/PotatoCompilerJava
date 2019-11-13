@@ -13,6 +13,7 @@ public final class PotatoAssembler extends PatternAssembler {
 
     private static Assembler build() {
         return new PotatoAssembler(List.of(
+                new ReturnPattern(),
                 new ContentArrayPattern(),
                 new ArrayIndexPattern(),
                 new AssignmentPattern(),
@@ -23,7 +24,6 @@ public final class PotatoAssembler extends PatternAssembler {
                 new BooleanPattern(),
                 new IntegerPattern(),
                 new IfElsePattern(),
-                new ReturnPattern(),
 				new StringPattern(),
                 new IfPattern()
         ));

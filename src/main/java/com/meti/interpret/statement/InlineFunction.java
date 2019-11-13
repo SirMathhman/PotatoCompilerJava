@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class InlineFunction implements Function {
@@ -25,6 +27,17 @@ public class InlineFunction implements Function {
         this.flags = flags;
         this.content = content;
         this.subFunctions = subFunctions;
+    }
+
+    @Override
+    public void replaceAll(Predicate<? super Statement> test, Statement replacement) {
+        content.stream()
+                .filter(test)
+                .peek(content::remove)
+                .map(statement -> replacement)
+                .forEach(content::add);
+
+        subFunctions.forEach(function -> function.replaceAll(test, replacement));
     }
 
     @Override

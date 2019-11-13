@@ -5,6 +5,7 @@ import com.meti.compile.CompilerState;
 import com.meti.compile.Unit;
 import com.meti.interpret.statement.InlineVariable;
 import com.meti.interpret.statement.Statement;
+import com.meti.interpret.statement.Variable;
 
 public class JSVariableUnit implements Unit {
     @Override
@@ -14,7 +15,7 @@ public class JSVariableUnit implements Unit {
 
     @Override
     public String compile(Statement statement, CompilerState state, Compiler compiler) {
-        var variable = (InlineVariable) statement;
+        var variable = (Variable) statement;
         return state.alias(variable.name());
     }
 }

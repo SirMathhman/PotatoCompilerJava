@@ -3,6 +3,7 @@ package com.meti.interpret.statement;
 import com.meti.interpret.type.Type;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class InlineInvocation implements Invocation {
 	private final Type callerType;
@@ -11,6 +12,15 @@ public class InlineInvocation implements Invocation {
 	public InlineInvocation(Type callerType, List<Statement> parameters) {
 		this.callerType = callerType;
 		this.parameters = parameters;
+	}
+
+	@Override
+	public void replaceAll(Predicate<? super Statement> test, Statement replacement) {
+		for (int i = 0; i < parameters.size(); i++) {
+			if (test.test(parameters.get(i))) {
+				parameters.set(i, replacement);
+			}
+		}
 	}
 
 	@Override

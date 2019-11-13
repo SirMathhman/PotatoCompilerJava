@@ -1,23 +1,30 @@
 package com.meti.interpret.statement;
 
-public class InlineAssignment implements Assignment {
-    private final Variable variable;
-    private final Statement value;
+import java.util.function.Predicate;
 
-    public InlineAssignment(Variable variable, Statement value) {
-        this.variable = variable;
+public class InlineAssignment implements Assignment {
+    private final Declaration declaration;
+    private Statement value;
+
+    public InlineAssignment(Declaration declaration, Statement value) {
+        this.declaration = declaration;
         this.value = value;
     }
 
     @Override
-    public Variable variable() {
-        return variable;
+    public void replaceAll(Predicate<? super Statement> test, Statement replacement) {
+        if(test.test(value)) value = replacement;
+    }
+
+    @Override
+    public Declaration variable() {
+        return declaration;
     }
 
     @Override
     public String toString() {
         return "InlineAssignment{" +
-                "variable=" + variable +
+                "declaration=" + declaration +
                 ", value=" + value +
                 '}';
     }

@@ -1,9 +1,11 @@
 package com.meti.interpret.statement;
 
+import java.util.function.Predicate;
+
 public class IfElseStatement implements Statement {
     private final Statement condition;
-    private final Statement ifBlock;
-    private final Statement elseBlock;
+    private Statement ifBlock;
+    private Statement elseBlock;
 
     public IfElseStatement(Statement condition, Statement ifBlock, Statement elseBlock) {
         this.condition = condition;
@@ -21,5 +23,11 @@ public class IfElseStatement implements Statement {
 
     public Statement elseBlock() {
         return elseBlock;
+    }
+
+    @Override
+    public void replaceAll(Predicate<? super Statement> test, Statement replacement) {
+        if(test.test(ifBlock)) ifBlock = replacement;
+        if(test.test(elseBlock)) elseBlock = replacement;
     }
 }

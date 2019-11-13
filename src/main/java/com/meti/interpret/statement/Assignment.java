@@ -1,7 +1,7 @@
 package com.meti.interpret.statement;
 
 public interface Assignment extends Statement {
-    Variable variable();
+    Declaration variable();
 
     Statement value();
 }
