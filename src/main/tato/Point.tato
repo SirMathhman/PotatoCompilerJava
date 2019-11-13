@@ -1,4 +1,12 @@
 Point[x double, y double]={
+    getX?double = {
+        return x;
+    };
+
+    getY?double = {
+        return y;
+    };
+
 	distance?double = {
 		val xSquared = Math.pow(x, 2);
 		val ySquared = Math.pow(y, 2);
@@ -6,8 +14,8 @@ Point[x double, y double]={
 	};
 
 	distanceTo[other Point]?double = {
-		val xDelta = x - other.x;
-		val yDelta = y - other.y;
+		val xDelta = x - other.getX();
+		val yDelta = y - other.getY();
 		val xSquared = Math.pow(xDelta, 2);
 		val ySquared = Math.pow(yDelta, 2);
 		return Math.sqrt(xSquared + ySquared);

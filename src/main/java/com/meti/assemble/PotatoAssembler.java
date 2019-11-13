@@ -12,14 +12,15 @@ public final class PotatoAssembler extends PatternAssembler {
     }
 
     private static Assembler build() {
+        //DO NOT ALTER THE ORDER!!!
         return new PotatoAssembler(List.of(
                 new ReturnPattern(),
+                new FunctionPattern(),
+                new OperatorPattern(),
                 new ContentArrayPattern(),
                 new ArrayIndexPattern(),
                 new AssignmentPattern(),
                 new InvocationPattern(),
-                new FunctionPattern(),
-                new OperatorPattern(),
                 new VariablePattern(),
                 new BooleanPattern(),
                 new IntegerPattern(),
