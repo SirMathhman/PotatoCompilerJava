@@ -16,7 +16,7 @@ public class SequentialLexer implements Lexer {
 
 	@Override
 	public List<? extends Match<?>> parse(String value) {
-		LexerState state = new StringLexerState(value);
+		LexerState state = new StringState(value);
 		List<Match<?>> matches = new ArrayList<>();
 		boolean shouldContinue;
 		do {
@@ -41,6 +41,6 @@ public class SequentialLexer implements Lexer {
 		} else {
 			state.advance();
 		}
-		return state.hasMoreCharacters();
+		return state.canParseMore();
 	}
 }

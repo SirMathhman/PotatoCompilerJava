@@ -3,21 +3,17 @@ package com.meti.lexeme;
 import java.util.Optional;
 
 public interface LexerState {
-	void advance();
+	LexerState advance();
 
 	String compute();
 
-	int depth();
+	Depth depth();
 
-	boolean hasMoreCharacters();
+	boolean canParseMore();
 
-	void reset();
+	LexerState reset();
 
-	void sink();
-
-	void skipWhitespace();
-
-	void surface();
+	LexerState skipWhitespace();
 
 	String trailing(int count);
 

@@ -11,8 +11,8 @@ public class BlockMatcher implements Matcher {
 	public Optional<Match<?>> build(LexerState state) {
 		var value = state.compute();
 		if (value.equals("{") || value.equals("}")) {
-			if (value.equals("{")) state.sink();
-			if (value.equals("}")) state.surface();
+			if (value.equals("{")) state.depth().sink();
+			if (value.equals("}")) state.depth().surface();
 			return Optional.of(new BlockMatch(value.equals("{")));
 		}
 		return Optional.empty();
