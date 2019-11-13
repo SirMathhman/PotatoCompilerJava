@@ -24,6 +24,6 @@ public class JSInvocationUnit implements Unit {
 				.map(Collections::singletonList)
 				.map(compiler::compile)
 				.collect(Collectors.joining(","));
-		return alias + "(" + parameterString + ");";
+		return alias + "(" + parameterString + ")";
 	}
 }

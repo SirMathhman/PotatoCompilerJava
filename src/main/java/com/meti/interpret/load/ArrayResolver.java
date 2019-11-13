@@ -1,12 +1,13 @@
-package com.meti.interpret;
+package com.meti.interpret.load;
 
+import com.meti.interpret.Interpreter;
 import com.meti.interpret.resolve.Resolver;
 import com.meti.interpret.statement.ContentArray;
 import com.meti.interpret.statement.Statement;
 import com.meti.interpret.type.ArrayType;
 import com.meti.interpret.type.Type;
 
-class ArrayResolver implements Resolver {
+public class ArrayResolver implements Resolver {
     @Override
     public boolean canResolve(Statement statement) {
         return statement instanceof ContentArray;

@@ -14,7 +14,13 @@ public class InlineIntegerValue implements IntegerValue {
 
     @Override
     public void replaceAll(Predicate<? super Statement> test, Statement replacement) {
+    }
 
+    @Override
+    public String toString() {
+        return "InlineIntegerValue{" +
+                "value=" + value +
+                '}';
     }
 
     @Override

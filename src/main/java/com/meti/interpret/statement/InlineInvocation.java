@@ -3,6 +3,7 @@ package com.meti.interpret.statement;
 import com.meti.interpret.type.Type;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class InlineInvocation implements Invocation {
@@ -21,6 +22,8 @@ public class InlineInvocation implements Invocation {
 				parameters.set(i, replacement);
 			}
 		}
+
+		parameters.forEach(statement -> statement.replaceAll(test, replacement));
 	}
 
 	@Override

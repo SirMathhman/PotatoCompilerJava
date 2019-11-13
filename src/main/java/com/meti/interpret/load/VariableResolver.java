@@ -1,5 +1,6 @@
-package com.meti.interpret;
+package com.meti.interpret.load;
 
+import com.meti.interpret.Interpreter;
 import com.meti.interpret.resolve.Resolver;
 import com.meti.interpret.statement.InlineVariable;
 import com.meti.interpret.statement.Statement;

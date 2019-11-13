@@ -3,7 +3,9 @@ package com.meti.interpret.type;
 public enum PrimitiveType implements Type {
 	STRING,
 	INT,
-	BOOLEAN;
+	BOOLEAN,
+	DOUBLE,
+	VOID;
 
 	@Override
 	public String[] value() {

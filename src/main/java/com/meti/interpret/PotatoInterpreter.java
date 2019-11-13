@@ -30,6 +30,7 @@ public final class PotatoInterpreter extends ListInterpreter {
         ));
         var resolvers = Set.of(
                 new ArrayIndexResolver(),
+                new InvocationResolver(),
                 new OperationResolver(),
                 new VariableResolver(),
                 new IntegerResolver(),

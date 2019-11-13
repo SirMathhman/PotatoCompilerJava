@@ -1,0 +1,2 @@
+val point = Point(3, 4);
+val origin = Point(0, 0);

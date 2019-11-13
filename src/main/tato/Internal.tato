@@ -1,3 +1,0 @@
-single Internal = {
-	external write[value string] =;
-}

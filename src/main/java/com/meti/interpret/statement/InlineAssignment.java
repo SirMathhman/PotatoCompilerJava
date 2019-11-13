@@ -14,6 +14,7 @@ public class InlineAssignment implements Assignment {
     @Override
     public void replaceAll(Predicate<? super Statement> test, Statement replacement) {
         if(test.test(value)) value = replacement;
+        value.replaceAll(test, replacement);
     }
 
     @Override

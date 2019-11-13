@@ -17,6 +17,7 @@ public class CompileEvaluator implements Evaluator {
             var renderedStatements = new ArrayList<Statement>();
             renderedStatements.addAll(compiledStatements);
             renderedStatements.addAll(PotatoTransformer.INSTANCE.functions());
+            PotatoTransformer.INSTANCE.functions().clear();
 			return JSPotatoCompiler.INSTANCE.compile(renderedStatements);
         } else {
             return "Unsupported compilation type: \"" + value + "\"";
