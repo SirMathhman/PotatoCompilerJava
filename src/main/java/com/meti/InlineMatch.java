@@ -1,14 +1,14 @@
 package com.meti;
 
-class InlineMatch implements Match<Boolean> {
-	private final boolean mutable;
+class InlineMatch<T> implements Match<T> {
+	private final T mutable;
 
-	InlineMatch(boolean mutable) {
+	InlineMatch(T mutable) {
 		this.mutable = mutable;
 	}
 
 	@Override
-	public Boolean value() {
+	public T value() {
 		return mutable;
 	}
 }
