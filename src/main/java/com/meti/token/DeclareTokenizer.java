@@ -1,4 +1,6 @@
-package com.meti;
+package com.meti.token;
+
+import com.meti.lex.LexerInput;
 
 import java.util.Optional;
 

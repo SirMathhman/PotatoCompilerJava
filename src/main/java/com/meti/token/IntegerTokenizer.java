@@ -1,8 +1,10 @@
-package com.meti;
+package com.meti.token;
+
+import com.meti.lex.LexerInput;
 
 import java.util.Optional;
 
-class IntegerTokenizer implements Tokenizer<Integer> {
+public class IntegerTokenizer implements Tokenizer<Integer> {
 	@Override
 	public Optional<? extends Token<Integer>> match(LexerInput input) {
 		return input.compute().chars().allMatch(Character::isDigit) ?

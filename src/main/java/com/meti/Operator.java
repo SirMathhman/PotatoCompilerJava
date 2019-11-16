@@ -1,6 +1,6 @@
 package com.meti;
 
-enum Operator implements Valued<Character> {
+public enum Operator implements Valued<Character> {
 	ADD('+');
 
 	private final char value;

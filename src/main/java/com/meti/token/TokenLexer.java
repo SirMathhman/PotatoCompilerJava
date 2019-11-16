@@ -1,4 +1,9 @@
-package com.meti;
+package com.meti.token;
+
+import com.meti.lex.Lexer;
+import com.meti.lex.LexerInput;
+import com.meti.lex.LexerOutput;
+import com.meti.lex.ListLexerOutput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +12,7 @@ import java.util.Optional;
 public class TokenLexer implements Lexer<Token<?>> {
 	private final List<? extends Tokenizer<?>> tokenizers;
 
-	TokenLexer(List<? extends Tokenizer<?>> tokenizers) {
+	public TokenLexer(List<? extends Tokenizer<?>> tokenizers) {
 		this.tokenizers = tokenizers;
 	}
 

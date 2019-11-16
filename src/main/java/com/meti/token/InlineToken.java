@@ -1,4 +1,4 @@
-package com.meti;
+package com.meti.token;
 
 class InlineToken<T> implements Token<T> {
 	private final T mutable;
