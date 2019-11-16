@@ -1,9 +1,9 @@
 package com.meti;
 
-class InlineMatch<T> implements Match<T> {
+class InlineToken<T> implements Token<T> {
 	private final T mutable;
 
-	InlineMatch(T mutable) {
+	InlineToken(T mutable) {
 		this.mutable = mutable;
 	}
 

@@ -1,5 +1,5 @@
 package com.meti;
 
-public interface Match<T> {
+public interface Token<T> {
 	T value();
 }

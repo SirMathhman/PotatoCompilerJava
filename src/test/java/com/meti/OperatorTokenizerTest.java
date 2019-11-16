@@ -10,24 +10,24 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class OperatorMatcherTest {
+class OperatorTokenizerTest {
 	@Test
 	void match() {
 		var string = "+";
-		var matcher = new OperatorMatcher();
-		var result = matcher.match(string);
+		var tokenizer = new OperatorTokenizer();
+		var result = tokenizer.match(string);
 		assertTrue(result.isPresent());
 		assertEquals(Operator.ADD, result.get().value());
 	}
 
-	private static class OperatorMatcher implements Matcher<Match<Valued<Character>>> {
+	private static class OperatorTokenizer implements Tokenizer<Token<Valued<Character>>> {
 		private final Map<Character, Valued<Character>> map = Arrays.stream(Operator.values())
 				.collect(Collectors.toMap(Valued::value, Function.identity()));
 
 		@Override
-		public Optional<? extends Match<Valued<Character>>> match(String string) {
+		public Optional<? extends Token<Valued<Character>>> match(String string) {
 			return string.length() == 1 ?
-					Optional.ofNullable(map.get(string.charAt(0))).map(InlineMatch::new) :
+					Optional.ofNullable(map.get(string.charAt(0))).map(InlineToken::new) :
 					Optional.empty();
 		}
 	}
