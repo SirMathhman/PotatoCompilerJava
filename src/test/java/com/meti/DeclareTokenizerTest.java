@@ -10,7 +10,9 @@ class DeclareTokenizerTest {
 	void immutable() {
 		var string = "val";
 		var tokenizer = new DeclareTokenizer();
-		var optional = tokenizer.match(string);
+		var input = new StringLexerInput(string)
+				.extend(2);
+		var optional = tokenizer.match(input);
 		assertTrue(optional.isPresent());
 		assertFalse(optional.get().value());
 	}
@@ -19,7 +21,9 @@ class DeclareTokenizerTest {
 	void invalid() {
 		var string = "test";
 		var tokenizer = new DeclareTokenizer();
-		var optional = tokenizer.match(string);
+		var input = new StringLexerInput(string)
+				.extend(3);
+		var optional = tokenizer.match(input);
 		assertTrue(optional.isEmpty());
 	}
 
@@ -27,7 +31,9 @@ class DeclareTokenizerTest {
 	void mutable() {
 		var string = "var";
 		var tokenizer = new DeclareTokenizer();
-		var optional = tokenizer.match(string);
+		var input = new StringLexerInput(string)
+				.extend(2);
+		var optional = tokenizer.match(input);
 		assertTrue(optional.isPresent());
 		assertTrue(optional.get().value());
 	}

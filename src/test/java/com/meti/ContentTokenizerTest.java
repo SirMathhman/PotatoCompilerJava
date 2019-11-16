@@ -10,7 +10,9 @@ class ContentTokenizerTest {
 	void match() {
 		var string = "test";
 		var tokenizer = new ContentTokenizer();
-		var result = tokenizer.match(string);
+		var input = new StringLexerInput(string)
+				.extend(3);
+		var result = tokenizer.match(input);
 		assertTrue(result.isPresent());
 		assertEquals("test", result.get().value());
 	}

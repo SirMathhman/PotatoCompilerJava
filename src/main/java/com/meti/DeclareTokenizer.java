@@ -2,11 +2,12 @@ package com.meti;
 
 import java.util.Optional;
 
-public class DeclareTokenizer implements Tokenizer<Token<Boolean>> {
+public class DeclareTokenizer implements Tokenizer<Boolean> {
 	@Override
-	public Optional<? extends Token<Boolean>> match(String string) {
-		return string.equals("var") || string.equals("val") ?
-				Optional.of(new InlineToken<>(string.equals("var"))) :
+	public Optional<? extends Token<Boolean>> match(LexerInput input) {
+		var value = input.compute();
+		return value.equals("var") || value.equals("val") ?
+				Optional.of(new InlineToken<>(value.equals("var"))) :
 				Optional.empty();
 	}
 }
