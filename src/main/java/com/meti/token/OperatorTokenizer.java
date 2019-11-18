@@ -17,7 +17,7 @@ public class OperatorTokenizer implements Tokenizer<Valued<Character>> {
 	@Override
 	public Optional<? extends Token<Valued<Character>>> match(LexerInput input) {
 		return input.compute().length() == 1 ?
-				Optional.ofNullable(map.get(input.compute().charAt(0))).map(mutable -> new InlineToken<Valued<Character>>(mutable, type)) :
+				Optional.ofNullable(map.get(input.compute().charAt(0))).map(mutable -> new InlineToken<>(mutable, TokenType.OPERATOR)) :
 				Optional.empty();
 	}
 }
