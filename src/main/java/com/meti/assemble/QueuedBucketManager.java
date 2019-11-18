@@ -19,16 +19,19 @@ class QueuedBucketManager implements BucketManager {
         this.current = buckets.get(0);
     }
 
-    private void advance() {
+    private boolean advance(Token<?> token) {
         counter++;
+        if (counter == buckets.size()) {
+            throw new IllegalStateException("Failed to find a matching " +
+                    "pattern for " + token);
+        }
         current = buckets.get(counter);
+        return add(token);
     }
 
     @Override
     public boolean add(Token<?> token) {
-        var valid = current.add(token);
-        if (!valid) advance();
-        return valid;
+        return current.add(token) || advance(token);
     }
 
     @Override

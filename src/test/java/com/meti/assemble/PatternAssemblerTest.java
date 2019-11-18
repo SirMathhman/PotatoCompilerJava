@@ -20,7 +20,7 @@ class PatternAssemblerTest {
                 new OperatorTokenizer()
         );
         var tokens = lexer.lexise(new StringLexerInput("var x = 10"));
-        var assembler = new PatternAssembler(Collections.emptySet());
+        var assembler = new PatternAssembler(Collections.singleton(new DeclarationPattern()));
         var node = assembler.assemble(tokens.list());
         assertTrue(node instanceof DeclarationNode);
         var declaration = (DeclarationNode) node;

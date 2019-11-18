@@ -12,7 +12,7 @@ interface BucketManager {
     default boolean addAll(List<? extends Token<?>> tokens) {
         return tokens.stream()
                 .map(this::add)
-                .reduce((bool0, bool1) -> bool0 && bool1)
+                .reduce((bool0, bool1) -> bool0 || bool1)
                 .orElse(false);
     }
 }
