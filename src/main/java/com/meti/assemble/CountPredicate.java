@@ -4,7 +4,7 @@ import com.meti.token.Token;
 
 import java.util.function.Predicate;
 
-class CountPredicate implements Predicate<Token<?>> {
+class CountPredicate<T> implements Predicate<T> {
     private final int count;
     private int counter = 0;
 
@@ -12,12 +12,12 @@ class CountPredicate implements Predicate<Token<?>> {
         this.count = count;
     }
 
-    static CountPredicate count(int count) {
-        return new CountPredicate(count);
+    static CountPredicate<Token<?>> count(int count) {
+        return new CountPredicate<>(count);
     }
 
     @Override
-    public boolean test(Token<?> token) {
+    public boolean test(T token) {
         var hasSpace = counter != count;
         if (hasSpace) counter++;
         return hasSpace;
