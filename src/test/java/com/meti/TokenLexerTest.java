@@ -19,7 +19,7 @@ class TokenLexerTest {
 		var output = lexer.lexise(new StringLexerInput(string));
 		var list = output.list();
 		assertEquals(2, list.size());
-		assertTrue(list.get(0).as(Boolean.class));
-		assertEquals("x", list.get(1).as(String.class));
+		assertTrue(list.get(0).valueAs(Boolean.class));
+		assertEquals("x", list.get(1).valueAs(String.class));
 	}
 }

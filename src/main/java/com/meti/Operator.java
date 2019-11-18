@@ -1,16 +1,17 @@
 package com.meti;
 
 public enum Operator implements Valued<Character> {
-	ADD('+');
+    ADD('+'),
+	ASSIGN('=');
 
-	private final char value;
+    private final char value;
 
-	Operator(char value) {
-		this.value = value;
-	}
+    Operator(char value) {
+        this.value = value;
+    }
 
-	@Override
-	public Character value() {
-		return value;
-	}
+    @Override
+    public Character value() {
+        return value;
+    }
 }
