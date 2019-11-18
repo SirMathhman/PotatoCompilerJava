@@ -1,7 +1,5 @@
 package com.meti.assemble;
 
-import com.meti.token.Token;
-
 import java.util.function.Predicate;
 
 class CountPredicate<T> implements Predicate<T> {
@@ -12,7 +10,7 @@ class CountPredicate<T> implements Predicate<T> {
         this.count = count;
     }
 
-    static CountPredicate<Token<?>> count(int count) {
+    static <T> CountPredicate<T> count(int count) {
         return new CountPredicate<>(count);
     }
 

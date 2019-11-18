@@ -12,7 +12,7 @@ class TypePredicate implements Predicate<Token<?>> {
         this.type = type;
     }
 
-    static Predicate<Token<?>> anyType() {
+    static Predicate<Token<?>> any() {
         return token -> true;
     }
 

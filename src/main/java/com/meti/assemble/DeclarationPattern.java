@@ -8,7 +8,7 @@ import java.util.Optional;
 import static com.meti.assemble.CountPredicate.count;
 import static com.meti.assemble.PredicateBucket.by;
 import static com.meti.assemble.PredicateBucket.equalsType;
-import static com.meti.assemble.TypePredicate.anyType;
+import static com.meti.assemble.TypePredicate.any;
 import static com.meti.assemble.TypePredicate.type;
 import static com.meti.token.TokenType.*;
 
@@ -16,7 +16,7 @@ class DeclarationPattern implements Pattern {
     private final Bucket declare = by(type(DECLARE), count(1));
     private final Bucket nameBucket = by(type(CONTENT), count(1));
     private final Bucket operator = by(type(OPERATOR), count(1), equalsType(Operator.ASSIGN));
-    private final Bucket value = by(anyType());
+    private final Bucket value = by(any());
 
     private final BucketManager manager = new QueuedBucketManager(
             declare, nameBucket, operator, value

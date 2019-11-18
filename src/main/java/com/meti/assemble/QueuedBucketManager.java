@@ -14,6 +14,7 @@ class QueuedBucketManager implements BucketManager {
     }
 
     private QueuedBucketManager(List<? extends Bucket> buckets) {
+        if (buckets.isEmpty()) throw new IllegalArgumentException(buckets + "cannot be empty.");
         this.buckets = buckets;
         this.current = buckets.get(0);
     }
@@ -26,12 +27,14 @@ class QueuedBucketManager implements BucketManager {
     @Override
     public boolean add(Token<?> token) {
         var valid = current.add(token);
-        if (valid) advance();
+        if (!valid) advance();
         return valid;
     }
 
     @Override
     public void reset() {
         buckets.forEach(Bucket::empty);
+        counter = 0;
+        current = buckets.get(0);
     }
 }

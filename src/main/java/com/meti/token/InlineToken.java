@@ -1,12 +1,16 @@
 package com.meti.token;
 
-class InlineToken<T> implements Token<T> {
-    private final T mutable;
+public class InlineToken<T> implements Token<T> {
+    private final T value;
     private final TokenType type;
 
-    InlineToken(T mutable, TokenType type) {
-        this.mutable = mutable;
-		this.type = type;
+    public InlineToken(TokenType type) {
+        this(null, type);
+    }
+
+    public InlineToken(T value, TokenType type) {
+        this.value = value;
+        this.type = type;
     }
 
     @Override
@@ -16,6 +20,6 @@ class InlineToken<T> implements Token<T> {
 
     @Override
     public T value() {
-        return mutable;
+        return value;
     }
 }

@@ -1,0 +1,20 @@
+package com.meti.assemble;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.function.Predicate;
+
+import static com.meti.assemble.CountPredicate.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CountPredicateTest {
+
+    @Test
+    void test1() {
+        var predicate = count(3);
+        assertTrue(predicate.test(0));
+        assertTrue(predicate.test(1));
+        assertTrue(predicate.test(2));
+        assertFalse(predicate.test(3));
+    }
+}
