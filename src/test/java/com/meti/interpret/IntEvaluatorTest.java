@@ -1,6 +1,8 @@
 package com.meti.interpret;
 
 import com.meti.assemble.node.IntNode;
+import com.meti.interpret.evaluate.IntEvaluator;
+import com.meti.interpret.statement.IntStatement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

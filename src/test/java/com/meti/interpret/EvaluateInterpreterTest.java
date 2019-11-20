@@ -2,6 +2,13 @@ package com.meti.interpret;
 
 import com.meti.assemble.node.DeclarationNode;
 import com.meti.assemble.node.IntNode;
+import com.meti.interpret.evaluate.DeclareEvaluator;
+import com.meti.interpret.evaluate.IntEvaluator;
+import com.meti.interpret.resolve.TypedResolver;
+import com.meti.interpret.statement.AssignmentStatement;
+import com.meti.interpret.statement.DeclarationStatement;
+import com.meti.interpret.statement.GroupStatement;
+import com.meti.interpret.statement.IntStatement;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

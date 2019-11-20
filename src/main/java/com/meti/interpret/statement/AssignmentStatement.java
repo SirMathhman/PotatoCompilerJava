@@ -1,10 +1,12 @@
-package com.meti.interpret;
+package com.meti.interpret.statement;
 
-class AssignmentStatement implements Statement {
+import com.meti.interpret.Variable;
+
+public class AssignmentStatement implements Statement {
     private final Variable variable;
     private final Statement value;
 
-    AssignmentStatement(Variable variable, Statement value) {
+    public AssignmentStatement(Variable variable, Statement value) {
         this.variable = variable;
         this.value = value;
     }

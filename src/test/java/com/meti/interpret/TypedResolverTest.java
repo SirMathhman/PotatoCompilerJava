@@ -1,5 +1,7 @@
 package com.meti.interpret;
 
+import com.meti.interpret.resolve.TypedResolver;
+import com.meti.interpret.statement.IntStatement;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

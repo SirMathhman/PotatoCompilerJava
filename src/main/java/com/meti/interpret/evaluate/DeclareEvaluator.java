@@ -1,11 +1,18 @@
-package com.meti.interpret;
+package com.meti.interpret.evaluate;
 
 import com.meti.assemble.node.DeclarationNode;
 import com.meti.assemble.node.Node;
+import com.meti.interpret.Interpreter;
+import com.meti.interpret.Primitive;
+import com.meti.interpret.Variable;
+import com.meti.interpret.statement.AssignmentStatement;
+import com.meti.interpret.statement.DeclarationStatement;
+import com.meti.interpret.statement.GroupStatement;
+import com.meti.interpret.statement.Statement;
 
 import java.util.ArrayList;
 
-class DeclareEvaluator implements Evaluator {
+public class DeclareEvaluator implements Evaluator {
     @Override
     public boolean canEvaluate(Node node) {
         return node instanceof DeclarationNode;

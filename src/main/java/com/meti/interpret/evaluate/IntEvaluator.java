@@ -1,9 +1,12 @@
-package com.meti.interpret;
+package com.meti.interpret.evaluate;
 
 import com.meti.assemble.node.IntNode;
 import com.meti.assemble.node.Node;
+import com.meti.interpret.Interpreter;
+import com.meti.interpret.statement.IntStatement;
+import com.meti.interpret.statement.Statement;
 
-class IntEvaluator implements Evaluator {
+public class IntEvaluator implements Evaluator {
     @Override
     public boolean canEvaluate(Node node) {
         return node instanceof IntNode;

@@ -1,4 +1,4 @@
 package com.meti.interpret;
 
-interface Type {
+public interface Type {
 }

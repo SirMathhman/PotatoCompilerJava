@@ -1,10 +1,12 @@
-package com.meti.interpret;
+package com.meti.interpret.statement;
 
-class DeclarationStatement implements Statement {
+import com.meti.interpret.Variable;
+
+public class DeclarationStatement implements Statement {
     private final boolean mutable;
     private final Variable variable;
 
-    DeclarationStatement(boolean mutable, Variable variable) {
+    public DeclarationStatement(boolean mutable, Variable variable) {
         this.mutable = mutable;
         this.variable = variable;
     }

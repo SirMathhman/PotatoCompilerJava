@@ -1,8 +1,8 @@
-package com.meti.interpret;
+package com.meti.interpret.statement;
 
 import java.util.List;
 
-class GroupStatement implements Statement {
+public class GroupStatement implements Statement {
     private final List<? extends Statement> children;
 
     public GroupStatement(List<? extends Statement> children) {
