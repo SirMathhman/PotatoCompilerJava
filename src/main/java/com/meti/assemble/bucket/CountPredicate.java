@@ -1,8 +1,8 @@
-package com.meti.assemble;
+package com.meti.assemble.bucket;
 
 import java.util.function.Predicate;
 
-class CountPredicate<T> implements Predicate<T> {
+public class CountPredicate<T> implements Predicate<T> {
     private final int count;
     private int counter = 0;
 
@@ -10,7 +10,7 @@ class CountPredicate<T> implements Predicate<T> {
         this.count = count;
     }
 
-    static <T> CountPredicate<T> count(int count) {
+    public static <T> CountPredicate<T> count(int count) {
         return new CountPredicate<>(count);
     }
 

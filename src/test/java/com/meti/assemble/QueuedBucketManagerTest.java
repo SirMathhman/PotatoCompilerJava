@@ -1,12 +1,13 @@
 package com.meti.assemble;
 
+import com.meti.assemble.bucket.QueuedBucketManager;
 import com.meti.token.InlineToken;
 import com.meti.token.TokenType;
 import org.junit.jupiter.api.Test;
 
-import static com.meti.assemble.CountPredicate.count;
-import static com.meti.assemble.PredicateBucket.by;
-import static com.meti.assemble.TypePredicate.any;
+import static com.meti.assemble.bucket.CountPredicate.count;
+import static com.meti.assemble.bucket.PredicateBucket.by;
+import static com.meti.assemble.bucket.TypePredicate.any;
 import static java.util.Collections.nCopies;
 import static java.util.Collections.singleton;
 import static org.junit.jupiter.api.Assertions.*;

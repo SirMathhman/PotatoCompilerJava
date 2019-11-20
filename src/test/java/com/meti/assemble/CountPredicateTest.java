@@ -2,9 +2,7 @@ package com.meti.assemble;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Predicate;
-
-import static com.meti.assemble.CountPredicate.*;
+import static com.meti.assemble.bucket.CountPredicate.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CountPredicateTest {

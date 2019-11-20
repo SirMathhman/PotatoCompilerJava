@@ -1,10 +1,10 @@
-package com.meti.assemble;
+package com.meti.assemble.bucket;
 
 import com.meti.token.Token;
 
 import java.util.List;
 
-interface BucketManager {
+public interface BucketManager {
     void add(Token<?> token);
 
     void reset();

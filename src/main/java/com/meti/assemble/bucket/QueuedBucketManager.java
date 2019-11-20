@@ -1,15 +1,15 @@
-package com.meti.assemble;
+package com.meti.assemble.bucket;
 
 import com.meti.token.Token;
 
 import java.util.List;
 
-class QueuedBucketManager implements BucketManager {
+public class QueuedBucketManager implements BucketManager {
     private final List<? extends Bucket> buckets;
     private int counter = 0;
     private Bucket current;
 
-    QueuedBucketManager(Bucket... buckets) {
+    public QueuedBucketManager(Bucket... buckets) {
         this(List.of(buckets));
     }
 

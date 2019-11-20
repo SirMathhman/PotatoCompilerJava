@@ -1,11 +1,11 @@
-package com.meti.assemble;
+package com.meti.assemble.node;
 
-class DeclarationNode implements Node {
+public class DeclarationNode implements Node {
     private final boolean mutable;
     private final String name;
     private final Node value;
 
-    DeclarationNode(boolean mutable, String name, Node value) {
+    public DeclarationNode(boolean mutable, String name, Node value) {
         this.value = value;
         this.mutable = mutable;
         this.name = name;

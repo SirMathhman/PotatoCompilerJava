@@ -1,9 +1,9 @@
-package com.meti.assemble;
+package com.meti.assemble.node;
 
-class IntegerNode implements ValueNode<Integer> {
+public class IntegerNode implements ValueNode<Integer> {
     private final int value;
 
-    IntegerNode(int value) {
+    public IntegerNode(int value) {
         this.value = value;
     }
 

@@ -1,11 +1,14 @@
-package com.meti.assemble;
+package com.meti.assemble.pattern;
 
+import com.meti.assemble.Assembler;
+import com.meti.assemble.node.IntegerNode;
+import com.meti.assemble.node.Node;
 import com.meti.token.Token;
 import com.meti.token.TokenType;
 
 import java.util.Optional;
 
-class IntegerPattern implements Pattern {
+public class IntegerPattern implements Pattern {
     private Token<?> current;
 
     @Override

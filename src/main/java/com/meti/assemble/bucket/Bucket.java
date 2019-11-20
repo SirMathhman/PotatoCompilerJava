@@ -1,10 +1,10 @@
-package com.meti.assemble;
+package com.meti.assemble.bucket;
 
 import com.meti.token.Token;
 
 import java.util.List;
 
-interface Bucket {
+public interface Bucket {
     boolean add(Token<?> token);
 
     List<? extends Token<?>> content();

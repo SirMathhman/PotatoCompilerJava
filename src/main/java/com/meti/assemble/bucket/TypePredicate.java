@@ -1,22 +1,22 @@
-package com.meti.assemble;
+package com.meti.assemble.bucket;
 
 import com.meti.token.Token;
 import com.meti.token.TokenType;
 
 import java.util.function.Predicate;
 
-class TypePredicate implements Predicate<Token<?>> {
+public class TypePredicate implements Predicate<Token<?>> {
     private final TokenType type;
 
     private TypePredicate(TokenType type) {
         this.type = type;
     }
 
-    static Predicate<Token<?>> any() {
+    public static Predicate<Token<?>> any() {
         return token -> true;
     }
 
-    static TypePredicate type(TokenType type) {
+    public static TypePredicate type(TokenType type) {
         return new TypePredicate(type);
     }
 

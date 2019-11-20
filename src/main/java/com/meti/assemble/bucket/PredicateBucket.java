@@ -1,4 +1,4 @@
-package com.meti.assemble;
+package com.meti.assemble.bucket;
 
 import com.meti.token.Token;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-class PredicateBucket implements Bucket {
+public class PredicateBucket implements Bucket {
     private final List<Token<?>> content = new ArrayList<>();
     private final Predicate<Token<?>>[] predicates;
 
@@ -15,11 +15,11 @@ class PredicateBucket implements Bucket {
         this.predicates = predicates;
     }
 
-    static PredicateBucket by(Predicate<Token<?>>... predicates) {
+    public static PredicateBucket by(Predicate<Token<?>>... predicates) {
         return new PredicateBucket(predicates);
     }
 
-    static Predicate<Token<?>> equalsType(Object value) {
+    public static Predicate<Token<?>> equalsType(Object value) {
         return token -> token.value().equals(value);
     }
 

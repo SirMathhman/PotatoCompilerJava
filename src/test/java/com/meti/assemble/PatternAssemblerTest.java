@@ -1,5 +1,10 @@
 package com.meti.assemble;
 
+import com.meti.assemble.node.DeclarationNode;
+import com.meti.assemble.node.IntegerNode;
+import com.meti.assemble.pattern.DeclarationPattern;
+import com.meti.assemble.pattern.IntegerPattern;
+import com.meti.assemble.pattern.PatternAssembler;
 import com.meti.lex.StringLexerInput;
 import com.meti.token.*;
 import org.junit.jupiter.api.Test;

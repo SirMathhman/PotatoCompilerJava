@@ -1,17 +1,18 @@
-package com.meti.assemble;
+package com.meti.assemble.pattern;
 
+import com.meti.assemble.Assembler;
+import com.meti.assemble.node.Node;
 import com.meti.token.Token;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-class PatternAssembler implements Assembler {
+public class PatternAssembler implements Assembler {
     private final List<? extends Pattern> patterns;
 
-    PatternAssembler(List<? extends Pattern> patterns) {
+    private PatternAssembler(List<? extends Pattern> patterns) {
         this.patterns = patterns;
     }
 
@@ -34,7 +35,7 @@ class PatternAssembler implements Assembler {
         var list = patterns.stream()
                 .map(Pattern::copy)
                 .collect(Collectors.toList());
-        if(list.stream().anyMatch(Objects::isNull)){
+        if (list.stream().anyMatch(Objects::isNull)) {
             throw new IllegalStateException("Pattern.copy() was not implemented.");
         }
         return new PatternAssembler(list);

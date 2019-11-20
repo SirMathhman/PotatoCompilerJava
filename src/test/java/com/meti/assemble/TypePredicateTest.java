@@ -1,5 +1,6 @@
 package com.meti.assemble;
 
+import com.meti.assemble.bucket.TypePredicate;
 import com.meti.token.InlineToken;
 import com.meti.token.TokenType;
 import org.junit.jupiter.api.Test;
