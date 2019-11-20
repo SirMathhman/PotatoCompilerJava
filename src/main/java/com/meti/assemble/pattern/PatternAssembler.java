@@ -13,6 +13,7 @@ public class PatternAssembler implements Assembler {
     private final List<? extends Pattern> patterns;
 
     private PatternAssembler(List<? extends Pattern> patterns) {
+
         this.patterns = patterns;
     }
 

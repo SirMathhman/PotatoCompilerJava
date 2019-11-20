@@ -1,7 +1,7 @@
 package com.meti.assemble;
 
 import com.meti.assemble.node.DeclarationNode;
-import com.meti.assemble.node.IntegerNode;
+import com.meti.assemble.node.IntNode;
 import com.meti.assemble.pattern.DeclarationPattern;
 import com.meti.assemble.pattern.IntegerPattern;
 import com.meti.assemble.pattern.PatternAssembler;
@@ -30,7 +30,8 @@ class PatternAssemblerTest {
         assertTrue(declaration.mutable());
         assertEquals("x", declaration.name());
         var value = declaration.value();
-        assertTrue(value instanceof IntegerNode);
-        assertEquals(10, ((IntegerNode) value).value());
+        assertTrue(value.isPresent());
+        assertTrue(value.get() instanceof IntNode);
+        assertEquals(10, ((IntNode) value.get()).value());
     }
 }

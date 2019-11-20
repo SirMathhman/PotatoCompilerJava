@@ -1,5 +1,7 @@
 package com.meti.assemble.node;
 
+import java.util.Optional;
+
 public class DeclarationNode implements Node {
     private final boolean mutable;
     private final String name;
@@ -19,7 +21,7 @@ public class DeclarationNode implements Node {
         return name;
     }
 
-    public Node value() {
-        return value;
+    public Optional<Node> value() {
+        return Optional.ofNullable(value);
     }
 }

@@ -1,7 +1,7 @@
 package com.meti.assemble.pattern;
 
 import com.meti.assemble.Assembler;
-import com.meti.assemble.node.IntegerNode;
+import com.meti.assemble.node.IntNode;
 import com.meti.assemble.node.Node;
 import com.meti.token.Token;
 import com.meti.token.TokenType;
@@ -15,7 +15,7 @@ public class IntegerPattern implements Pattern {
     public Optional<Node> collect(Assembler assembler) {
         return Optional.ofNullable(current)
                 .map(token -> token.valueAs(Integer.class))
-                .map(IntegerNode::new);
+                .map(IntNode::new);
     }
 
     @Override
