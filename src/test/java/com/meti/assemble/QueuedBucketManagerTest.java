@@ -19,7 +19,7 @@ class QueuedBucketManagerTest {
         var second = by(any());
         var manager = new QueuedBucketManager(first, second);
         var copies = nCopies(4, new InlineToken<>(TokenType.CONTENT));
-        assertTrue(manager.addAll(copies));
+        manager.addAll(copies);
         assertTrue(first.content().containsAll(copies.subList(0, 4)));
         assertIterableEquals(singleton(copies.get(3)), second.content());
     }
@@ -31,7 +31,7 @@ class QueuedBucketManagerTest {
         var manager = new QueuedBucketManager(first, second);
         var copies = nCopies(4, new InlineToken<>(TokenType.CONTENT));
 
-        assertTrue(manager.addAll(copies));
+        manager.addAll(copies);
         assertFalse(first.content().isEmpty());
         assertFalse(second.content().isEmpty());
 

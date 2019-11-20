@@ -9,6 +9,10 @@ interface Bucket {
 
     List<? extends Token<?>> content();
 
+    default boolean present() {
+        return !content().isEmpty();
+    }
+
     default Token<?> single() {
         return content().get(0);
     }

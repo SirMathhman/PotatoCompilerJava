@@ -7,8 +7,12 @@ import java.util.Optional;
 public class IntegerTokenizer implements Tokenizer<Integer> {
     @Override
     public Optional<? extends Token<Integer>> match(LexerInput input) {
-        return input.compute().chars().allMatch(Character::isDigit) ?
-				Optional.of(new InlineToken<>(Integer.parseInt(input.compute()), TokenType.INTEGER)) :
-                Optional.empty();
+        var trailing = input.trailing();
+        if ((trailing.isEmpty() || !Character.isDigit(trailing.get())) &&
+                input.compute().chars().allMatch(Character::isDigit)) {
+            return Optional.of(new InlineToken<>(Integer.parseInt(input.compute()), TokenType.INTEGER));
+        } else {
+            return Optional.empty();
+        }
     }
 }

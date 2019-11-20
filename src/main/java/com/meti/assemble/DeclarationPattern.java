@@ -23,14 +23,23 @@ class DeclarationPattern implements Pattern {
     );
 
     @Override
-    public Optional<Node> form(Token<?> next, Assembler assembler) {
-        var wasAdded = manager.add(next);
-        if (wasAdded) {
+    public Optional<Node> collect(Assembler assembler){
+        if (declare.present() && nameBucket.present() && value.present()) {
             var mutable = declare.single().valueAs(Boolean.class);
             var name = nameBucket.single().valueAs(String.class);
             var valueNode = assembler.assemble(value.content());
             manager.reset();
             return Optional.of(new DeclarationNode(mutable, name, valueNode));
         } else return Optional.empty();
+    }
+
+    @Override
+    public void form(Token<?> next) {
+        manager.add(next);
+    }
+
+    @Override
+    public Pattern copy() {
+        return new DeclarationPattern();
     }
 }

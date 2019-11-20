@@ -3,38 +3,44 @@ package com.meti.assemble;
 import com.meti.token.Token;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
-import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 class PatternAssembler implements Assembler {
-    private final Set<? extends Pattern> patterns;
+    private final List<? extends Pattern> patterns;
 
-    PatternAssembler(Set<? extends Pattern> patterns) {
+    PatternAssembler(List<? extends Pattern> patterns) {
         this.patterns = patterns;
+    }
+
+    public PatternAssembler(Pattern... patterns) {
+        this(List.of(patterns));
     }
 
     @Override
     public Node assemble(List<? extends Token<?>> tokens) {
-        var nodes = tokens.stream()
-                .map(this::buildNode)
+        tokens.forEach(this::buildNode);
+        return patterns.stream()
+                .map(pattern -> pattern.collect(copy()))
                 .flatMap(Optional::stream)
-                .collect(Collectors.toList());
-        if (nodes.isEmpty()) {
-            throw new IllegalArgumentException("There was no content " +
-                    "to parse.");
-        } else if (nodes.size() == 1) {
-            return nodes.get(0);
-        } else {
-            return new GroupNode(nodes);
-        }
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("There was no content " +
+                        "to parse."));
     }
 
-    private Optional<Node> buildNode(Token<?> token) {
-        return patterns.stream()
-                .map((Function<Pattern, Optional<Node>>) pattern -> pattern.form(token, this))
-                .findAny()
-                .orElseThrow();
+    private Assembler copy() {
+        var list = patterns.stream()
+                .map(Pattern::copy)
+                .collect(Collectors.toList());
+        if(list.stream().anyMatch(Objects::isNull)){
+            throw new IllegalStateException("Pattern.copy() was not implemented.");
+        }
+        return new PatternAssembler(list);
+    }
+
+    private void buildNode(Token<?> token) {
+        patterns.forEach(pattern -> pattern.form(token));
     }
 }
