@@ -6,4 +6,8 @@ public class QuantityStatement implements Statement {
 	public QuantityStatement(Statement child) {
 		this.child = child;
 	}
+
+	public Statement child() {
+		return child;
+	}
 }
