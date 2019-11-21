@@ -1,9 +1,9 @@
 package com.meti.assemble.node;
 
-public class OrderNode implements Node {
+public class QuantityNode implements Node {
 	private final Node child;
 
-	public OrderNode(Node child) {
+	public QuantityNode(Node child) {
 		this.child = child;
 	}
 

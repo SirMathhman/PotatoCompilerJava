@@ -5,7 +5,7 @@ import com.meti.assemble.bucket.Bucket;
 import com.meti.assemble.bucket.BucketManager;
 import com.meti.assemble.bucket.QueuedBucketManager;
 import com.meti.assemble.node.Node;
-import com.meti.assemble.node.OrderNode;
+import com.meti.assemble.node.QuantityNode;
 import com.meti.lex.token.Token;
 
 import java.util.Optional;
@@ -26,7 +26,7 @@ public class OrderPattern implements Pattern {
 	public Optional<Node> collect(Assembler assembler) {
 		if (openToken.present() && closeToken.present()) {
 			var node = assembler.assemble(content.content());
-			return Optional.of(new OrderNode(node));
+			return Optional.of(new QuantityNode(node));
 		} else {
 			return Optional.empty();
 		}

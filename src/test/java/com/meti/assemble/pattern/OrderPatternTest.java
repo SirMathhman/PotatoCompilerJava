@@ -1,8 +1,7 @@
 package com.meti.assemble.pattern;
 
 import com.meti.assemble.node.IntNode;
-import com.meti.assemble.node.Node;
-import com.meti.assemble.node.OrderNode;
+import com.meti.assemble.node.QuantityNode;
 import com.meti.lex.token.InlineToken;
 import com.meti.lex.token.ParenthesisToken;
 import com.meti.lex.token.TokenType;
@@ -20,7 +19,7 @@ class OrderPatternTest {
 				.form(new ParenthesisToken(false))
 				.collect(new PatternAssembler(new IntPattern()));
 		assertTrue(result.isPresent());
-		var order = (OrderNode) result.get();
+		var order = (QuantityNode) result.get();
 		var child = (IntNode) order.child();
 		assertEquals(10, child.value());
 	}
