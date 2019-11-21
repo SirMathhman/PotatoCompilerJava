@@ -5,8 +5,8 @@ import com.meti.assemble.node.IntNode;
 import com.meti.interpret.evaluate.DeclareEvaluator;
 import com.meti.interpret.evaluate.IntEvaluator;
 import com.meti.interpret.resolve.TypedResolver;
-import com.meti.interpret.statement.AssignmentStatement;
-import com.meti.interpret.statement.DeclarationStatement;
+import com.meti.interpret.statement.AssignStatement;
+import com.meti.interpret.statement.DeclareStatement;
 import com.meti.interpret.statement.GroupStatement;
 import com.meti.interpret.statement.IntStatement;
 import org.junit.jupiter.api.Test;
@@ -27,12 +27,12 @@ class EvaluateInterpreterTest {
         var children = ((GroupStatement) statement).children();
         assertEquals(2, children.size());
 
-        var declare = (DeclarationStatement) children.get(0);
-        assertTrue(declare.isMutable());
+        var declare = (DeclareStatement) children.get(0);
+        assertTrue(declare.mutable());
         assertEquals(Primitive.INT, declare.variable().type());
         assertEquals("x", declare.variable().name());
 
-        var assign = (AssignmentStatement) children.get(1);
+        var assign = (AssignStatement) children.get(1);
         assertEquals("x", assign.variable().name());
         assertEquals(10, ((IntStatement) assign.value()).value());
     }

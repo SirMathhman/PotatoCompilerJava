@@ -2,16 +2,16 @@ package com.meti.interpret.statement;
 
 import com.meti.interpret.Variable;
 
-public class DeclarationStatement implements Statement {
+public class DeclareStatement implements Statement {
     private final boolean mutable;
     private final Variable variable;
 
-    public DeclarationStatement(boolean mutable, Variable variable) {
+    public DeclareStatement(boolean mutable, Variable variable) {
         this.mutable = mutable;
         this.variable = variable;
     }
 
-    public boolean isMutable() {
+    public boolean mutable() {
         return mutable;
     }
 

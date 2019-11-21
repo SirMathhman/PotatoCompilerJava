@@ -5,8 +5,8 @@ import com.meti.assemble.node.Node;
 import com.meti.interpret.Interpreter;
 import com.meti.interpret.Primitive;
 import com.meti.interpret.Variable;
-import com.meti.interpret.statement.AssignmentStatement;
-import com.meti.interpret.statement.DeclarationStatement;
+import com.meti.interpret.statement.AssignStatement;
+import com.meti.interpret.statement.DeclareStatement;
 import com.meti.interpret.statement.GroupStatement;
 import com.meti.interpret.statement.Statement;
 
@@ -25,8 +25,8 @@ public class DeclareEvaluator implements Evaluator {
         var type = value.isPresent() ? interpreter.resolve(value.get()) : Primitive.ANY;
         var variable = new Variable(type, declaration.name());
         var list = new ArrayList<Statement>();
-        list.add(new DeclarationStatement(declaration.mutable(), variable));
-        value.ifPresent(statement -> list.add(new AssignmentStatement(variable, statement)));
+        list.add(new DeclareStatement(declaration.mutable(), variable));
+        value.ifPresent(statement -> list.add(new AssignStatement(variable, statement)));
         return new GroupStatement(list);
     }
 }
