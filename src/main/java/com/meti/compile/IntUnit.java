@@ -5,12 +5,12 @@ import com.meti.interpret.statement.Statement;
 
 public class IntUnit implements Unit {
 	@Override
-	public boolean canCompile(Statement value) {
-		return value instanceof IntStatement;
+	public boolean canCompile(Statement statement) {
+		return statement instanceof IntStatement;
 	}
 
 	@Override
-	public String compile(Statement value, Compiler compiler) {
-		return String.valueOf(((IntStatement) value).value());
+	public String compile(Statement statement, Compiler compiler) {
+		return String.valueOf(((IntStatement) statement).value());
 	}
 }

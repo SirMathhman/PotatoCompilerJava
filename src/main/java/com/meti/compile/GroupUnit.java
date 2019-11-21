@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 
 public class GroupUnit implements Unit {
 	@Override
-	public boolean canCompile(Statement value) {
-		return value instanceof GroupStatement;
+	public boolean canCompile(Statement statement) {
+		return statement instanceof GroupStatement;
 	}
 
 	@Override
-	public String compile(Statement value, Compiler compiler) {
-		var group = (GroupStatement) value;
+	public String compile(Statement statement, Compiler compiler) {
+		var group = (GroupStatement) statement;
 		return group.children()
 				.stream()
 				.map(compiler::compile)

@@ -17,7 +17,7 @@ public class OperationStatement implements Statement {
 		return s0;
 	}
 
-	public Operator getOperator() {
+	public Operator operator() {
 		return operator;
 	}
 
