@@ -10,7 +10,7 @@ public class CountPredicate<T> implements Predicate<T> {
         this.count = count;
     }
 
-    public static <T> CountPredicate<T> count(int count) {
+    public static <T> Predicate<T> count(int count) {
         return new CountPredicate<>(count);
     }
 

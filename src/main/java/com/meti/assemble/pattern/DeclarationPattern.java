@@ -13,7 +13,7 @@ import java.util.Optional;
 
 import static com.meti.assemble.bucket.CountPredicate.count;
 import static com.meti.assemble.bucket.PredicateBucket.by;
-import static com.meti.assemble.bucket.PredicateBucket.equalsType;
+import static com.meti.assemble.bucket.PredicateBucket.valueEquals;
 import static com.meti.assemble.bucket.TypePredicate.any;
 import static com.meti.assemble.bucket.TypePredicate.type;
 import static com.meti.lex.token.TokenType.*;
@@ -21,7 +21,7 @@ import static com.meti.lex.token.TokenType.*;
 public class DeclarationPattern implements Pattern {
     private final Bucket declare = by(type(DECLARE), count(1));
     private final Bucket nameBucket = by(type(CONTENT), count(1));
-    private final Bucket operator = by(type(OPERATOR), count(1), equalsType(Operator.ASSIGN));
+    private final Bucket operator = by(type(OPERATOR), count(1), valueEquals(Operator.ASSIGN));
     private final Bucket value = by(any());
 
     private final BucketManager manager = new QueuedBucketManager(
@@ -40,8 +40,9 @@ public class DeclarationPattern implements Pattern {
     }
 
     @Override
-    public void form(Token<?> next) {
+    public Pattern form(Token<?> next) {
         manager.add(next);
+        return this;
     }
 
     @Override

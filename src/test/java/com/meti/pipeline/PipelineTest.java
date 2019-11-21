@@ -1,7 +1,7 @@
 package com.meti.pipeline;
 
 import com.meti.assemble.pattern.DeclarationPattern;
-import com.meti.assemble.pattern.IntegerPattern;
+import com.meti.assemble.pattern.IntPattern;
 import com.meti.assemble.pattern.PatternAssembler;
 import com.meti.compile.*;
 import com.meti.interpret.EvaluateInterpreter;
@@ -28,7 +28,7 @@ public class PipelineTest {
 		);
 		var assembler = new PatternAssembler(
 				new DeclarationPattern(),
-				new IntegerPattern()
+				new IntPattern()
 		);
 		var interpreter = new EvaluateInterpreter(
 				Set.of(new DeclareEvaluator(), new IntEvaluator()),

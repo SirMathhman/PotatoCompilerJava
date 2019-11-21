@@ -3,7 +3,7 @@ package com.meti.assemble;
 import com.meti.assemble.node.DeclarationNode;
 import com.meti.assemble.node.IntNode;
 import com.meti.assemble.pattern.DeclarationPattern;
-import com.meti.assemble.pattern.IntegerPattern;
+import com.meti.assemble.pattern.IntPattern;
 import com.meti.assemble.pattern.PatternAssembler;
 import com.meti.lex.StringLexerInput;
 import com.meti.lex.token.*;
@@ -23,7 +23,7 @@ class PatternAssemblerTest {
                 new ContentTokenizer()
         );
         var tokens = lexer.lexise(new StringLexerInput("var x = 10"));
-        var assembler = new PatternAssembler(new DeclarationPattern(), new IntegerPattern());
+        var assembler = new PatternAssembler(new DeclarationPattern(), new IntPattern());
         var node = assembler.assemble(tokens.list());
         assertTrue(node instanceof DeclarationNode);
         var declaration = (DeclarationNode) node;

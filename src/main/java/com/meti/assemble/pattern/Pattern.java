@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface Pattern {
     Optional<Node> collect(Assembler assembler);
 
-    void form(Token<?> next);
+    Pattern form(Token<?> next);
 
     Pattern copy();
 }

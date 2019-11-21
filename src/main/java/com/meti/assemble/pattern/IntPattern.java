@@ -8,7 +8,7 @@ import com.meti.lex.token.TokenType;
 
 import java.util.Optional;
 
-public class IntegerPattern implements Pattern {
+public class IntPattern implements Pattern {
     private Token<?> current;
 
     @Override
@@ -19,12 +19,13 @@ public class IntegerPattern implements Pattern {
     }
 
     @Override
-    public void form(Token<?> next) {
-        if (next.type().equals(TokenType.INTEGER)) current = next;
+    public Pattern form(Token<?> next) {
+        if (next.type() == TokenType.INTEGER) current = next;
+        return this;
     }
 
     @Override
     public Pattern copy() {
-        return new IntegerPattern();
+        return new IntPattern();
     }
 }
