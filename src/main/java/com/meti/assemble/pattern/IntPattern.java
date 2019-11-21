@@ -20,7 +20,7 @@ public class IntPattern implements Pattern {
 
     @Override
     public Pattern form(Token<?> next) {
-        if (next.type() == TokenType.INTEGER) current = next;
+        if (next.type() == TokenType.INT) current = next;
         return this;
     }
 

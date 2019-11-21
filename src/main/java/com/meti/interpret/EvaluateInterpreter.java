@@ -14,7 +14,7 @@ public class EvaluateInterpreter implements Interpreter {
 
 	EvaluateInterpreter(Set<? extends Evaluator> evaluators) {
 		this(evaluators, new HashSet<>());
-    }
+	}
 
 	public EvaluateInterpreter(Set<? extends Evaluator> evaluators, Set<? extends Resolver> resolvers) {
 		this.evaluators = evaluators;
@@ -34,7 +34,7 @@ public class EvaluateInterpreter implements Interpreter {
 	public Type resolve(Statement statement) {
 		return resolvers.stream()
 				.filter(resolver -> resolver.canResolve(statement))
-				.map(resolver -> resolver.resolve(statement))
+				.map(resolver -> resolver.resolve(statement, this))
 				.findAny()
 				.orElseThrow();
 	}

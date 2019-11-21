@@ -10,7 +10,7 @@ public class IntegerTokenizer implements Tokenizer<Integer> {
         var trailing = input.trailing();
         if ((trailing.isEmpty() || !Character.isDigit(trailing.get())) &&
                 input.compute().chars().allMatch(Character::isDigit)) {
-            return Optional.of(new InlineToken<>(Integer.parseInt(input.compute()), TokenType.INTEGER));
+            return Optional.of(new InlineToken<>(Integer.parseInt(input.compute()), TokenType.INT));
         } else {
             return Optional.empty();
         }

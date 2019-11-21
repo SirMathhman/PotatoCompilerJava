@@ -1,5 +1,6 @@
 package com.meti.interpret.resolve;
 
+import com.meti.interpret.Interpreter;
 import com.meti.interpret.Type;
 import com.meti.interpret.statement.Statement;
 import com.meti.interpret.statement.TypedStatement;
@@ -11,7 +12,7 @@ public class TypedResolver implements Resolver {
     }
 
     @Override
-    public Type resolve(Statement node) {
+    public Type resolve(Statement node, Interpreter interpreter) {
         return ((TypedStatement) node).type();
     }
 }
