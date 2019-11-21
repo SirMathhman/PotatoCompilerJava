@@ -4,6 +4,7 @@ import com.meti.assemble.node.DeclarationNode;
 import com.meti.assemble.node.Node;
 import com.meti.interpret.Interpreter;
 import com.meti.interpret.Primitive;
+import com.meti.interpret.Type;
 import com.meti.interpret.Variable;
 import com.meti.interpret.statement.AssignStatement;
 import com.meti.interpret.statement.DeclareStatement;
@@ -11,8 +12,20 @@ import com.meti.interpret.statement.GroupStatement;
 import com.meti.interpret.statement.Statement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DeclareEvaluator implements Evaluator {
+    private final Map<String, Type> typeMap;
+
+    public DeclareEvaluator() {
+        this(new HashMap<>());
+    }
+
+    public DeclareEvaluator(Map<String, Type> typeMap) {
+        this.typeMap = typeMap;
+    }
+
     @Override
     public boolean canEvaluate(Node node) {
         return node instanceof DeclarationNode;
@@ -23,7 +36,10 @@ public class DeclareEvaluator implements Evaluator {
         var declaration = (DeclarationNode) node;
         var value = declaration.value().map(interpreter::interpret);
         var type = value.isPresent() ? interpreter.resolve(value.get()) : Primitive.ANY;
-        var variable = new Variable(type, declaration.name());
+        var name = declaration.name();
+        var variable = new Variable(type, name);
+        typeMap.put(name, type);
+
         var list = new ArrayList<Statement>();
         list.add(new DeclareStatement(declaration.mutable(), variable));
         value.ifPresent(statement -> list.add(new AssignStatement(variable, statement)));

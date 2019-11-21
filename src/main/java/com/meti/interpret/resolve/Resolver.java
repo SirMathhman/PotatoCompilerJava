@@ -5,7 +5,7 @@ import com.meti.interpret.Type;
 import com.meti.interpret.statement.Statement;
 
 public interface Resolver {
-    boolean canResolve(Statement node);
+    boolean canResolve(Statement statement);
 
-    Type resolve(Statement node, Interpreter interpreter);
+    Type resolve(Statement statement, Interpreter interpreter);
 }

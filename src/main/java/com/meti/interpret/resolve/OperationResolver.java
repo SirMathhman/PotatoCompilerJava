@@ -7,13 +7,13 @@ import com.meti.interpret.statement.Statement;
 
 public class OperationResolver implements Resolver {
 	@Override
-	public boolean canResolve(Statement node) {
-		return node instanceof OperationStatement;
+	public boolean canResolve(Statement statement) {
+		return statement instanceof OperationStatement;
 	}
 
 	@Override
-	public Type resolve(Statement node, Interpreter interpreter) {
-		var operation = (OperationStatement) node;
+	public Type resolve(Statement statement, Interpreter interpreter) {
+		var operation = (OperationStatement) statement;
 		var s0 = operation.s0();
 		var s1 = operation.s1();
 		var type0 = interpreter.resolve(s0);

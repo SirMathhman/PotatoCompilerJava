@@ -7,12 +7,12 @@ import com.meti.interpret.statement.TypedStatement;
 
 public class TypedResolver implements Resolver {
     @Override
-    public boolean canResolve(Statement node) {
-        return node instanceof TypedStatement;
+    public boolean canResolve(Statement statement) {
+        return statement instanceof TypedStatement;
     }
 
     @Override
-    public Type resolve(Statement node, Interpreter interpreter) {
-        return ((TypedStatement) node).type();
+    public Type resolve(Statement statement, Interpreter interpreter) {
+        return ((TypedStatement) statement).type();
     }
 }

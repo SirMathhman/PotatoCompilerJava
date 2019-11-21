@@ -5,5 +5,5 @@ public enum TokenType {
 	DECLARE,
 	INT,
 	OPERATOR,
-	LIST, PARENTHESIS
+	LIST, INDEX, PARENTHESIS
 }
