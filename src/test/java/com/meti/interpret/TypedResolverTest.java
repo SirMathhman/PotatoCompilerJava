@@ -15,6 +15,6 @@ class TypedResolverTest {
 
     @Test
     void resolve() {
-        assertEquals(Primitive.INT, new TypedResolver().resolve(new IntStatement(10), ));
+        assertEquals(Primitive.INT, new TypedResolver().resolve(new IntStatement(10), null));
     }
 }
