@@ -1,13 +1,13 @@
 package com.meti.assemble.pattern;
 
-import com.meti.Operator;
+import com.meti.lex.token.Operator;
 import com.meti.assemble.Assembler;
 import com.meti.assemble.bucket.Bucket;
 import com.meti.assemble.bucket.BucketManager;
 import com.meti.assemble.bucket.QueuedBucketManager;
 import com.meti.assemble.node.DeclarationNode;
 import com.meti.assemble.node.Node;
-import com.meti.token.Token;
+import com.meti.lex.token.Token;
 
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ import static com.meti.assemble.bucket.PredicateBucket.by;
 import static com.meti.assemble.bucket.PredicateBucket.equalsType;
 import static com.meti.assemble.bucket.TypePredicate.any;
 import static com.meti.assemble.bucket.TypePredicate.type;
-import static com.meti.token.TokenType.*;
+import static com.meti.lex.token.TokenType.*;
 
 public class DeclarationPattern implements Pattern {
     private final Bucket declare = by(type(DECLARE), count(1));

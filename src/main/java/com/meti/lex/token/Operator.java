@@ -1,4 +1,4 @@
-package com.meti;
+package com.meti.lex.token;
 
 public enum Operator implements Valued<Character> {
     ADD('+'),

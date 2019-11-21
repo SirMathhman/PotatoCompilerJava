@@ -1,7 +1,7 @@
 package com.meti.assemble;
 
 import com.meti.assemble.node.Node;
-import com.meti.token.Token;
+import com.meti.lex.token.Token;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@ import com.meti.interpret.evaluate.DeclareEvaluator;
 import com.meti.interpret.evaluate.IntEvaluator;
 import com.meti.interpret.resolve.TypedResolver;
 import com.meti.lex.StringLexerInput;
-import com.meti.token.*;
+import com.meti.lex.token.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

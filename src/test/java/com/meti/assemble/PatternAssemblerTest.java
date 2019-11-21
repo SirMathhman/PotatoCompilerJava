@@ -6,7 +6,7 @@ import com.meti.assemble.pattern.DeclarationPattern;
 import com.meti.assemble.pattern.IntegerPattern;
 import com.meti.assemble.pattern.PatternAssembler;
 import com.meti.lex.StringLexerInput;
-import com.meti.token.*;
+import com.meti.lex.token.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

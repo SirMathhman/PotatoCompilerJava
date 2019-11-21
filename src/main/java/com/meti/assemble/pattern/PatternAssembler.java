@@ -2,7 +2,7 @@ package com.meti.assemble.pattern;
 
 import com.meti.assemble.Assembler;
 import com.meti.assemble.node.Node;
-import com.meti.token.Token;
+import com.meti.lex.token.Token;
 
 import java.util.List;
 import java.util.Objects;

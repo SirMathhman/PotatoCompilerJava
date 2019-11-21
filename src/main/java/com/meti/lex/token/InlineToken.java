@@ -1,4 +1,4 @@
-package com.meti.token;
+package com.meti.lex.token;
 
 public class InlineToken<T> implements Token<T> {
     private final T value;

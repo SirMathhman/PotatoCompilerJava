@@ -1,4 +1,4 @@
-package com.meti.token;
+package com.meti.lex.token;
 
 public enum TokenType {
     CONTENT,

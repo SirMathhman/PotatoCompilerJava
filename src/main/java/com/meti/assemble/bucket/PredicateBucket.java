@@ -1,6 +1,6 @@
 package com.meti.assemble.bucket;
 
-import com.meti.token.Token;
+import com.meti.lex.token.Token;
 
 import java.util.ArrayList;
 import java.util.Arrays;

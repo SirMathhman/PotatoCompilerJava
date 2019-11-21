@@ -1,8 +1,8 @@
 package com.meti.assemble;
 
 import com.meti.assemble.bucket.TypePredicate;
-import com.meti.token.InlineToken;
-import com.meti.token.TokenType;
+import com.meti.lex.token.InlineToken;
+import com.meti.lex.token.TokenType;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

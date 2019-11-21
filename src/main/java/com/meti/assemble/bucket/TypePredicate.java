@@ -1,7 +1,7 @@
 package com.meti.assemble.bucket;
 
-import com.meti.token.Token;
-import com.meti.token.TokenType;
+import com.meti.lex.token.Token;
+import com.meti.lex.token.TokenType;
 
 import java.util.function.Predicate;
 

@@ -1,7 +1,5 @@
-package com.meti.token;
+package com.meti.lex.token;
 
-import com.meti.Operator;
-import com.meti.Valued;
 import com.meti.lex.LexerInput;
 
 import java.util.Arrays;
