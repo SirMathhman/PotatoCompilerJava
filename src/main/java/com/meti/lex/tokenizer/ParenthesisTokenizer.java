@@ -1,6 +1,8 @@
-package com.meti.lex.token;
+package com.meti.lex.tokenizer;
 
 import com.meti.lex.LexerInput;
+import com.meti.lex.token.ParenthesisToken;
+import com.meti.lex.token.Token;
 
 import java.util.Optional;
 

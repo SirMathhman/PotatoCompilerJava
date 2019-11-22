@@ -1,11 +1,9 @@
 package com.meti.compile;
 
-import com.meti.assemble.node.AllocNode;
-import com.meti.assemble.node.IntNode;
 import com.meti.assemble.node.VariableNode;
+import com.meti.compile.unit.UnitCompiler;
+import com.meti.compile.unit.VariableUnit;
 import com.meti.interpret.EvaluateInterpreter;
-import com.meti.interpret.evaluate.AllocEvaluator;
-import com.meti.interpret.evaluate.IntEvaluator;
 import com.meti.interpret.evaluate.VariableEvaluator;
 import org.junit.jupiter.api.Test;
 

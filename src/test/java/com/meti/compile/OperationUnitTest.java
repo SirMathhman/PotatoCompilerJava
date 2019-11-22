@@ -2,6 +2,9 @@ package com.meti.compile;
 
 import com.meti.assemble.node.IntNode;
 import com.meti.assemble.node.OperationNode;
+import com.meti.compile.unit.IntUnit;
+import com.meti.compile.unit.OperationUnit;
+import com.meti.compile.unit.UnitCompiler;
 import com.meti.interpret.EvaluateInterpreter;
 import com.meti.interpret.evaluate.IntEvaluator;
 import com.meti.interpret.evaluate.OperationEvaluator;

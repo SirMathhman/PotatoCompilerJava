@@ -1,5 +1,6 @@
-package com.meti.compile;
+package com.meti.compile.unit;
 
+import com.meti.compile.Compiler;
 import com.meti.interpret.statement.QuantityStatement;
 import com.meti.interpret.statement.Statement;
 

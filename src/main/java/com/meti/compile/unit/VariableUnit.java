@@ -1,9 +1,10 @@
-package com.meti.compile;
+package com.meti.compile.unit;
 
+import com.meti.compile.Compiler;
 import com.meti.interpret.evaluate.VariableStatement;
 import com.meti.interpret.statement.Statement;
 
-class VariableUnit implements Unit {
+public class VariableUnit implements Unit {
     @Override
     public boolean canCompile(Statement statement) {
         return statement instanceof VariableStatement;

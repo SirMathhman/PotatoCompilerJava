@@ -1,5 +1,8 @@
-package com.meti.compile;
+package com.meti.compile.unit;
 
+import com.meti.compile.Compiler;
+import com.meti.compile.Generator;
+import com.meti.compile.SimpleGenerator;
 import com.meti.interpret.statement.Statement;
 
 import java.util.Set;

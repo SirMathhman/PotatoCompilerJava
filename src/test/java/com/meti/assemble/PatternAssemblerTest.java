@@ -7,6 +7,10 @@ import com.meti.assemble.pattern.IntPattern;
 import com.meti.assemble.pattern.PatternAssembler;
 import com.meti.lex.StringLexerInput;
 import com.meti.lex.token.*;
+import com.meti.lex.tokenizer.ContentTokenizer;
+import com.meti.lex.tokenizer.DeclareTokenizer;
+import com.meti.lex.tokenizer.IntegerTokenizer;
+import com.meti.lex.tokenizer.OperatorTokenizer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,6 +1,6 @@
 package com.meti.lex.token;
 
-enum Keyword implements Valued<String> {
+public enum Keyword implements Valued<String> {
     IF("if");
 
     private final String value;

@@ -1,5 +1,6 @@
 package com.meti.compile;
 
+import com.meti.compile.unit.IntUnit;
 import com.meti.interpret.statement.IntStatement;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

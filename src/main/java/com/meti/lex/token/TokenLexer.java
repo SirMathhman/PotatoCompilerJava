@@ -4,6 +4,7 @@ import com.meti.lex.Lexer;
 import com.meti.lex.LexerInput;
 import com.meti.lex.LexerOutput;
 import com.meti.lex.ListLexerOutput;
+import com.meti.lex.tokenizer.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.List;

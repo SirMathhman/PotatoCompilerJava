@@ -4,6 +4,7 @@ import com.meti.assemble.node.BlockNode;
 import com.meti.assemble.node.DeclareNode;
 import com.meti.lex.StringLexerInput;
 import com.meti.lex.token.*;
+import com.meti.lex.tokenizer.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

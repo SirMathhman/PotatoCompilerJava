@@ -1,5 +1,7 @@
 package com.meti.compile;
 
+import com.meti.compile.unit.DeclareUnit;
+import com.meti.compile.unit.UnitCompiler;
 import com.meti.interpret.Primitive;
 import com.meti.interpret.Variable;
 import com.meti.interpret.statement.DeclareStatement;

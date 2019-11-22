@@ -1,6 +1,7 @@
 package com.meti.lex.token;
 
 import com.meti.lex.StringLexerInput;
+import com.meti.lex.tokenizer.ListTokenizer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
