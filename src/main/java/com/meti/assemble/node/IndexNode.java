@@ -9,7 +9,7 @@ public class IndexNode implements Node {
 		this.index = index;
 	}
 
-	public Node array() {
+	public Node name() {
 		return array;
 	}
 

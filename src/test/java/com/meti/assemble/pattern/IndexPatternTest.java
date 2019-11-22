@@ -14,15 +14,15 @@ class IndexPatternTest {
 	@Test
 	void collect() {
 		var node = new IndexPattern()
-				.form(new InlineToken<>(CONTENT, "array"))
+				.form(new InlineToken<>(CONTENT, "name"))
 				.form(new InlineToken<>(LIST, true))
 				.form(new InlineToken<>(INT, 10))
 				.form(new InlineToken<>(LIST, false))
 				.collect(new PatternAssembler(new IntPattern(), new VariablePattern()))
 				.orElseThrow();
 		var arrayIndex = (IndexNode) node;
-		var array = (VariableNode) arrayIndex.array();
-		assertEquals("array", array.name());
+		var array = (VariableNode) arrayIndex.name();
+		assertEquals("name", array.name());
 		var index =  (IntNode) arrayIndex.index();
 		assertEquals(10, index.value());
 	}
