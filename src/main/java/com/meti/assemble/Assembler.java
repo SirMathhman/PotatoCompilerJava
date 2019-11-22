@@ -6,7 +6,11 @@ import com.meti.lex.token.Token;
 import java.util.List;
 
 public interface Assembler {
-    Node assemble(List<? extends Token<?>> tokens);
+	default Node assembleChild(List<? extends Token<?>> tokens) {
+		return copy().assemble(tokens);
+	}
 
-    Assembler copy();
+	Node assemble(List<? extends Token<?>> tokens);
+
+	Assembler copy();
 }
