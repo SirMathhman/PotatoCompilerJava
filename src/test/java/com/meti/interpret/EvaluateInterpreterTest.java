@@ -5,7 +5,7 @@ import com.meti.assemble.node.IntNode;
 import com.meti.interpret.evaluate.DeclareEvaluator;
 import com.meti.interpret.evaluate.EvaluateInterpreter;
 import com.meti.interpret.evaluate.IntEvaluator;
-import com.meti.interpret.resolve.TypedResolver;
+import com.meti.interpret.resolve.PrimitiveResolver;
 import com.meti.interpret.statement.AssignStatement;
 import com.meti.interpret.statement.DeclareStatement;
 import com.meti.interpret.statement.GroupStatement;
@@ -23,7 +23,7 @@ class EvaluateInterpreterTest {
 
     @Test
     void interpret() {
-        var interpreter = new EvaluateInterpreter(Set.of(new DeclareEvaluator(), new IntEvaluator()), singleton(new TypedResolver()));
+        var interpreter = new EvaluateInterpreter(Set.of(new DeclareEvaluator(), new IntEvaluator()), singleton(new PrimitiveResolver()));
         var statement = interpreter.interpret(new DeclareNode(true, "x", new IntNode(10)));
         var children = ((GroupStatement) statement).children();
         assertEquals(2, children.size());
@@ -40,7 +40,7 @@ class EvaluateInterpreterTest {
 
     @Test
     void resolve() {
-        var interpreter = new EvaluateInterpreter(emptySet(), singleton(new TypedResolver()));
+        var interpreter = new EvaluateInterpreter(emptySet(), singleton(new PrimitiveResolver()));
         var type = interpreter.resolve(new IntStatement(10));
         assertEquals(Primitive.INT, type);
     }

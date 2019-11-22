@@ -7,7 +7,7 @@ import com.meti.compile.unit.*;
 import com.meti.interpret.evaluate.EvaluateInterpreter;
 import com.meti.interpret.evaluate.DeclareEvaluator;
 import com.meti.interpret.evaluate.IntEvaluator;
-import com.meti.interpret.resolve.TypedResolver;
+import com.meti.interpret.resolve.PrimitiveResolver;
 import com.meti.lex.StringLexerInput;
 import com.meti.lex.token.*;
 import com.meti.lex.tokenizer.ContentTokenizer;
@@ -36,7 +36,7 @@ public class PipelineTest {
 		);
 		var interpreter = new EvaluateInterpreter(
 				Set.of(new DeclareEvaluator(), new IntEvaluator()),
-				singleton(new TypedResolver())
+				singleton(new PrimitiveResolver())
 		);
 		var compiler = new UnitCompiler(
 				new GroupUnit(),

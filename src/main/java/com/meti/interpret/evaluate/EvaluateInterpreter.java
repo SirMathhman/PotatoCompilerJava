@@ -34,4 +34,13 @@ public class EvaluateInterpreter implements Interpreter {
 				.findAny()
 				.orElseThrow(() -> new IllegalArgumentException("Could not resolve type for statement " + statement));
 	}
+
+	@Override
+	public Type resolve(String value) {
+		return resolvers.stream()
+				.filter(resolver -> resolver.canResolve(value))
+				.map(resolver -> resolver.resolve(value, this))
+				.findAny()
+				.orElseThrow(() -> new IllegalArgumentException("Could not resolve type for statement " + value));
+	}
 }

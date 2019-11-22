@@ -9,7 +9,6 @@ import com.meti.assemble.node.Node;
 import com.meti.lex.token.Operator;
 import com.meti.lex.token.Token;
 
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -20,44 +19,46 @@ import static com.meti.lex.token.TokenType.*;
 import static java.util.function.Predicate.not;
 
 public class FunctionPattern implements Pattern {
-    private final Bucket nameBucket = by(type(CONTENT), count(1));
-    private final Bucket parameterStart = by(type(LIST), valueEquals(true));
-    private final Bucket parameters = by(not(type(LIST).and(valueEquals(false))));
-    private final Bucket parameterEnd = by(type(LIST), valueEquals(false), count(1));
-    private final Bucket assignBucket = by(type(OPERATOR), valueEquals(Operator.ASSIGN), count(1));
-    private final Bucket contentBucket = byAny();
-    private final BucketManager manager = new QueuedBucketManager(
-            nameBucket,
-            parameterStart,
-            parameters,
-            parameterEnd,
-            assignBucket,
-            contentBucket
-    );
+	private final Bucket assignBucket = by(type(OPERATOR), valueEquals(Operator.ASSIGN), count(1));
+	private final Bucket contentBucket = byAny();
+	private final Bucket nameBucket = by(type(CONTENT), count(1));
+	private final Bucket parameterEnd = by(type(LIST), valueEquals(false), count(1));
+	private final Bucket parameterStart = by(type(LIST), valueEquals(true));
+    private final Bucket parameters = by(
+		    type(CONTENT).or(type(ENTRY)),
+		    token -> parameterStart.present());
+	private final BucketManager manager = new QueuedBucketManager(
+			nameBucket,
+			parameterStart,
+			parameters,
+			parameterEnd,
+			assignBucket,
+			contentBucket
+	);
 
-    @Override
-    public Optional<Node> collect(Assembler assembler) {
-        if (nameBucket.present() && assignBucket.present() && contentBucket.present()) {
-            var name = manager.at(0, String.class);
-            var content = assembler.assembleChild(manager.at(2));
-            var parameterMap =  manager.split(3, type(ENTRY)).stream()
-                    .collect(Collectors.toMap(
-                            tokens -> tokens.get(0).valueAs(String.class),
-                            tokens -> tokens.get(1).valueAs(String.class)));
-            return Optional.of(new FunctionNode(name, parameterMap, content));
-        } else {
-            return Optional.empty();
-        }
-    }
+	@Override
+	public Optional<Node> collect(Assembler assembler) {
+		if (nameBucket.present() && assignBucket.present() && contentBucket.present()) {
+			var name = nameBucket.single().valueAs(String.class);
+			var content = assembler.assembleChild(contentBucket.content());
+			var parameterMap = manager.split(2, type(ENTRY)).stream()
+					.collect(Collectors.toMap(
+							tokens -> tokens.get(0).valueAs(String.class),
+							tokens -> tokens.get(1).valueAs(String.class)));
+			return Optional.of(new FunctionNode(name, parameterMap, content));
+		} else {
+			return Optional.empty();
+		}
+	}
 
-    @Override
-    public Pattern form(Token<?> next) {
-        manager.add(next);
-        return this;
-    }
+	@Override
+	public Pattern form(Token<?> next) {
+		manager.add(next);
+		return this;
+	}
 
-    @Override
-    public Pattern copy() {
-        return new FunctionPattern();
-    }
+	@Override
+	public Pattern copy() {
+		return new FunctionPattern();
+	}
 }

@@ -20,5 +20,5 @@ public interface BucketManager {
         tokens.forEach(this::add);
     }
 
-    List<? extends List<? extends Token<?>>> split(int index, Predicate<Token<?>> predicate);
+    List<? extends List<? extends Token<?>>> split(int index, Predicate<? super Token<?>> predicate);
 }

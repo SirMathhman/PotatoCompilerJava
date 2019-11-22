@@ -4,7 +4,7 @@ import com.meti.interpret.Interpreter;
 import com.meti.interpret.Type;
 import com.meti.interpret.resolve.OperationResolver;
 import com.meti.interpret.resolve.Resolver;
-import com.meti.interpret.resolve.TypedResolver;
+import com.meti.interpret.resolve.PrimitiveResolver;
 import com.meti.interpret.resolve.VariableResolver;
 
 import java.util.HashMap;
@@ -21,10 +21,10 @@ public class PotatoInterpreter extends EvaluateInterpreter {
 					new OperationEvaluator(),
 					new QuantityEvaluator(),
 					new VariableEvaluator(),
-					new FunctionEvaluator(),
+					new FunctionEvaluator(typeMap),
 					new BlockEvaluator()
 			),
-			Set.of(new TypedResolver(),
+			Set.of(new PrimitiveResolver(),
 					new VariableResolver(typeMap),
 					new OperationResolver())
 	);

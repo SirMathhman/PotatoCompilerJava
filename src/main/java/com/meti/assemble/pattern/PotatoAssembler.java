@@ -7,11 +7,11 @@ public class PotatoAssembler extends PatternAssembler {
 			new AllocPattern(),
 			new BlockPattern(),
 			new DeclarePattern(),
+			new FunctionPattern(),
 			new IndexPattern(),
 			new IntPattern(),
 			new OperatorPattern(),
 			new OrderPattern(),
-			new FunctionPattern(),
 			new VariablePattern()
 	);
 

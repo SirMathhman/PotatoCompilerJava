@@ -3,7 +3,7 @@ package com.meti.interpret.statement;
 import com.meti.interpret.Primitive;
 import com.meti.interpret.Type;
 
-public class IntStatement implements TypedStatement {
+public class IntStatement implements PrimitiveStatement {
     private final int value;
 
     public IntStatement(int value) {

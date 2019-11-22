@@ -3,7 +3,6 @@ package com.meti.assemble.bucket;
 import com.meti.lex.token.Token;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -61,17 +60,19 @@ public class QueuedBucketManager implements BucketManager {
 	}
 
 	@Override
-	public List<? extends List<? extends Token<?>>> split(int index, Predicate<Token<?>> predicate) {
-		var list = new ArrayList<List<Token<?>>>();
+	public List<? extends List<? extends Token<?>>> split(int index, Predicate<? super Token<?>> predicate) {
+		var parent = new ArrayList<List<Token<?>>>();
 		var current = new ArrayList<Token<?>>();
-        for (Token<?> next : at(index)) {
-            if (predicate.test(next)) {
-                list.add(current);
-                current = new ArrayList<>();
-            } else {
-                current.add(next);
-            }
-        }
-		return list;
+		var tokenList = at(index);
+		for (Token<?> next : tokenList) {
+			if (predicate.test(next)) {
+				if (!current.isEmpty()) parent.add(current);
+				current = new ArrayList<>();
+			} else {
+				current.add(next);
+			}
+		}
+		if (!current.isEmpty()) parent.add(current);
+		return parent;
 	}
 }
