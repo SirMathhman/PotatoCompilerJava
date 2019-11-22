@@ -3,20 +3,14 @@ package com.meti.interpret.evaluate;
 import com.meti.assemble.node.Node;
 import com.meti.interpret.Interpreter;
 import com.meti.interpret.Type;
-import com.meti.interpret.evaluate.Evaluator;
 import com.meti.interpret.resolve.Resolver;
 import com.meti.interpret.statement.Statement;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class EvaluateInterpreter implements Interpreter {
 	private final Set<? extends Evaluator> evaluators;
 	private final Set<? extends Resolver> resolvers;
-
-	EvaluateInterpreter(Set<? extends Evaluator> evaluators) {
-		this(evaluators, new HashSet<>());
-	}
 
 	public EvaluateInterpreter(Set<? extends Evaluator> evaluators, Set<? extends Resolver> resolvers) {
 		this.evaluators = evaluators;
@@ -29,7 +23,7 @@ public class EvaluateInterpreter implements Interpreter {
 				.filter(evaluator -> evaluator.canEvaluate(node))
 				.map(evaluator -> evaluator.evaluate(node, this))
 				.findAny()
-				.orElseThrow();
+				.orElseThrow(() -> new IllegalArgumentException("Could not interpret " + node));
 	}
 
 	@Override
@@ -38,6 +32,6 @@ public class EvaluateInterpreter implements Interpreter {
 				.filter(resolver -> resolver.canResolve(statement))
 				.map(resolver -> resolver.resolve(statement, this))
 				.findAny()
-				.orElseThrow();
+				.orElseThrow(() -> new IllegalArgumentException("Could not resolve type for statement " + statement));
 	}
 }

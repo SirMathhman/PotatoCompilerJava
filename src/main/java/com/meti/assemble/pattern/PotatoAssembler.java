@@ -3,7 +3,7 @@ package com.meti.assemble.pattern;
 import com.meti.assemble.Assembler;
 
 public class PotatoAssembler extends PatternAssembler {
-	public static final Assembler assembler = new PotatoAssembler(
+	public static final Assembler INSTANCE = new PotatoAssembler(
 			new AllocPattern(),
 			new BlockPattern(),
 			new DeclarePattern(),
@@ -11,6 +11,7 @@ public class PotatoAssembler extends PatternAssembler {
 			new IntPattern(),
 			new OperatorPattern(),
 			new OrderPattern(),
+			new FunctionPattern(),
 			new VariablePattern()
 	);
 

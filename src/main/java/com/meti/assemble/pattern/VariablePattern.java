@@ -7,14 +7,17 @@ import com.meti.assemble.bucket.QueuedBucketManager;
 import com.meti.assemble.node.Node;
 import com.meti.assemble.node.VariableNode;
 import com.meti.lex.token.Token;
+import com.meti.lex.token.TokenType;
 
 import java.util.Optional;
 
 import static com.meti.assemble.bucket.CountPredicate.count;
 import static com.meti.assemble.bucket.PredicateBucket.by;
+import static com.meti.assemble.bucket.TypePredicate.type;
+import static com.meti.lex.token.TokenType.*;
 
 class VariablePattern implements Pattern {
-    private final Bucket bucket = by(count(1));
+    private final Bucket bucket = by(type(CONTENT), count(1));
     private final BucketManager manager = new QueuedBucketManager(bucket);
 
     @Override

@@ -30,7 +30,7 @@ public class UnitCompiler implements Compiler {
 				.filter(unit -> unit.canCompile(statement))
 				.map(unit -> unit.compile(statement, this))
 				.findAny()
-				.orElseThrow();
+				.orElseThrow(() -> new IllegalArgumentException("Failed to locate compilation unit for " + statement));
 	}
 
 	@Override

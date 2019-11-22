@@ -28,8 +28,7 @@ public class PatternAssembler implements Assembler {
                 .map(pattern -> pattern.collect(this))
                 .flatMap(Optional::stream)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("There was no content " +
-                        "to parse."));
+                .orElseThrow(() -> new IllegalArgumentException("Could not find valid pattern for " + tokens));
     }
 
     @Override

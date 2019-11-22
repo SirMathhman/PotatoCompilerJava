@@ -6,14 +6,14 @@ import com.meti.lex.tokenizer.*;
 public class PotatoLexer extends TokenLexer {
 	public static final Lexer<Token<?>> INSTANCE = new PotatoLexer(
 			new BracketTokenizer(),
-			new ContentTokenizer(),
 			new DeclareTokenizer(),
 			new IntegerTokenizer(),
 			new KeywordTokenizer(),
 			new ListTokenizer(),
 			new OperatorTokenizer(),
 			new ParenthesisTokenizer(),
-			new SplitTokenizer()
+			new SplitTokenizer(),
+			new ContentTokenizer()
 	);
 
 	private PotatoLexer(Tokenizer<?>... tokenizers) {
