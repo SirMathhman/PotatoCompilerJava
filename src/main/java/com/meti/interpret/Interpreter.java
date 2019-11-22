@@ -7,4 +7,6 @@ public interface Interpreter {
     Statement interpret(Node node);
 
     Type resolve(Statement statement);
+
+    Type resolve(String value);
 }

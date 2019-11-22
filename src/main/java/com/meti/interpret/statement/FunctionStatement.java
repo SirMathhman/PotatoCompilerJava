@@ -1,10 +1,14 @@
 package com.meti.interpret.statement;
 
+import com.meti.interpret.Type;
+
+import java.util.Map;
+
 public class FunctionStatement implements Statement {
 	private final Statement content;
 	private final String name;
 
-	public FunctionStatement(String name, Statement content) {
+	public FunctionStatement(String name, Map<String, Type> parameterMap, Statement content) {
 		this.name = name;
 		this.content = content;
 	}
