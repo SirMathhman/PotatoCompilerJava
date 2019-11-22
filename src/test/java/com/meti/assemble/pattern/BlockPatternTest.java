@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BracketPatternTest {
+class BlockPatternTest {
     @Test
     void collect() {
         var lexer = new TokenLexer(
@@ -21,7 +21,7 @@ class BracketPatternTest {
                 new ContentTokenizer()
         );
         var assembler = new PatternAssembler(
-                new BracketPattern(),
+                new BlockPattern(),
                 new DeclarePattern(),
                 new OperatorPattern(),
                 new IntPattern(),

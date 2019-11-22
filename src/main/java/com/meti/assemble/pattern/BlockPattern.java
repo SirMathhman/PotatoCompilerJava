@@ -17,7 +17,7 @@ import static com.meti.assemble.bucket.PredicateBucket.valueEquals;
 import static com.meti.assemble.bucket.TypePredicate.type;
 import static java.util.function.Predicate.not;
 
-class BracketPattern implements Pattern {
+class BlockPattern implements Pattern {
     private final BucketManager manager = new QueuedBucketManager(
             by(count(1), type(TokenType.BRACKET), valueEquals(true)),
             by(not(type(TokenType.BRACKET).and(valueEquals(false)))),
@@ -44,6 +44,6 @@ class BracketPattern implements Pattern {
 
     @Override
     public Pattern copy() {
-        return new BracketPattern();
+        return new BlockPattern();
     }
 }

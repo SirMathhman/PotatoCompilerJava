@@ -2,16 +2,16 @@ package com.meti.interpret.resolve;
 
 import com.meti.interpret.Interpreter;
 import com.meti.interpret.Type;
-import com.meti.interpret.evaluate.VariableStatement;
+import com.meti.interpret.statement.VariableStatement;
 import com.meti.interpret.statement.Statement;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class VariableResolver implements Resolver {
-    private final Map<String, Type> typeMap;
+public class VariableResolver implements Resolver {
+    private final Map<String, ? extends Type> typeMap;
 
-    VariableResolver(HashMap<String, Type> typeMap) {
+    public VariableResolver(Map<String, ? extends Type> typeMap) {
         this.typeMap = typeMap;
     }
 

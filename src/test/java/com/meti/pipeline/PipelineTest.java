@@ -4,7 +4,7 @@ import com.meti.assemble.pattern.DeclarePattern;
 import com.meti.assemble.pattern.IntPattern;
 import com.meti.assemble.pattern.PatternAssembler;
 import com.meti.compile.unit.*;
-import com.meti.interpret.EvaluateInterpreter;
+import com.meti.interpret.evaluate.EvaluateInterpreter;
 import com.meti.interpret.evaluate.DeclareEvaluator;
 import com.meti.interpret.evaluate.IntEvaluator;
 import com.meti.interpret.resolve.TypedResolver;

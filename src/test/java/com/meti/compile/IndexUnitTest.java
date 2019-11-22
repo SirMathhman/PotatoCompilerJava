@@ -4,7 +4,7 @@ import com.meti.compile.unit.IndexUnit;
 import com.meti.compile.unit.IntUnit;
 import com.meti.compile.unit.UnitCompiler;
 import com.meti.compile.unit.VariableUnit;
-import com.meti.interpret.evaluate.VariableStatement;
+import com.meti.interpret.statement.VariableStatement;
 import com.meti.interpret.statement.IndexStatement;
 import com.meti.interpret.statement.IntStatement;
 import org.junit.jupiter.api.Test;

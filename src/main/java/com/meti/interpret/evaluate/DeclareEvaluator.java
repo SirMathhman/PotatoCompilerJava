@@ -16,13 +16,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DeclareEvaluator implements Evaluator {
-    private final Map<String, Type> typeMap;
+    private final Map<? super String, ? super Type> typeMap;
 
     public DeclareEvaluator() {
         this(new HashMap<>());
     }
 
-    public DeclareEvaluator(Map<String, Type> typeMap) {
+    public DeclareEvaluator(Map<? super String, ? super Type> typeMap) {
         this.typeMap = typeMap;
     }
 

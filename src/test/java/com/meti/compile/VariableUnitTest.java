@@ -3,7 +3,7 @@ package com.meti.compile;
 import com.meti.assemble.node.VariableNode;
 import com.meti.compile.unit.UnitCompiler;
 import com.meti.compile.unit.VariableUnit;
-import com.meti.interpret.EvaluateInterpreter;
+import com.meti.interpret.evaluate.EvaluateInterpreter;
 import com.meti.interpret.evaluate.VariableEvaluator;
 import org.junit.jupiter.api.Test;
 

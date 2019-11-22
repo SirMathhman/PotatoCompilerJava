@@ -3,6 +3,7 @@ package com.meti.interpret;
 import com.meti.assemble.node.DeclareNode;
 import com.meti.assemble.node.IntNode;
 import com.meti.interpret.evaluate.DeclareEvaluator;
+import com.meti.interpret.evaluate.EvaluateInterpreter;
 import com.meti.interpret.evaluate.IntEvaluator;
 import com.meti.interpret.resolve.TypedResolver;
 import com.meti.interpret.statement.AssignStatement;

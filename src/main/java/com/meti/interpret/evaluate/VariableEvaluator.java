@@ -4,6 +4,7 @@ import com.meti.assemble.node.Node;
 import com.meti.assemble.node.VariableNode;
 import com.meti.interpret.Interpreter;
 import com.meti.interpret.statement.Statement;
+import com.meti.interpret.statement.VariableStatement;
 
 public class VariableEvaluator implements Evaluator {
     @Override

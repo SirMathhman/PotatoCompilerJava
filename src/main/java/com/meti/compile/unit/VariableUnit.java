@@ -1,7 +1,7 @@
 package com.meti.compile.unit;
 
 import com.meti.compile.Compiler;
-import com.meti.interpret.evaluate.VariableStatement;
+import com.meti.interpret.statement.VariableStatement;
 import com.meti.interpret.statement.Statement;
 
 public class VariableUnit implements Unit {

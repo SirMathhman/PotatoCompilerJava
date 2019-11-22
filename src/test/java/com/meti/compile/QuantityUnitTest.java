@@ -5,7 +5,7 @@ import com.meti.assemble.node.QuantityNode;
 import com.meti.compile.unit.IntUnit;
 import com.meti.compile.unit.QuantityUnit;
 import com.meti.compile.unit.UnitCompiler;
-import com.meti.interpret.EvaluateInterpreter;
+import com.meti.interpret.evaluate.EvaluateInterpreter;
 import com.meti.interpret.evaluate.IntEvaluator;
 import com.meti.interpret.evaluate.QuantityEvaluator;
 import org.junit.jupiter.api.Test;

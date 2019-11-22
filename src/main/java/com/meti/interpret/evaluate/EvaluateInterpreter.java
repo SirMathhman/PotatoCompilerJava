@@ -1,6 +1,8 @@
-package com.meti.interpret;
+package com.meti.interpret.evaluate;
 
 import com.meti.assemble.node.Node;
+import com.meti.interpret.Interpreter;
+import com.meti.interpret.Type;
 import com.meti.interpret.evaluate.Evaluator;
 import com.meti.interpret.resolve.Resolver;
 import com.meti.interpret.statement.Statement;
