@@ -1,8 +1,8 @@
 package com.meti.assemble;
 
-import com.meti.assemble.node.DeclarationNode;
+import com.meti.assemble.node.DeclareNode;
 import com.meti.assemble.node.IntNode;
-import com.meti.assemble.pattern.DeclarationPattern;
+import com.meti.assemble.pattern.DeclarePattern;
 import com.meti.assemble.pattern.IntPattern;
 import com.meti.assemble.pattern.PatternAssembler;
 import com.meti.lex.StringLexerInput;
@@ -23,10 +23,10 @@ class PatternAssemblerTest {
                 new ContentTokenizer()
         );
         var tokens = lexer.lexise(new StringLexerInput("var x = 10"));
-        var assembler = new PatternAssembler(new DeclarationPattern(), new IntPattern());
+        var assembler = new PatternAssembler(new DeclarePattern(), new IntPattern());
         var node = assembler.assemble(tokens.list());
-        assertTrue(node instanceof DeclarationNode);
-        var declaration = (DeclarationNode) node;
+        assertTrue(node instanceof DeclareNode);
+        var declaration = (DeclareNode) node;
         assertTrue(declaration.mutable());
         assertEquals("x", declaration.name());
         var value = declaration.value();

@@ -1,6 +1,6 @@
 package com.meti.interpret;
 
-import com.meti.assemble.node.DeclarationNode;
+import com.meti.assemble.node.DeclareNode;
 import com.meti.assemble.node.IntNode;
 import com.meti.interpret.evaluate.DeclareEvaluator;
 import com.meti.interpret.evaluate.IntEvaluator;
@@ -23,7 +23,7 @@ class EvaluateInterpreterTest {
     @Test
     void interpret() {
         var interpreter = new EvaluateInterpreter(Set.of(new DeclareEvaluator(), new IntEvaluator()), singleton(new TypedResolver()));
-        var statement = interpreter.interpret(new DeclarationNode(true, "x", new IntNode(10)));
+        var statement = interpreter.interpret(new DeclareNode(true, "x", new IntNode(10)));
         var children = ((GroupStatement) statement).children();
         assertEquals(2, children.size());
 

@@ -12,6 +12,6 @@ class KeywordTokenizer implements Tokenizer {
         return Arrays.stream(Keyword.values())
                 .filter(keyword -> keyword.value().equals(value))
                 .findAny()
-                .map(keyword -> new InlineToken<>(keyword, TokenType.KEYWORD));
+                .map(keyword -> new InlineToken<>(TokenType.KEYWORD, keyword));
     }
 }

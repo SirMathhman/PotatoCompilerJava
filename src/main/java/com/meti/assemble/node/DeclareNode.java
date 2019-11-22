@@ -2,12 +2,12 @@ package com.meti.assemble.node;
 
 import java.util.Optional;
 
-public class DeclarationNode implements Node {
+public class DeclareNode implements Node {
     private final boolean mutable;
     private final String name;
     private final Node value;
 
-    public DeclarationNode(boolean mutable, String name, Node value) {
+    public DeclareNode(boolean mutable, String name, Node value) {
         this.value = value;
         this.mutable = mutable;
         this.name = name;

@@ -15,7 +15,7 @@ class OrderPatternTest {
 	void collect() {
 		var pattern = new OrderPattern();
 		var result = pattern.form(new ParenthesisToken(true))
-				.form(new InlineToken<>(10, TokenType.INT))
+				.form(new InlineToken<>(TokenType.INT, 10))
 				.form(new ParenthesisToken(false))
 				.collect(new PatternAssembler(new IntPattern()));
 		assertTrue(result.isPresent());

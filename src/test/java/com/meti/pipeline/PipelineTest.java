@@ -1,6 +1,6 @@
 package com.meti.pipeline;
 
-import com.meti.assemble.pattern.DeclarationPattern;
+import com.meti.assemble.pattern.DeclarePattern;
 import com.meti.assemble.pattern.IntPattern;
 import com.meti.assemble.pattern.PatternAssembler;
 import com.meti.compile.*;
@@ -27,7 +27,7 @@ public class PipelineTest {
 				new ContentTokenizer()
 		);
 		var assembler = new PatternAssembler(
-				new DeclarationPattern(),
+				new DeclarePattern(),
 				new IntPattern()
 		);
 		var interpreter = new EvaluateInterpreter(

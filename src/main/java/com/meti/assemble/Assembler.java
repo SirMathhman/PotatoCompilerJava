@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface Assembler {
     Node assemble(List<? extends Token<?>> tokens);
+
+    Assembler copy();
 }

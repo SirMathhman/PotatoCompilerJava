@@ -13,7 +13,7 @@ class VariablePatternTest {
     @Test
     void collect() {
         var node = new VariablePattern()
-                .form(new InlineToken<>("test", TokenType.CONTENT))
+                .form(new InlineToken<>(TokenType.CONTENT, "test"))
                 .collect(null)
                 .orElseThrow();
         assertTrue(node instanceof VariableNode);

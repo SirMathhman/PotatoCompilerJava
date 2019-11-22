@@ -13,9 +13,9 @@ class AllocPatternTest {
 	@Test
 	void collect() {
 		var node = new AllocPattern()
-				.form(new InlineToken<>(true, TokenType.LIST))
-				.form(new InlineToken<>(10, TokenType.INT))
-				.form(new InlineToken<>(false, TokenType.LIST))
+				.form(new InlineToken<>(TokenType.LIST, true))
+				.form(new InlineToken<>(TokenType.INT, 10))
+				.form(new InlineToken<>(TokenType.LIST, false))
 				.collect(new PatternAssembler(new IntPattern()));
 		assertTrue(node.isPresent());
 		var alloc = (AllocNode) node.get();

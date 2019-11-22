@@ -10,6 +10,6 @@ public class ContentTokenizer implements Tokenizer<String> {
         var trailing = input.trailing();
 		return trailing.isPresent() && (Character.isAlphabetic(trailing.get()) || Character.isDigit(trailing.get())) ?
                 Optional.empty() :
-                Optional.of(new InlineToken<>(input.compute(), TokenType.CONTENT));
+                Optional.of(new InlineToken<>(TokenType.CONTENT, input.compute()));
     }
 }

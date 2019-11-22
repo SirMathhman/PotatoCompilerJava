@@ -14,9 +14,9 @@ class OperatorPatternTest {
 	@Test
 	void collect() {
 		var pattern = new OperatorPattern();
-		var result = pattern.form(new InlineToken<>(10, TokenType.INT))
-				.form(new InlineToken<>(Operator.ADD, TokenType.OPERATOR))
-				.form(new InlineToken<>(20, TokenType.INT))
+		var result = pattern.form(new InlineToken<>(TokenType.INT, 10))
+				.form(new InlineToken<>(TokenType.OPERATOR, Operator.ADD))
+				.form(new InlineToken<>(TokenType.INT, 20))
 				.collect(new PatternAssembler(new IntPattern()))
 				.orElseThrow();
 		var node = (OperationNode) result;

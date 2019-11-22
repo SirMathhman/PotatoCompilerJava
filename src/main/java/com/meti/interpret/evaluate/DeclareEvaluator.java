@@ -1,6 +1,6 @@
 package com.meti.interpret.evaluate;
 
-import com.meti.assemble.node.DeclarationNode;
+import com.meti.assemble.node.DeclareNode;
 import com.meti.assemble.node.Node;
 import com.meti.interpret.Interpreter;
 import com.meti.interpret.Primitive;
@@ -28,12 +28,12 @@ public class DeclareEvaluator implements Evaluator {
 
     @Override
     public boolean canEvaluate(Node node) {
-        return node instanceof DeclarationNode;
+        return node instanceof DeclareNode;
     }
 
     @Override
     public Statement evaluate(Node node, Interpreter interpreter) {
-        var declaration = (DeclarationNode) node;
+        var declaration = (DeclareNode) node;
         var value = declaration.value().map(interpreter::interpret);
         var type = value.isPresent() ? interpreter.resolve(value.get()) : Primitive.ANY;
         var name = declaration.name();

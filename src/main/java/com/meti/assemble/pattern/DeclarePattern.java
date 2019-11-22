@@ -5,7 +5,7 @@ import com.meti.assemble.Assembler;
 import com.meti.assemble.bucket.Bucket;
 import com.meti.assemble.bucket.BucketManager;
 import com.meti.assemble.bucket.QueuedBucketManager;
-import com.meti.assemble.node.DeclarationNode;
+import com.meti.assemble.node.DeclareNode;
 import com.meti.assemble.node.Node;
 import com.meti.lex.token.Token;
 
@@ -18,7 +18,7 @@ import static com.meti.assemble.bucket.TypePredicate.any;
 import static com.meti.assemble.bucket.TypePredicate.type;
 import static com.meti.lex.token.TokenType.*;
 
-public class DeclarationPattern implements Pattern {
+public class DeclarePattern implements Pattern {
     private final Bucket declare = by(type(DECLARE), count(1));
     private final Bucket nameBucket = by(type(CONTENT), count(1));
     private final Bucket operator = by(type(OPERATOR), count(1), valueEquals(Operator.ASSIGN));
@@ -33,9 +33,9 @@ public class DeclarationPattern implements Pattern {
         if (declare.present() && nameBucket.present() && value.present()) {
             var mutable = declare.single().valueAs(Boolean.class);
             var name = nameBucket.single().valueAs(String.class);
-            var valueNode = assembler.assemble(value.content());
+            var valueNode = assembler.copy().assemble(value.content());
             manager.reset();
-            return Optional.of(new DeclarationNode(mutable, name, valueNode));
+            return Optional.of(new DeclareNode(mutable, name, valueNode));
         } else return Optional.empty();
     }
 
@@ -47,6 +47,6 @@ public class DeclarationPattern implements Pattern {
 
     @Override
     public Pattern copy() {
-        return new DeclarationPattern();
+        return new DeclarePattern();
     }
 }

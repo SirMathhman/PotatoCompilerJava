@@ -9,7 +9,7 @@ public class DeclareTokenizer implements Tokenizer<Boolean> {
 	public Optional<? extends Token<Boolean>> match(LexerInput input) {
 		var value = input.compute();
 		return value.equals("var") || value.equals("val") ?
-				Optional.of(new InlineToken<>(value.equals("var"), TokenType.DECLARE)) :
+				Optional.of(new InlineToken<>(TokenType.DECLARE, value.equals("var"))) :
 				Optional.empty();
 	}
 }

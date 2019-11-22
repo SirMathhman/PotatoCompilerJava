@@ -25,14 +25,15 @@ public class PatternAssembler implements Assembler {
     public Node assemble(List<? extends Token<?>> tokens) {
         tokens.forEach(this::buildNode);
         return patterns.stream()
-                .map(pattern -> pattern.collect(copy()))
+                .map(pattern -> pattern.collect(this))
                 .flatMap(Optional::stream)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("There was no content " +
                         "to parse."));
     }
 
-    private Assembler copy() {
+    @Override
+    public Assembler copy() {
         var list = patterns.stream()
                 .map(Pattern::copy)
                 .collect(Collectors.toList());

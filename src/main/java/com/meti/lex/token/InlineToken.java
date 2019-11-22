@@ -5,10 +5,18 @@ public class InlineToken<T> implements Token<T> {
     private final TokenType type;
 
     public InlineToken(TokenType type) {
-        this(null, type);
+        this(type, null);
     }
 
-    public InlineToken(T value, TokenType type) {
+    @Override
+    public String toString() {
+        return "InlineToken{" +
+                "value=" + value +
+                ", type=" + type +
+                '}';
+    }
+
+    public InlineToken(TokenType type, T value) {
         this.value = value;
         this.type = type;
     }
