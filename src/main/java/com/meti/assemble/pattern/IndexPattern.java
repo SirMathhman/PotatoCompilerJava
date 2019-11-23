@@ -36,13 +36,18 @@ public class IndexPattern implements Pattern {
 	}
 
 	@Override
+	public Pattern copy() {
+		return new IndexPattern();
+	}
+
+	@Override
 	public Pattern form(Token<?> next) {
 		manager.add(next);
 		return this;
 	}
 
 	@Override
-	public Pattern copy() {
-		return new IndexPattern();
+	public void reset() {
+manager.reset();
 	}
 }

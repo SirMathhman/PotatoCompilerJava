@@ -11,7 +11,8 @@ import com.meti.lex.token.Token;
 import java.util.Optional;
 
 import static com.meti.assemble.bucket.CountPredicate.count;
-import static com.meti.assemble.bucket.PredicateBucket.*;
+import static com.meti.assemble.bucket.PredicateBucket.by;
+import static com.meti.assemble.bucket.PredicateBucket.valueEquals;
 import static com.meti.assemble.bucket.TypePredicate.type;
 import static com.meti.lex.token.TokenType.PARENTHESIS;
 import static java.util.function.Predicate.not;
@@ -33,13 +34,18 @@ public class OrderPattern implements Pattern {
 	}
 
 	@Override
+	public Pattern copy() {
+		return new OrderPattern();
+	}
+
+	@Override
 	public Pattern form(Token<?> next) {
 		manager.add(next);
 		return this;
 	}
 
 	@Override
-	public Pattern copy() {
-		return new OrderPattern();
+	public void reset() {
+manager.reset();
 	}
 }

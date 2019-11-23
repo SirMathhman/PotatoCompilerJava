@@ -14,7 +14,7 @@ public interface BucketManager {
 
     void add(Token<?> token);
 
-    void reset();
+	void reset();
 
     default void addAll(List<? extends Token<?>> tokens) {
         tokens.forEach(this::add);

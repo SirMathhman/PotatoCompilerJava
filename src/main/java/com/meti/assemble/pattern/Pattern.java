@@ -7,9 +7,11 @@ import com.meti.lex.token.Token;
 import java.util.Optional;
 
 public interface Pattern {
-    Optional<Node> collect(Assembler assembler);
+	Optional<Node> collect(Assembler assembler);
 
-    Pattern form(Token<?> next);
+	Pattern copy();
 
-    Pattern copy();
+	Pattern form(Token<?> next);
+
+	void reset();
 }

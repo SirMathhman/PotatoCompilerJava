@@ -17,7 +17,5 @@ public interface Bucket {
         return content().get(0);
     }
 
-    default void empty() {
-        content().clear();
-    }
+    void empty();
 }

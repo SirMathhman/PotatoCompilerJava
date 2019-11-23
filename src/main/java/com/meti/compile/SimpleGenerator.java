@@ -24,6 +24,12 @@ public class SimpleGenerator implements Generator {
 		}
 	}
 
+	@Override
+	public void reset() {
+		counter = -1;
+		aliases.clear();
+	}
+
 	private String next() {
 		counter++;
 		return ALPHABET.charAt(counter % ALPHABET.length()) +

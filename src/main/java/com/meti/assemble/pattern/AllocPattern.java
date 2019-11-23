@@ -25,12 +25,17 @@ public class AllocPattern implements Pattern {
 
 	@Override
 	public Optional<Node> collect(Assembler assembler) {
-		if(start.present() && size.present() && end.present()) {
+		if (start.present() && size.present() && end.present()) {
 			var node = assembler.assemble(size.content());
 			return Optional.of(new AllocNode(node));
 		} else {
 			return Optional.empty();
 		}
+	}
+
+	@Override
+	public Pattern copy() {
+		return new AllocPattern();
 	}
 
 	@Override
@@ -40,7 +45,7 @@ public class AllocPattern implements Pattern {
 	}
 
 	@Override
-	public Pattern copy() {
-		return new AllocPattern();
+	public void reset() {
+manager.reset();
 	}
 }

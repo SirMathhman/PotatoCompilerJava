@@ -16,7 +16,6 @@ import static com.meti.assemble.bucket.CountPredicate.count;
 import static com.meti.assemble.bucket.PredicateBucket.*;
 import static com.meti.assemble.bucket.TypePredicate.type;
 import static com.meti.lex.token.TokenType.*;
-import static java.util.function.Predicate.not;
 
 public class FunctionPattern implements Pattern {
 	private final Bucket assignBucket = by(type(OPERATOR), valueEquals(Operator.ASSIGN), count(1));
@@ -24,9 +23,9 @@ public class FunctionPattern implements Pattern {
 	private final Bucket nameBucket = by(type(CONTENT), count(1));
 	private final Bucket parameterEnd = by(type(LIST), valueEquals(false), count(1));
 	private final Bucket parameterStart = by(type(LIST), valueEquals(true));
-    private final Bucket parameters = by(
-		    type(CONTENT).or(type(ENTRY)),
-		    token -> parameterStart.present());
+	private final Bucket parameters = by(
+			type(CONTENT).or(type(ENTRY)),
+			token -> parameterStart.present());
 	private final BucketManager manager = new QueuedBucketManager(
 			nameBucket,
 			parameterStart,
@@ -52,13 +51,18 @@ public class FunctionPattern implements Pattern {
 	}
 
 	@Override
+	public Pattern copy() {
+		return new FunctionPattern();
+	}
+
+	@Override
 	public Pattern form(Token<?> next) {
 		manager.add(next);
 		return this;
 	}
 
 	@Override
-	public Pattern copy() {
-		return new FunctionPattern();
+	public void reset() {
+		manager.reset();
 	}
 }

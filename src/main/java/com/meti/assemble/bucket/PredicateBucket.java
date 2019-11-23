@@ -16,7 +16,7 @@ public class PredicateBucket implements Bucket {
 	}
 
 	public static Bucket byAny() {
-        return by();
+		return by();
 	}
 
 	public static Bucket by(Predicate<Token<?>>... predicates) {
@@ -38,5 +38,16 @@ public class PredicateBucket implements Bucket {
 	@Override
 	public List<? extends Token<?>> content() {
 		return content;
+	}
+
+	@Override
+	public void empty() {
+		content().clear();
+
+		for (Predicate<Token<?>> predicate : predicates) {
+			if (predicate instanceof ResettablePredicate<?>) {
+				((ResettablePredicate<Token<?>>) predicate).reset();
+			}
+		}
 	}
 }

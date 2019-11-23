@@ -29,9 +29,14 @@ public class DeclarePattern implements Pattern {
 			var mutable = manager.at(0, Boolean.class);
 			var name = manager.at(1, String.class);
 			var valueNode = assembler.assembleChild(manager.at(3));
-            manager.reset();
+			manager.reset();
 			return Optional.of(new DeclareNode(mutable, name, valueNode));
 		} else return Optional.empty();
+	}
+
+	@Override
+	public Pattern copy() {
+		return new DeclarePattern();
 	}
 
 	@Override
@@ -41,7 +46,7 @@ public class DeclarePattern implements Pattern {
 	}
 
 	@Override
-	public Pattern copy() {
-		return new DeclarePattern();
+	public void reset() {
+manager.reset();
 	}
 }

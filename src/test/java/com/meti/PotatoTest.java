@@ -18,6 +18,7 @@ public class PotatoTest {
 	private static final Lexer<Token<?>> LEXER = PotatoLexer.INSTANCE;
 
 	protected String compile(String value) {
+		COMPILER.generator().reset();
 		var tokens = LEXER.lexise(new StringLexerInput(value));
 		var root = ASSEMBLER.assemble(tokens.list());
 		var statement = INTERPRETER.interpret(root);

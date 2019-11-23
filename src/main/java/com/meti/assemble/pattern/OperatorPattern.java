@@ -41,13 +41,18 @@ public class OperatorPattern implements Pattern {
 	}
 
 	@Override
+	public Pattern copy() {
+		return new OperatorPattern();
+	}
+
+	@Override
 	public Pattern form(Token<?> next) {
 		manager.add(next);
 		return this;
 	}
 
 	@Override
-	public Pattern copy() {
-		return new OperatorPattern();
+	public void reset() {
+manager.reset();
 	}
 }

@@ -27,7 +27,7 @@ class BlockPattern implements Pattern {
 	@Override
 	public Optional<Node> collect(Assembler assembler) {
 		if (open.present() && close.present()) {
-            var content = manager.split(1,
+			var content = manager.split(1,
 					next -> next.type() == TokenType.SPLIT);
 			return Optional.of(new BlockNode(content.stream()
 					.map(tokens -> assembler.copy().assemble(tokens))
@@ -38,13 +38,18 @@ class BlockPattern implements Pattern {
 	}
 
 	@Override
+	public Pattern copy() {
+		return new BlockPattern();
+	}
+
+	@Override
 	public Pattern form(Token<?> next) {
 		manager.add(next);
 		return this;
 	}
 
 	@Override
-	public Pattern copy() {
-		return new BlockPattern();
+	public void reset() {
+manager.reset();
 	}
 }

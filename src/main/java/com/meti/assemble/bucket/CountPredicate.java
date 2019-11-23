@@ -2,7 +2,7 @@ package com.meti.assemble.bucket;
 
 import java.util.function.Predicate;
 
-public class CountPredicate<T> implements Predicate<T> {
+public class CountPredicate<T> implements ResettablePredicate<T> {
     private final int count;
     private int counter = 0;
 
@@ -12,6 +12,11 @@ public class CountPredicate<T> implements Predicate<T> {
 
     public static <T> Predicate<T> count(int count) {
         return new CountPredicate<>(count);
+    }
+
+    @Override
+    public void reset() {
+        counter = 0;
     }
 
     @Override

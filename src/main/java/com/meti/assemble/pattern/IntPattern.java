@@ -25,6 +25,10 @@ public class IntPattern implements Pattern {
     }
 
     @Override
+    public void reset() {
+    }
+
+    @Override
     public Pattern copy() {
         return new IntPattern();
     }
