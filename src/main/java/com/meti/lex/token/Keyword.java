@@ -2,7 +2,8 @@ package com.meti.lex.token;
 
 public enum Keyword implements Valued<String> {
     IF("if"),
-	RETURN("return");
+	RETURN("return"),
+	RETURN_MARK("?");
 
 	private final String value;
 
