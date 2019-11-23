@@ -22,7 +22,8 @@ public class PotatoInterpreter extends EvaluateInterpreter {
 					new QuantityEvaluator(),
 					new VariableEvaluator(),
 					new FunctionEvaluator(typeMap),
-					new BlockEvaluator()
+					new BlockEvaluator(),
+					new ReturnEvaluator()
 			),
 			Set.of(new PrimitiveResolver(),
 					new VariableResolver(typeMap),

@@ -8,7 +8,11 @@ import java.util.function.Predicate;
 public interface BucketManager {
     boolean allPresent();
 
-    List<? extends Token<?>> at(int index);
+	default boolean anyEmpty() {
+	    return !allPresent();
+    }
+
+	List<? extends Token<?>> at(int index);
 
     <R> R at(int index, Class<R> clazz);
 

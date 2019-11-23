@@ -15,6 +15,7 @@ public class PotatoCompiler extends UnitCompiler {
 			new QuantityUnit(),
 			new FunctionUnit(),
 			new BlockUnit(),
+			new ReturnUnit(),
 			new VariableUnit()
 	);
 
