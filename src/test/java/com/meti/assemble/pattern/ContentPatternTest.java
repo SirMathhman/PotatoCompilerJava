@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class VariablePatternTest {
+class ContentPatternTest {
 
     @Test
     void collect() {
-        var node = new VariablePattern()
+        var node = new ContentPattern()
                 .form(new InlineToken<>(TokenType.CONTENT, "test"))
                 .collect(null)
                 .orElseThrow();

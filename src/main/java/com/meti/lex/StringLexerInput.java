@@ -4,8 +4,8 @@ import java.util.Optional;
 
 public class StringLexerInput implements LexerInput {
 	private final String string;
-	private int end = 1;
-	private int start = 0;
+	private int endExclusive = 1;
+	private int startInclusive = 0;
 
 	public StringLexerInput(String string) {
 		this.string = string;
@@ -13,19 +13,22 @@ public class StringLexerInput implements LexerInput {
 
 	@Override
 	public LexerInput advance() {
-		start = end;
-		end = start + 1;
+		startInclusive = endExclusive;
+		endExclusive = startInclusive + 1;
 		return this;
 	}
 
 	@Override
 	public String compute() {
-		return string.substring(start, end);
+		return string.substring(startInclusive, endExclusive);
 	}
 
 	@Override
 	public LexerInput extend() {
-		end++;
+		if (endExclusive == string.length() + 1) {
+			throw new IllegalStateException("No more characters to extend.");
+		}
+		endExclusive++;
 		return this;
 	}
 
@@ -39,14 +42,14 @@ public class StringLexerInput implements LexerInput {
 
 	@Override
 	public boolean hasMoreToScan() {
-		return start < string.length();
+		return startInclusive < string.length();
 	}
 
 	@Override
 	public Optional<String> trailing(int count) {
-		if (end < string.length()) {
-			var endIndex = Math.min(string.length(), end + count);
-			return Optional.of(string.substring(end, endIndex));
+		if (endExclusive < string.length()) {
+			var endIndex = Math.min(string.length(), endExclusive + count);
+			return Optional.of(string.substring(endExclusive, endIndex));
 		} else return Optional.empty();
 	}
 }

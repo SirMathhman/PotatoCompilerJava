@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FunctionEvaluator implements Evaluator {
-	private final Map<String, Type> typeMap;
+	private final Map<? super String, ? super Type> typeMap;
 
-	public FunctionEvaluator(Map<String, Type> typeMap) {
+	public FunctionEvaluator(Map<? super String, ? super Type> typeMap) {
 		this.typeMap = typeMap;
 	}
 
@@ -26,21 +26,26 @@ public class FunctionEvaluator implements Evaluator {
 	@Override
 	public Statement evaluate(Node node, Interpreter interpreter) {
 		var function = (FunctionNode) node;
-		var parameters = function.parameters();
-		var parameterMap = parameters.entrySet()
-				.stream()
-				.map(entry -> Map.entry(entry.getKey(), interpreter.resolve(entry.getValue())))
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		var parameterMap = parameters(interpreter, function);
+		var returnType = returnType(interpreter, function);
 		typeMap.putAll(parameterMap);
 		var content = interpreter.interpret(function.content());
 		typeMap.keySet().removeAll(parameterMap.keySet());
-		Type type;
-		var returnType = function.returnType();
-		if (returnType.isPresent()) {
-			type = interpreter.resolve(returnType.get());
-		} else {
-			type = new ObjectType(function.name());
-		}
-		return new FunctionStatement(function.name(), parameterMap, type, content);
+		return new FunctionStatement(function.name(), parameterMap, returnType, content);
+	}
+
+	private Map<String, Type> parameters(Interpreter interpreter, FunctionNode function) {
+		return function.parameters()
+				.entrySet()
+				.stream()
+				.map(entry -> Map.entry(entry.getKey(), interpreter.resolve(entry.getValue())))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+	}
+
+	private Type returnType(Interpreter interpreter, FunctionNode function) {
+		var returnTypeOptional = function.returnType();
+		return returnTypeOptional.isPresent() ?
+				interpreter.resolve(returnTypeOptional.get()) :
+				new ObjectType(function.name());
 	}
 }

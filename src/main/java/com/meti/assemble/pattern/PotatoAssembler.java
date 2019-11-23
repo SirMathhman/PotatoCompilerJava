@@ -13,7 +13,7 @@ public class PotatoAssembler extends PatternAssembler {
 			new IntPattern(),
 			new OperatorPattern(),
 			new OrderPattern(),
-			new VariablePattern()
+			new ContentPattern()
 	);
 
 	private PotatoAssembler(Pattern... patterns) {

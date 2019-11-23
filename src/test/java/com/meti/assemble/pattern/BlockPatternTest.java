@@ -25,7 +25,7 @@ class BlockPatternTest {
                 new DeclarePattern(),
                 new OperatorPattern(),
                 new IntPattern(),
-                new VariablePattern()
+                new ContentPattern()
         );
         var tokens = lexer.lexise(new StringLexerInput("{var x = 10;var y = x;}"));
         var node = assembler.assemble(tokens.list());

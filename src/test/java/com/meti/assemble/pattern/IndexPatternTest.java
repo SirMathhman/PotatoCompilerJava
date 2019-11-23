@@ -18,7 +18,7 @@ class IndexPatternTest {
 				.form(new InlineToken<>(LIST, true))
 				.form(new InlineToken<>(INT, 10))
 				.form(new InlineToken<>(LIST, false))
-				.collect(new PatternAssembler(new IntPattern(), new VariablePattern()))
+				.collect(new PatternAssembler(new IntPattern(), new ContentPattern()))
 				.orElseThrow();
 		var arrayIndex = (IndexNode) node;
 		var array = (VariableNode) arrayIndex.name();

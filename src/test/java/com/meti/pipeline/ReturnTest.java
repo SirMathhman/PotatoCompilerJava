@@ -10,4 +10,9 @@ class ReturnTest extends PotatoTest  {
 	void test() {
 		assertEquals("function a0(){return 10;}", compile("test={return 10;}"));
 	}
+
+	@Test
+	void testWithHeader(){
+		assertEquals("function a0(){return \"Hello World!\";}", compile("test?string={return \"Hello World!\";}"));
+	}
 }
