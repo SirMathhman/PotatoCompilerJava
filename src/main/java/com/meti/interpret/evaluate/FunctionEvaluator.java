@@ -3,6 +3,7 @@ package com.meti.interpret.evaluate;
 import com.meti.assemble.node.FunctionNode;
 import com.meti.assemble.node.Node;
 import com.meti.interpret.Interpreter;
+import com.meti.interpret.ObjectType;
 import com.meti.interpret.Type;
 import com.meti.interpret.statement.FunctionStatement;
 import com.meti.interpret.statement.Statement;
@@ -33,6 +34,13 @@ public class FunctionEvaluator implements Evaluator {
 		typeMap.putAll(parameterMap);
 		var content = interpreter.interpret(function.content());
 		typeMap.keySet().removeAll(parameterMap.keySet());
-		return new FunctionStatement(function.name(), parameterMap, content);
+		Type type;
+		var returnType = function.returnType();
+		if (returnType.isPresent()) {
+			type = interpreter.resolve(returnType.get());
+		} else {
+			type = new ObjectType(function.name());
+		}
+		return new FunctionStatement(function.name(), parameterMap, type, content);
 	}
 }
