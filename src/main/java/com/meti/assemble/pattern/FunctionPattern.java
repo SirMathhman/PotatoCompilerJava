@@ -1,112 +1,68 @@
 package com.meti.assemble.pattern;
 
-import com.meti.assemble.AssemblyState;
-import com.meti.assemble.node.AssemblyNode;
-import com.meti.assemble.node.control.InlineFunctionNode;
-import com.meti.lexeme.match.format.ContentMatch;
-import com.meti.lexeme.match.format.ListMatch;
-import com.meti.lexeme.match.format.SeparatorMatch;
-import com.meti.lexeme.match.struct.*;
+import com.meti.assemble.Assembler;
+import com.meti.assemble.bucket.Bucket;
+import com.meti.assemble.bucket.BucketManager;
+import com.meti.assemble.bucket.QueuedBucketManager;
+import com.meti.assemble.node.FunctionNode;
+import com.meti.assemble.node.Node;
+import com.meti.lex.token.Operator;
+import com.meti.lex.token.Token;
 
-import java.util.*;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.meti.assemble.bucket.CountPredicate.count;
+import static com.meti.assemble.bucket.PredicateBucket.*;
+import static com.meti.assemble.bucket.TypePredicate.type;
+import static com.meti.lex.token.TokenType.*;
+
 public class FunctionPattern implements Pattern {
-    @Override
-    public boolean canAssemble(AssemblyState state) {
-        OptionalInt optional;
-        if (state.has(OperatorMatch.class, match -> match.value().equals(Operator.RETURN))) {
-            var firstEquals = state.first(OperatorMatch.class, match -> match.value().equals(Operator.EQUALS));
-            var firstReturn = state.first(OperatorMatch.class, match -> match.value().equals(Operator.RETURN));
-            if (firstEquals.isEmpty()) return false;
-            if (firstReturn.isEmpty()) return false;
-            optional = firstEquals.getAsInt() < firstReturn.getAsInt() ?
-                    state.first(OperatorMatch.class) :
-                    state.index(2, OperatorMatch.class);
-        } else optional = state.first(OperatorMatch.class, match -> match.value().equals(Operator.EQUALS));
-        return optional.isPresent() && !state.has(0, VariableMatch.class);
-    }
+	private final Bucket assignBucket = by(type(OPERATOR), valueEquals(Operator.ASSIGN), count(1));
+	private final Bucket contentBucket = byAny();
+	private final Bucket nameBucket = by(type(CONTENT), count(1));
+	private final Bucket parameterEnd = by(type(LIST), valueEquals(false), count(1));
+	private final Bucket parameterStart = by(type(LIST), valueEquals(true));
+	private final Bucket parameters = by(
+			type(CONTENT).or(type(ENTRY)),
+			token -> parameterStart.present());
+	private final BucketManager manager = new QueuedBucketManager(
+			nameBucket,
+			parameterStart,
+			parameters,
+			parameterEnd,
+			assignBucket,
+			contentBucket
+	);
 
-    @Override
-    public AssemblyNode assemble(AssemblyState state) {
-        var nameIndex = state.first(ContentMatch.class).orElseThrow();
-        var name = state.get(nameIndex, ContentMatch.class).value();
-        var keywords = parseKeywords(state, nameIndex);
-        var genericBounds = parseGenerics(state);
-        var paramMap = parseParameters(state);
-        var returnType = parseReturnType(state);
-        var firstBlockMatch = state.first(BlockMatch.class);
-        var isAbstract = firstBlockMatch.isEmpty();
-        var content = firstBlockMatch.isEmpty() ?
-                new ArrayList<AssemblyNode>() :
-                parseContent(state, firstBlockMatch.getAsInt());
-        return new InlineFunctionNode(name, keywords, genericBounds, paramMap, returnType, content, isAbstract);
-    }
+	@Override
+	public Optional<Node> collect(Assembler assembler) {
+		if (nameBucket.present() && assignBucket.present() && contentBucket.present()) {
+			var name = nameBucket.single().valueAs(String.class);
+			var content = assembler.assembleChild(contentBucket.content());
+			var parameterMap = manager.split(2, type(ENTRY)).stream()
+					.collect(Collectors.toMap(
+							tokens -> tokens.get(0).valueAs(String.class),
+							tokens -> tokens.get(1).valueAs(String.class)));
+			return Optional.of(new FunctionNode(name, parameterMap, content));
+		} else {
+			return Optional.empty();
+		}
+	}
 
-    private Set<Keyword> parseKeywords(AssemblyState state, int nameIndex) {
-        return state.subMatch(0, nameIndex, KeywordMatch.class)
-                .stream()
-                .map(KeywordMatch::value)
-                .collect(Collectors.toSet());
-    }
+	@Override
+	public Pattern copy() {
+		return new FunctionPattern();
+	}
 
-    private ArrayList<String> parseGenerics(AssemblyState state) {
-        var genericBounds = new ArrayList<String>();
-        var lessThanIndex = state.first(OperatorMatch.class, match -> match.value().equals(Operator.LESS_THAN));
-        var greaterThanIndex = state.first(OperatorMatch.class, match -> match.value().equals(Operator.GREATER_THAN));
-        if (lessThanIndex.isPresent() &&
-                greaterThanIndex.isPresent() &&
-                lessThanIndex.getAsInt() < greaterThanIndex.getAsInt() &&
-                (state.has(greaterThanIndex.getAsInt() + 1, ListMatch.class) ||
-                        state.has(greaterThanIndex.getAsInt() + 1, OperatorMatch.class,
-                                match -> match.value().equals(Operator.EQUALS)))
-        ) {
-            genericBounds.addAll(state.sub(lessThanIndex.getAsInt() + 1, greaterThanIndex.getAsInt())
-                    .split(SeparatorMatch.class)
-                    .stream()
-                    .filter(state0 -> state0.size() == 1)
-                    .filter(state0 -> state0.has(0, ContentMatch.class))
-                    .map(state0 -> state0.get(0, ContentMatch.class))
-                    .map(ContentMatch::value)
-                    .collect(Collectors.toList()));
-        }
-        return genericBounds;
-    }
+	@Override
+	public Pattern form(Token<?> next) {
+		manager.add(next);
+		return this;
+	}
 
-    private Map<String, String> parseParameters(AssemblyState state) {
-        var paramMap = new HashMap<String, String>();
-        var paramStart = state.first(ListMatch.class);
-        if (paramStart.isPresent()) {
-            var paramEnd = state.index(2, ListMatch.class).orElseThrow();
-            var params = state.sub(paramStart.getAsInt() + 1, paramEnd);
-            return params.split(SeparatorMatch.class)
-                    .stream()
-                    .collect(Collectors.toMap(
-                            subState -> subState.get(0, ContentMatch.class).value(),
-							subState -> subState.get(1, ContentMatch.class).value()));
-        }
-        return paramMap;
-    }
-
-    private String parseReturnType(AssemblyState state) {
-        var returnFlag = state.first(OperatorMatch.class, match -> match.value().equals(Operator.RETURN));
-        var equalsFlag = state.first(OperatorMatch.class, match -> match.value().equals(Operator.EQUALS));
-        String returnType = null;
-        if (returnFlag.isPresent() && equalsFlag.isPresent() && returnFlag.getAsInt() < equalsFlag.getAsInt()) {
-            var returnTypeMatch = state.get(returnFlag.getAsInt() + 1, ContentMatch.class);
-            returnType = returnTypeMatch.value();
-        }
-        return returnType;
-    }
-
-    private List<AssemblyNode> parseContent(AssemblyState state, int blockStartIndex) {
-        state.sink();
-        var content = state.sub(blockStartIndex + 1, state.size() - 1)
-                .split(EndLineMatch.class, endLineMatch -> endLineMatch.value() == state.depth())
-                .stream()
-                .map(AssemblyState::assemble)
-                .collect(Collectors.toList());
-        state.surface();
-        return content;
-    }
+	@Override
+	public void reset() {
+		manager.reset();
+	}
 }

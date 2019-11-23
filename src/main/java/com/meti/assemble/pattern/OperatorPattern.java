@@ -1,30 +1,58 @@
 package com.meti.assemble.pattern;
 
-import com.meti.assemble.AssemblyState;
-import com.meti.assemble.node.AssemblyNode;
+import com.meti.assemble.Assembler;
+import com.meti.assemble.bucket.Bucket;
+import com.meti.assemble.bucket.BucketManager;
+import com.meti.assemble.bucket.QueuedBucketManager;
+import com.meti.assemble.node.Node;
 import com.meti.assemble.node.OperationNode;
-import com.meti.lexeme.match.struct.BlockMatch;
-import com.meti.lexeme.match.struct.Operator;
-import com.meti.lexeme.match.struct.OperatorMatch;
+import com.meti.lex.token.Operator;
+import com.meti.lex.token.Token;
+import com.meti.lex.token.TokenType;
+
+import java.util.Optional;
+
+import static com.meti.assemble.bucket.PredicateBucket.by;
+import static com.meti.assemble.bucket.PredicateBucket.valueEquals;
+import static com.meti.assemble.bucket.TypePredicate.type;
+import static java.util.function.Predicate.not;
 
 public class OperatorPattern implements Pattern {
+	private final Bucket content0 = by(not(type(TokenType.OPERATOR)));
+	private final Bucket content1 = by(not(type(TokenType.OPERATOR)));
+	private final Bucket type = by(type(TokenType.OPERATOR),
+			not(valueEquals(Operator.ASSIGN)));
+	private final BucketManager manager = new QueuedBucketManager(
+			content0,
+			type,
+			content1
+	);
+
 	@Override
-	public boolean canAssemble(AssemblyState state) {
-		if (!state.has(OperatorMatch.class)) return false;
-		var firstOperator = state.first(OperatorMatch.class);
-		if (firstOperator.isEmpty()) return false;
-		if(state.index(2, OperatorMatch.class, match -> match.value().equals(Operator.GREATER_THAN))) return false;
-		return !state.has(firstOperator.getAsInt() + 1, BlockMatch.class);
+	public Optional<Node> collect(Assembler assembler) {
+		if (content0.present() && type.present() && content1.present()) {
+			var node0 = assembler.assemble(content0.content());
+			var operator = type.single().valueAs(Operator.class);
+			var node1 = assembler.assemble(content1.content());
+			return Optional.of(new OperationNode(node0, operator, node1));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	@Override
-	public AssemblyNode assemble(AssemblyState state) {
-		var index = state.first(OperatorMatch.class).orElseThrow();
-		var operator = state.get(index, OperatorMatch.class).value();
-		var before = state.sub(0, index);
-		var after = state.sub(index + 1);
-		var beforeNode = state.parent().assemble(before);
-		var afterNode = state.parent().assemble(after);
-		return new OperationNode(operator, beforeNode, afterNode);
+	public Pattern copy() {
+		return new OperatorPattern();
+	}
+
+	@Override
+	public Pattern form(Token<?> next) {
+		manager.add(next);
+		return this;
+	}
+
+	@Override
+	public void reset() {
+manager.reset();
 	}
 }

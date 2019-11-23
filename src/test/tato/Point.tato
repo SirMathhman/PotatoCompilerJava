@@ -1,0 +1,25 @@
+with Math.pow;
+
+Point[x float, y float] = {
+	getX?float = {
+		return x;
+	}
+
+	getY?float = {
+		return y;
+	}
+
+	distance[other Point]?float = {
+		val deltaX = x - other.getX();
+		val deltaY = y - other.getY();
+		val xSquared = pow(deltaX, 2);
+		val ySquared = pow(deltaY, 2);
+		val distSquared = xSquared + ySquared;
+		return pow(distSquared, 0.5);
+	}
+}
+
+val a = Point(3, 4);
+val b = Point(0, 0);
+val distance = a.distance(b);
+Internal.write(StringUtil.toString(distance));

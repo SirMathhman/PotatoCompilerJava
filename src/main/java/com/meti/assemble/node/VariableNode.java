@@ -1,5 +1,13 @@
 package com.meti.assemble.node;
 
-public interface VariableNode extends AssemblyNode {
-	String name();
+public class VariableNode implements Node {
+    private final String name;
+
+    public VariableNode(String name) {
+        this.name = name;
+    }
+
+    public String name() {
+        return name;
+    }
 }

@@ -1,4 +1,0 @@
-single Math?void = {
-	external pow[value0 double, value1 double]?double=;
-	external sqrt[value double]?double=;
-}

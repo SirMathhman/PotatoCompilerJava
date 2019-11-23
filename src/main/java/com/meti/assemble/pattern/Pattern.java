@@ -1,9 +1,17 @@
 package com.meti.assemble.pattern;
 
-import com.meti.assemble.node.AssemblyNode;
-import com.meti.assemble.AssemblyState;
+import com.meti.assemble.Assembler;
+import com.meti.assemble.node.Node;
+import com.meti.lex.token.Token;
+
+import java.util.Optional;
 
 public interface Pattern {
-	boolean canAssemble(AssemblyState state);
-	AssemblyNode assemble(AssemblyState state);
+	Optional<Node> collect(Assembler assembler);
+
+	Pattern copy();
+
+	Pattern form(Token<?> next);
+
+	void reset();
 }

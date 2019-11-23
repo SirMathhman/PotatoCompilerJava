@@ -1,36 +1,27 @@
 package com.meti.assemble.node;
 
-import com.meti.lexeme.match.struct.Valued;
+import com.meti.lex.token.Operator;
 
-public class OperationNode implements AssemblyNode {
-    private final AssemblyNode afterNode;
-    private final AssemblyNode beforeNode;
-    private final Valued operator;
+public class OperationNode implements Node {
+	private final Node node0;
+	private final Operator operator;
+	private final Node node1;
 
-    public OperationNode(Valued operator, AssemblyNode beforeNode, AssemblyNode afterNode) {
-        this.operator = operator;
-        this.beforeNode = beforeNode;
-        this.afterNode = afterNode;
-    }
+	public OperationNode(Node node0, Operator operator, Node node1) {
+		this.node0 = node0;
+		this.operator = operator;
+		this.node1 = node1;
+	}
 
-    @Override
-    public String toString() {
-        return "OperatorNode{" +
-                "operator=" + operator +
-                ", beforeNode=" + beforeNode +
-                ", afterNode=" + afterNode +
-                '}';
-    }
+	public Node node0() {
+		return node0;
+	}
 
-    public Valued operator() {
+	public Operator operator() {
 		return operator;
-    }
+	}
 
-    public AssemblyNode after() {
-        return afterNode;
-    }
-
-    public AssemblyNode before() {
-        return beforeNode;
-    }
+	public Node node1() {
+		return node1;
+	}
 }

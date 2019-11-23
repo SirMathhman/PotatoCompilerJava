@@ -1,11 +1,19 @@
 package com.meti.interpret.resolve;
 
 import com.meti.interpret.Interpreter;
+import com.meti.interpret.Type;
 import com.meti.interpret.statement.Statement;
-import com.meti.interpret.type.Type;
 
 public interface Resolver {
-    boolean canResolve(Statement statement);
+	boolean canResolve(Statement statement);
 
-    Type resolve(Statement statement, Interpreter interpreter);
+	default boolean canResolve(String value) {
+		return false;
+	}
+
+	Type resolve(Statement statement, Interpreter interpreter);
+
+	default Type resolve(String statement, Interpreter interpreter) {
+		throw new UnsupportedOperationException("Cannot resolve " + statement + " with " + interpreter);
+	}
 }
