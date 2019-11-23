@@ -12,8 +12,13 @@ class FunctionTest extends PotatoTest {
 	}
 
 	@Test
+	void testWithParameter() {
+		assertEquals("function a0(b1){}", compile("testWithParameter[value string]={}"));
+	}
+
+	@Test
 	void testWithParameters() {
-		assertEquals("function a0(b1){}", compile("testWithParameters[value string]={}"));
+		assertEquals("function a0(b1,c2){}", compile("testWithParameters[s0 string, s1 string]={}"));
 	}
 
 	@Test

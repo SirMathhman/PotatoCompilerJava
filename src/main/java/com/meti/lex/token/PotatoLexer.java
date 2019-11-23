@@ -12,6 +12,7 @@ public class PotatoLexer extends TokenLexer {
 			new ListTokenizer(),
 			new OperatorTokenizer(),
 			new ParenthesisTokenizer(),
+			new EntryTokenizer(),
 			new SplitTokenizer(),
 			new ContentTokenizer()
 	);
