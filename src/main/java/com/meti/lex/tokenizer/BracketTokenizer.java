@@ -8,11 +8,24 @@ import com.meti.lex.token.TokenType;
 import java.util.Optional;
 
 public class BracketTokenizer implements Tokenizer<Boolean> {
-    @Override
-    public Optional<? extends Token<Boolean>> match(LexerInput input) {
-        return Optional.of(input.compute())
-                .filter(s -> s.equals("{") || s.equals("}"))
-                .map(s -> s.equals("{"))
-                .map(aBoolean -> new InlineToken<>(TokenType.BRACKET, aBoolean));
-    }
+	private final Binding<Integer> depth;
+
+	public BracketTokenizer(Binding<Integer> depth) {
+		this.depth = depth;
+	}
+
+	@Override
+	public Optional<? extends Token<Boolean>> match(LexerInput input) {
+		var value = input.compute();
+		if (value.equals("{") || value.equals("}")) {
+			if (value.equals("{")) {
+				depth.set(depth.get() + 1);
+			} else {
+				depth.set(depth.get() - 1);
+			}
+            return Optional.of(new InlineToken<>(TokenType.BRACKET, value.equals("{")));
+		} else {
+			return Optional.empty();
+		}
+	}
 }

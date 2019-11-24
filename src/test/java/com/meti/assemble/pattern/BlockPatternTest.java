@@ -10,18 +10,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BlockPatternTest {
+    private Binding<Integer> depth = new Binding<>(0);
+
     @Test
     void collect() {
         var lexer = new TokenLexer(
-                new BracketTokenizer(),
+                new BracketTokenizer(depth),
                 new DeclareTokenizer(),
                 new OperatorTokenizer(),
                 new IntegerTokenizer(),
-                new SplitTokenizer(),
+                new SplitTokenizer(depth),
                 new ContentTokenizer()
         );
         var assembler = new PatternAssembler(
-                new BlockPattern(),
+                new BlockPattern(new Binding<>(0)),
                 new DeclarePattern(),
                 new OperatorPattern(),
                 new IntPattern(),

@@ -10,7 +10,8 @@ import java.util.Map;
 
 public class PrimitiveResolver implements Resolver {
 	private final Map<String, Type> primitives = Map.of(
-			"string", Primitive.STRING
+			"string", Primitive.STRING,
+			"void", Primitive.VOID
 	);
 
 	@Override
