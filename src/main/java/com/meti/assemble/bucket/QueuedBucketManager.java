@@ -1,8 +1,8 @@
 package com.meti.assemble.bucket;
 
 import com.meti.lex.token.Token;
+import com.meti.util.SplitUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -61,18 +61,7 @@ public class QueuedBucketManager implements BucketManager {
 
 	@Override
 	public List<? extends List<? extends Token<?>>> split(int index, Predicate<? super Token<?>> predicate) {
-		var parent = new ArrayList<List<Token<?>>>();
-		var current = new ArrayList<Token<?>>();
-		var tokenList = at(index);
-		for (Token<?> next : tokenList) {
-			if (predicate.test(next)) {
-				if (!current.isEmpty()) parent.add(current);
-				current = new ArrayList<>();
-			} else {
-				current.add(next);
-			}
-		}
-		if (!current.isEmpty()) parent.add(current);
-		return parent;
+		var tokens = at(index);
+		return SplitUtil.split(tokens, predicate);
 	}
 }
