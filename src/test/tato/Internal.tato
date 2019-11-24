@@ -1,5 +1,0 @@
-single Internal = {
-	write[value string]?void = {
-		Console.log(value);
-	}
-}

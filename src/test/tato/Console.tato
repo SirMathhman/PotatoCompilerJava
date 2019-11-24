@@ -1,3 +1,0 @@
-single native["console"] Console = {
-	native log[value string]=;
-}
